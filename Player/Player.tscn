@@ -117,7 +117,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=1]
 resource_name = "run"
-length = 0.01
+length = 1.9
 loop = true
 step = 0.25
 tracks/0/type = "value"

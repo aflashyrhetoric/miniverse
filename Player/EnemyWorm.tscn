@@ -135,7 +135,7 @@ tracks/9/keys = {
 }
 
 [sub_resource type="Animation" id=3]
-length = 1.75
+length = 1.95
 loop = true
 step = 0.25
 tracks/0/type = "value"
@@ -152,7 +152,6 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=4]
-length = 0.7
 loop = true
 step = 0.25
 tracks/0/type = "value"
@@ -212,6 +211,7 @@ position = Vector2( -1, -8 )
 texture = ExtResource( 4 )
 flip_h = true
 hframes = 3
+frame = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/destroy = SubResource( 2 )
