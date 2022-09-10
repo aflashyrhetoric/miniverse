@@ -58,10 +58,13 @@ tracks/2/keys = {
 
 [node name="Bullet" type="RigidBody2D"]
 material = SubResource( 1 )
+scale = Vector2( 0.25, 0.25 )
+collision_layer = 4
+mass = 0.408163
 script = ExtResource( 2 )
 
 [node name="Particles2D" type="CPUParticles2D" parent="."]
-self_modulate = Color( 1, 1, 1, 0 )
+self_modulate = Color( 1, 1, 1, 0.666667 )
 material = SubResource( 2 )
 emitting = false
 lifetime = 0.3

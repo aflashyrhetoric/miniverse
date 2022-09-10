@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Player/Gun.gd" type="Script" id=1]
+[ext_resource path="res://assets/audio/sfx/shoot.wav" type="AudioStream" id=2]
+[ext_resource path="res://Objects/flower_gun_spritesheet.png" type="Texture" id=3]
+
+[node name="Gun" type="Position2D"]
+position = Vector2( 14, 1 )
+script = ExtResource( 1 )
+bullet_velocity = 1200.0
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -6, 0 )
+rotation = 1.16937
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 3 )
+hframes = 3
+
+[node name="Shoot" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( -30.6589, -6.13176 )
+stream = ExtResource( 2 )
+volume_db = -17.0
+
+[node name="Cooldown" type="Timer" parent="."]
+process_mode = 0
+wait_time = 0.1
+one_shot = true

@@ -1,168 +1,61 @@
 class_name Player
-extends Actor
+extends Node2D
 
-# warning-ignore:unused_signal
-signal collect_coin
+var _ellie_is_inside_float_area = true
 
-const FLOOR_DETECT_DISTANCE = 20.0
-const WALK_SPEED = 200
-const WALK_ACCEL = WALK_SPEED / 20
-const WALK_DECAY = WALK_SPEED / 20
+## ELLIE CONSTANTS
+const ELLIE_FLIGHT_SPEED = Vector2(50, 30)
+const ELLIE_RETURN_SPEED = Vector2(10, 10)
 
-export(String) var action_suffix = ""
-
-onready var platform_detector = $PlatformDetector
-onready var animation_player = $AnimationPlayer
-onready var shoot_timer = $ShootAnimation
-onready var sprite = $Sprite
-onready var sound_jump = $Jump
-onready var label = $Label
-onready var gun = sprite.get_node(@"Gun")
+# The BBs! :D
+onready var mini = $Mini
+onready var ellie = $Ellie
 
 
-func _ready():
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass  # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _physics_process(delta: float) -> void:
+	handle_ellie_position()
 	pass
-	# Static types are necessary here to avoid warnings.
 
 
-#	var camera: Camera2D = $Camera
-#	if action_suffix == "_p1":
-#		camera.custom_viewport = $"../.."
-#		yield(get_tree(), "idle_frame")
-#		camera.make_current()
-#	elif action_suffix == "_p2":
-#		var viewport: Viewport = $"../../../../ViewportContainer2/Viewport2"
-#		viewport.world_2d = ($"../.." as Viewport).world_2d
-#		camera.custom_viewport = viewport
-#		yield(get_tree(), "idle_frame")
-#		camera.make_current()
+func handle_ellie_position():
+	var is_attacking = false  # TODO: Make this dynamically update when ellie is actually attacking
+	if !is_attacking:
+		var point_to_approach = point_for_ellie_to_approach()
+		# if mini is on the floor, adjust y movement speed toward position2d to mitigate wobble
+		if !mini.is_on_floor():
+			pass
 
-# Physics process is a built-in loop in Godot.
-# If you define _physics_process on a node, Godot will call it every frame.
+		# If ellie is out of the box, move toward the point
+		compute_direction_and_distance_accel()
+	pass
 
-# We use separate functions to calculate the direction and velocity to make this one easier to read.
-# At a glance, you can see that the physics process loop:
-# 1. Calculates the move direction.
-# 2. Calculates the move velocity.
-# 3. Moves the character.
-# 4. Updates the sprite direction.
-# 5. Shoots bullets.
-# 6. Updates the animation.
+# Which direction should ellie move, and how fast?
+func compute_direction_and_distance_accel():
+	var point_to_approach = point_for_ellie_to_approach()
+	var speed = ELLIE_FLIGHT_SPEED if _ellie_is_inside_float_area else ELLIE_RETURN_SPEED
+	var direction = ellie.global_position.direction_to(point_to_approach.global_position)
+	var catch_up_accel = ellie.global_position.distance_to(point_to_approach.global_position) / 2
+	ellie._velocity = direction * speed * catch_up_accel
+	ellie._direction = direction
 
-
-# Splitting the physics process logic into functions not only makes it
-# easier to read, it help to change or improve the code later on:
-# - If you need to change a calculation, you can use Go To -> Function
-#   (Ctrl Alt F) to quickly jump to the corresponding function.
-# - If you split the character into a state machine or more advanced pattern,
-#   you can easily move individual functions.
-func _physics_process(_delta):
-	# Play jump sound
-#	if Input.is_action_just_pressed("jump" + action_suffix) and is_on_floor():
-#		sound_jump.play()
-
-	var direction = get_direction()
-
-	var is_jump_interrupted: bool
-	is_jump_interrupted = (
-		Input.is_action_just_released("jump" + action_suffix)
-		and _velocity.y < 0.0
-	)
-	_velocity = calculate_move_velocity(_velocity, direction, speed, is_jump_interrupted)
-
-	var snap_vector = Vector2.ZERO
-	if direction.y == 0.0:
-		snap_vector = Vector2.DOWN * FLOOR_DETECT_DISTANCE
-	var is_on_platform = platform_detector.is_colliding()
-
-	####################### MOVE!!!
-	_velocity = move_and_slide_with_snap(
-		_velocity, snap_vector, FLOOR_NORMAL, not is_on_platform, 4, 0.9, false
-	)
-	###############################
-
-	# When the character’s direction changes, we want to to scale the Sprite accordingly to flip it.
-	# This will make Robi face left or right depending on the direction you move.
-	if direction.x != 0:
-		if direction.x > 0:
-			sprite.scale.x = 1
-		else:
-			sprite.scale.x = -1
-
-	# We use the sprite's scale to store Robi’s look direction which allows us to shoot
-	# bullets forward.
-	# There are many situations like these where you can reuse existing properties instead of
-	# creating new variables.
-	var is_shooting = false
-	if Input.is_action_just_pressed("shoot" + action_suffix):
-		is_shooting = gun.shoot()
-
-	# var animation = get_new_animation(is_shooting)
-	# if animation != animation_player.current_animation and shoot_timer.is_stopped():
-	# 	if is_shooting:
-	# 		shoot_timer.start()
-	# 	animation_player.play(animation)
+func point_for_ellie_to_approach() -> Position2D:
+	# TODO: Make it so that it takes in other factors into consideration
+	return mini.get_node("EllieFloatRange/PointBehindMini")
 
 
-func get_direction():
-	return Vector2(
-		(
-			Input.get_action_strength("move_right" + action_suffix)
-			- Input.get_action_strength("move_left" + action_suffix)
-		),
-		-1 if is_on_floor() and Input.is_action_just_pressed("jump" + action_suffix) else 0
-	)
+func _on_Mini_ellie_entered_area() -> void:
+	print("entered")
+	_ellie_is_inside_float_area = true
+	pass  # Replace with function body.
 
 
-# This function calculates a new velocity whenever you need it.
-# It allows you to interrupt jumps.
-func calculate_move_velocity(
-	current_linear_velocity: Vector2,
-	direction: Vector2,
-	speed_setting: Vector2,
-	is_jump_interrupted: bool
-):
-	var velocity = current_linear_velocity
-
-	if direction.x != 0.0:
-		var would_be_speed_x = (abs(current_linear_velocity.x) + WALK_ACCEL) * direction.x
-		# If we're going to go faster than our max, cap horizontal speed
-		velocity.x = (
-			would_be_speed_x
-			if abs(would_be_speed_x) < max_speed.x
-			else max_speed.x * direction.x
-		)
-	else:
-		velocity.x = 0
-		var would_be_speed_x = (abs(current_linear_velocity.x) + WALK_DECAY) * direction.x
-		# If we're going to go faster than our max, cap horizontal speed
-		velocity.x = (
-			would_be_speed_x
-			if abs(would_be_speed_x) < max_speed.x
-			else max_speed.x * direction.x
-		)
-
-	if direction.y != 0.0:
-		velocity.y = speed_setting.y * direction.y
-	if is_jump_interrupted:
-		# Decrease the Y velocity by multiplying it, but don't set it to 0
-		# as to not be too abrupt.
-		velocity.y *= 0.6
-	return velocity
-
-
-func get_new_animation(is_shooting = false):
-	var animation_new = ""
-	if is_on_floor():
-		if abs(_velocity.x) > 0.1:
-			animation_new = "run"
-		else:
-			animation_new = "idle"
-	else:
-		if _velocity.y > 0:
-			animation_new = "falling"
-		else:
-			animation_new = "jumping"
-	if is_shooting:
-		animation_new += "_weapon"
-	return animation_new
+func _on_Mini_ellie_exited_area() -> void:
+	print("exited")
+	_ellie_is_inside_float_area = false
+	pass  # Replace with function body.

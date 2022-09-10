@@ -10,6 +10,8 @@ enum Wall { LEFT, RIGHT }
 
 var _state = State.WALKING
 
+export(int) var health = 100
+
 # onready var platform_detector = $PlatformDetector
 onready var floor_detector_left = $FloorDetectorLeft
 onready var floor_detector_right = $FloorDetectorRight
@@ -22,28 +24,10 @@ onready var animation_player = $AnimationPlayer
 onready var last_wall_hit: int = Wall.LEFT if sprite.scale.x == 1 else Wall.Right
 
 
-# This function is called when the scene enters the scene tree.
-# We can initialize variables here.
 func _ready():
 	_velocity.x = speed.x
 
 
-# Physics process is a built-in loop in Godot.
-# If you define _physics_process on a node, Godot will call it every frame.
-
-# At a glance, you can see that the physics process loop:
-# 1. Calculates the move velocity.
-# 2. Moves the character.
-# 3. Updates the sprite direction.
-# 4. Updates the animation.
-
-
-# Splitting the physics process logic into functions not only makes it
-# easier to read, it help to change or improve the code later on:
-# - If you need to change a calculation, you can use Go To -> Function
-#   (Ctrl Alt F) to quickly jump to the corresponding function.
-# - If you split the character into a state machine or more advanced pattern,
-#   you can easily move individual functions.
 func _physics_process(_delta):
 	var collision_exists = left_wall_detector.is_colliding() or right_wall_detector.is_colliding()
 

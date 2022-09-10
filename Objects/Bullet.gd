@@ -20,6 +20,7 @@ func _ready():
 func _physics_process(_delta: float) -> void:
 	look_at(self.linear_velocity)
 
+
 func destroy():
 	animation_player.play("destroy")
 

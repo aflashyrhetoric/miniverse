@@ -17,7 +17,6 @@ func shoot():
 	var bullet = Bullet.instance()
 	bullet.global_position = global_position
 	var direction_to_fire: Vector2 = (get_global_mouse_position() - global_position).normalized()
-	print(direction_to_fire)
 	bullet.linear_velocity = direction_to_fire * bullet_velocity
 
 	bullet.set_as_toplevel(true)
