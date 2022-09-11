@@ -170,10 +170,19 @@ speed = Vector2( 75, 250 )
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 1 )
-position = Vector2( 0, -22 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 4 )
+offset = Vector2( 0, -7 )
 hframes = 6
+
+[node name="HealthLabel" type="Label" parent="."]
+margin_left = -20.0
+margin_top = -41.0
+margin_right = 20.0
+margin_bottom = -27.0
+text = "100"
+align = 1
+valign = 1
 
 [node name="Hitbox" type="Area2D" parent="."]
 scale = Vector2( 2.92, 2.92 )
@@ -200,12 +209,12 @@ enabled = true
 cast_to = Vector2( 0, 35 )
 
 [node name="LeftWallDetector" type="RayCast2D" parent="."]
-position = Vector2( -24, 0 )
+position = Vector2( -33, 9 )
 enabled = true
 cast_to = Vector2( -9, 0 )
 
 [node name="RightWallDetector" type="RayCast2D" parent="."]
-position = Vector2( 26, 0 )
+position = Vector2( 33, 9 )
 enabled = true
 cast_to = Vector2( 9, 0 )
 
@@ -241,14 +250,5 @@ stream = ExtResource( 3 )
 
 [node name="Explode" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 2 )
-
-[node name="HealthLabel" type="Label" parent="."]
-margin_left = -20.0
-margin_top = -41.0
-margin_right = 20.0
-margin_bottom = -27.0
-text = "100"
-align = 1
-valign = 1
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]

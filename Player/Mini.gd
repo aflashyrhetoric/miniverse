@@ -7,7 +7,7 @@ signal collect_coin
 signal ellie_entered_area
 signal ellie_exited_area
 
-const FLOOR_DETECT_DISTANCE = 20.0
+const FLOOR_DETECT_DISTANCE = 50.0
 const WALK_SPEED = 200
 const WALK_ACCEL = WALK_SPEED / 20
 const WALK_DECAY = WALK_SPEED / 20
@@ -35,7 +35,6 @@ func _physics_process(_delta):
 	# Play jump sound
 #	if Input.is_action_just_pressed("jump" + action_suffix) and is_on_floor():
 #		sound_jump.play()
-
 	var direction = get_direction()
 	var is_jump_interrupted: bool
 	is_jump_interrupted = (

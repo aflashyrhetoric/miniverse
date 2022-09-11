@@ -19,7 +19,14 @@ var _velocity = Vector2.ZERO
 func _physics_process(delta):
 	_velocity.y += gravity * delta
 
-func die_if_low(_health):
-	if _health <= 0:
-		queue_free()
 
+func die(animation_player: AnimationPlayer = null):
+	if (
+		animation_player != null
+		and animation_player.has_animation("destroy")
+		and animation_player.current_animation != "destroy"
+	):
+		print(animation_player.current_animation)
+		animation_player.play("destroy")
+	else:
+		queue_free()

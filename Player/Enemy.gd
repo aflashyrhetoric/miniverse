@@ -32,13 +32,7 @@ func _ready():
 	_velocity.x = speed.x
 
 
-func _process(_delta) -> void:
-	die_if_low(_health)
-
-
 func _physics_process(_delta):
-	die_if_low(_health)
-
 	var collision_exists = left_wall_detector.is_colliding() or right_wall_detector.is_colliding()
 
 	# If the enemy encounters a wall or an edge, the horizontal velocity is flipped.
@@ -58,11 +52,14 @@ func _physics_process(_delta):
 	if _velocity.x > 0:
 		sprite.scale.x = abs(sprite.scale.x)
 	else:
-		sprite.scale.x *= -1
+		# If the sprite isn't facing left, make it face left. We can't set -1 directly bc the sprite scale is 3.
+		if sprite.scale.x > 0:
+			sprite.scale.x *= -1
 
 	var animation = get_new_animation()
 	if animation != animation_player.current_animation:
 		animation_player.play(animation)
+		print(animation_player.current_animation)
 
 
 func handle_wall_hit():
@@ -77,6 +74,9 @@ func destroy():
 
 func get_new_animation():
 	var animation_new = ""
+	if _health <= 0:
+		return "destroy"
+
 	if _state == State.WALKING:
 		if _velocity.x == 0:
 			animation_new = "idle"

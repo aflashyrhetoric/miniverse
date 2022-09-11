@@ -22,7 +22,6 @@ tracks/0/keys = {
 
 [node name="FlowerGun" type="Position2D"]
 script = ExtResource( 1 )
-bullet_velocity = 900.0
 
 [node name="Sprite" type="Sprite" parent="."]
 rotation = 1.16937

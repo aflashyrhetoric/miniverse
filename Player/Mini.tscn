@@ -42,7 +42,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=4]
-length = 7.0
+length = 2.0
 loop = true
 step = 0.25
 tracks/0/type = "value"
@@ -52,10 +52,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1.25, 1.5, 2, 4.5, 4.75, 5, 5.25 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( -0.0065557, 1.25 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 16, 17, 18, 16, 19, 20, 19, 16 ]
+"values": [ 0, 1 ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -111,7 +111,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=1]
 resource_name = "run"
-length = 2.25
+length = 1.8
 loop = true
 step = 0.25
 tracks/0/type = "value"
@@ -122,7 +122,7 @@ tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"transitions": PoolRealArray( 2.46229, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
 }
@@ -178,7 +178,7 @@ wait_time = 0.2
 one_shot = true
 
 [node name="PlatformDetector" type="RayCast2D" parent="."]
-position = Vector2( -1, -5 )
+position = Vector2( 0, -6 )
 enabled = true
 cast_to = Vector2( 0, 6 )
 collision_mask = 8
@@ -187,6 +187,7 @@ collision_mask = 8
 position = Vector2( 0, -12 )
 texture = ExtResource( 2 )
 hframes = 8
+frame = 1
 
 [node name="FlowerGun" parent="Sprite" instance=ExtResource( 4 )]
 position = Vector2( 7, 2 )
@@ -208,8 +209,10 @@ position = Vector2( 0, -28 )
 current = true
 zoom = Vector2( 0.5, 0.5 )
 process_mode = 0
+limit_smoothed = true
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
+smoothing_enabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -12 )
