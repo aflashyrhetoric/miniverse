@@ -18,7 +18,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	handle_ellie_position()
 	pass
 
@@ -26,7 +26,6 @@ func _physics_process(delta: float) -> void:
 func handle_ellie_position():
 	var is_attacking = false  # TODO: Make this dynamically update when ellie is actually attacking
 	if !is_attacking:
-		var point_to_approach = point_for_ellie_to_approach()
 		# if mini is on the floor, adjust y movement speed toward position2d to mitigate wobble
 		if !mini.is_on_floor():
 			pass

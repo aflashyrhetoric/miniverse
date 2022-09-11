@@ -54,6 +54,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Player/Fauna.gd"
 }, {
+"base": "Gun",
+"class": "FlowerGun",
+"language": "GDScript",
+"path": "res://Weapons/FlowerGun.gd"
+}, {
 "base": "",
 "class": "GitAPI",
 "language": "NativeScript",
@@ -84,6 +89,7 @@ _global_script_class_icons={
 "Enemy": "",
 "EnemyFlying": "",
 "Fauna": "",
+"FlowerGun": "",
 "GitAPI": "",
 "Gun": "",
 "Mini": "",

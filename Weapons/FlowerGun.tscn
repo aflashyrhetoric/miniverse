@@ -1,16 +1,30 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Player/Gun.gd" type="Script" id=1]
+[ext_resource path="res://Weapons/FlowerGun.gd" type="Script" id=1]
 [ext_resource path="res://assets/audio/sfx/shoot.wav" type="AudioStream" id=2]
 [ext_resource path="res://Objects/flower_gun_spritesheet.png" type="Texture" id=3]
 
-[node name="Gun" type="Position2D"]
-position = Vector2( 14, 1 )
+[sub_resource type="Animation" id=1]
+resource_name = "shoot"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2 ]
+}
+
+[node name="FlowerGun" type="Position2D"]
 script = ExtResource( 1 )
-bullet_velocity = 1200.0
+bullet_velocity = 900.0
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( -6, 0 )
 rotation = 1.16937
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 3 )
@@ -25,3 +39,8 @@ volume_db = -17.0
 process_mode = 0
 wait_time = 0.1
 one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/shoot = SubResource( 1 )
+
+[node name="BulletSpawnPoint" type="Position2D" parent="."]

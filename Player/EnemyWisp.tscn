@@ -196,12 +196,14 @@ collision_mask = 0
 script = ExtResource( 5 )
 
 [node name="FloorDetectorLeft" type="RayCast2D" parent="."]
+visible = false
 position = Vector2( -22, -1 )
 enabled = true
 cast_to = Vector2( 0, 35 )
 collision_mask = 24
 
 [node name="FloorDetectorRight" type="RayCast2D" parent="."]
+visible = false
 position = Vector2( 21, 0 )
 enabled = true
 cast_to = Vector2( 0, 35 )
@@ -229,6 +231,15 @@ frame = 3
 anims/destroy = SubResource( 2 )
 anims/idle = SubResource( 3 )
 anims/walk = SubResource( 4 )
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2( 0, -1 )
+rotation = -1.5708
+shape = SubResource( 8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -1 )
@@ -263,3 +274,14 @@ stream = ExtResource( 3 )
 
 [node name="Explode" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 2 )
+
+[node name="HealthLabel" type="Label" parent="."]
+margin_left = -19.0
+margin_top = -23.0
+margin_right = 21.0
+margin_bottom = -9.0
+text = "111"
+align = 1
+valign = 1
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]

@@ -6,8 +6,6 @@
 [ext_resource path="res://assets/art/enemy/enemy_fly.png" type="Texture" id=4]
 [ext_resource path="res://Player/EnemyFlying.gd" type="Script" id=5]
 
-[sub_resource type="CanvasItemMaterial" id=1]
-
 [sub_resource type="Animation" id=2]
 resource_name = "destroy"
 length = 1.5
@@ -169,6 +167,8 @@ tracks/0/keys = {
 "values": [ 5, 0, 3, 0, 3 ]
 }
 
+[sub_resource type="CanvasItemMaterial" id=1]
+
 [sub_resource type="CircleShape2D" id=8]
 radius = 11.0
 
@@ -194,6 +194,11 @@ position = Vector2( 4, 0 )
 enabled = true
 cast_to = Vector2( 9, 0 )
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/destroy = SubResource( 2 )
+anims/idle = SubResource( 3 )
+anims/walk = SubResource( 9 )
+
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 1 )
 position = Vector2( 0, 1 )
@@ -201,10 +206,12 @@ texture = ExtResource( 4 )
 hframes = 4
 frame = 3
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/destroy = SubResource( 2 )
-anims/idle = SubResource( 3 )
-anims/walk = SubResource( 9 )
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource( 8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 8 )
@@ -237,3 +244,14 @@ stream = ExtResource( 3 )
 
 [node name="Explode" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 2 )
+
+[node name="HealthLabel" type="Label" parent="."]
+margin_left = -19.0
+margin_top = -23.0
+margin_right = 21.0
+margin_bottom = -9.0
+text = "111"
+align = 1
+valign = 1
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]

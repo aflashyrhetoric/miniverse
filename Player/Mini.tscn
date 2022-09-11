@@ -188,7 +188,8 @@ position = Vector2( 0, -12 )
 texture = ExtResource( 2 )
 hframes = 8
 
-[node name="Gun" parent="Sprite" instance=ExtResource( 4 )]
+[node name="FlowerGun" parent="Sprite" instance=ExtResource( 4 )]
+position = Vector2( 7, 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 2.6
@@ -233,10 +234,6 @@ shape = SubResource( 22 )
 
 [node name="PointBehindMini" type="Position2D" parent="EllieFloatRange"]
 position = Vector2( -13, -29 )
-
-[node name="PointFrontMini" type="Position2D" parent="."]
-visible = false
-position = Vector2( 17, -31 )
 
 [connection signal="body_entered" from="EllieFloatRange" to="." method="_on_EllieFloatRange_body_entered"]
 [connection signal="body_exited" from="EllieFloatRange" to="." method="_on_EllieFloatRange_body_exited"]

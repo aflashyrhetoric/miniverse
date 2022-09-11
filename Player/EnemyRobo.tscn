@@ -8,6 +8,10 @@
 
 [sub_resource type="CanvasItemMaterial" id=1]
 
+[sub_resource type="CapsuleShape2D" id=5]
+radius = 9.0
+height = 6.0
+
 [sub_resource type="Animation" id=2]
 resource_name = "destroy"
 length = 1.5
@@ -151,10 +155,6 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3, 4, 0 ]
 }
 
-[sub_resource type="CapsuleShape2D" id=5]
-radius = 9.0
-height = 6.0
-
 [sub_resource type="CanvasItemMaterial" id=6]
 blend_mode = 1
 
@@ -163,44 +163,55 @@ offsets = PoolRealArray( 0.5, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 0, 0, 0, 1 )
 
 [node name="EnemyRobo" type="KinematicBody2D"]
-collision_layer = 0
+collision_layer = 8
 collision_mask = 24
 script = ExtResource( 5 )
 speed = Vector2( 75, 250 )
 
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 1 )
+position = Vector2( 0, -22 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 4 )
+hframes = 6
+
+[node name="Hitbox" type="Area2D" parent="."]
+scale = Vector2( 2.92, 2.92 )
+collision_layer = 0
+collision_mask = 4
+
+[node name="HitboxCollisonShape" type="CollisionShape2D" parent="Hitbox"]
+rotation = -1.5708
+shape = SubResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = -1.5708
+scale = Vector2( 2.92, 2.92 )
+shape = SubResource( 5 )
+
 [node name="FloorDetectorLeft" type="RayCast2D" parent="."]
-position = Vector2( -13, 0 )
+position = Vector2( -33, 0 )
 enabled = true
 cast_to = Vector2( 0, 35 )
 
 [node name="FloorDetectorRight" type="RayCast2D" parent="."]
-position = Vector2( 12, 0 )
+position = Vector2( 35, 0 )
 enabled = true
 cast_to = Vector2( 0, 35 )
 
 [node name="LeftWallDetector" type="RayCast2D" parent="."]
-position = Vector2( -5, 0 )
+position = Vector2( -24, 0 )
 enabled = true
 cast_to = Vector2( -9, 0 )
 
 [node name="RightWallDetector" type="RayCast2D" parent="."]
-position = Vector2( 4, 0 )
+position = Vector2( 26, 0 )
 enabled = true
 cast_to = Vector2( 9, 0 )
-
-[node name="Sprite" type="Sprite" parent="."]
-material = SubResource( 1 )
-position = Vector2( 0, -7 )
-texture = ExtResource( 4 )
-hframes = 6
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/destroy = SubResource( 2 )
 anims/walk = SubResource( 4 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-rotation = -1.5708
-shape = SubResource( 5 )
 
 [node name="Explosion" type="CPUParticles2D" parent="."]
 self_modulate = Color( 1, 1, 1, 0.12 )
@@ -230,3 +241,14 @@ stream = ExtResource( 3 )
 
 [node name="Explode" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 2 )
+
+[node name="HealthLabel" type="Label" parent="."]
+margin_left = -20.0
+margin_top = -41.0
+margin_right = 20.0
+margin_bottom = -27.0
+text = "100"
+align = 1
+valign = 1
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]

@@ -1056,12 +1056,6 @@ position = Vector2( 304, 264 )
 
 [node name="EnemyRobo" parent="." instance=ExtResource( 3 )]
 position = Vector2( 64, 200 )
-collision_layer = 8
-collision_mask = 2
-
-[node name="EnemyRobo2" parent="." instance=ExtResource( 3 )]
-position = Vector2( 96, 200 )
-collision_layer = 8
 collision_mask = 2
 
 [node name="EnemyFly" parent="." instance=ExtResource( 5 )]
@@ -1175,4 +1169,3 @@ region_filter_clip = true
 [node name="Song" type="AudioStreamPlayer2D" parent="."]
 visible = false
 stream = ExtResource( 17 )
-autoplay = true

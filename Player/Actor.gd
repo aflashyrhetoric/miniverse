@@ -18,3 +18,8 @@ var _velocity = Vector2.ZERO
 # This allows the Player and Enemy scenes to be affected by gravity.
 func _physics_process(delta):
 	_velocity.y += gravity * delta
+
+func die_if_low(_health):
+	if _health <= 0:
+		queue_free()
+
