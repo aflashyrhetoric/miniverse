@@ -25,6 +25,9 @@ onready var label = $Label
 onready var gun = sprite.get_node(@"FlowerGun")
 onready var ellie_float_range = $EllieFloatRange
 
+# Instance Variables
+var _has_extra_jump = true
+
 
 func _ready():
 	pass
@@ -32,16 +35,24 @@ func _ready():
 
 
 func _physics_process(_delta):
+	if is_on_floor() and _has_extra_jump:
+		print("jump reset")
+		_has_extra_jump = false
+
 	# Play jump sound
-#	if Input.is_action_just_pressed("jump" + action_suffix) and is_on_floor():
-#		sound_jump.play()
+	#	if Input.is_action_just_pressed("jump" + action_suffix) and is_on_floor():
+	#		sound_jump.play()
+
 	var direction = get_direction()
-	var is_jump_interrupted: bool
-	is_jump_interrupted = (
+	var dampen_second_jump_from_interrupted_jump: bool
+	dampen_second_jump_from_interrupted_jump = (
 		Input.is_action_just_released("jump" + action_suffix)
 		and _velocity.y < 0.0
 	)
-	_velocity = calculate_move_velocity(_velocity, direction, speed, is_jump_interrupted)
+
+	_velocity = calculate_move_velocity(
+		_velocity, direction, speed, dampen_second_jump_from_interrupted_jump
+	)
 
 	var snap_vector = Vector2.ZERO
 	if direction.y == 0.0:
@@ -72,6 +83,11 @@ func _physics_process(_delta):
 		animation_player.play(animation)
 
 
+func grant_extra_jump():
+	print("extra jump granted")
+	_has_extra_jump = true
+
+
 func turn_sprites(direction, sprites_to_turn):
 	for _sprite in sprites_to_turn:
 		if direction.x != 0:
@@ -81,14 +97,20 @@ func turn_sprites(direction, sprites_to_turn):
 				_sprite.scale.x = -1
 
 
-func get_direction():
-	return Vector2(
+func get_direction() -> Vector2:
+	var jump_is_permitted = is_on_floor() or _has_extra_jump
+	var just_jumped = Input.is_action_just_pressed("jump" + action_suffix)
+	var direction = Vector2(
 		(
 			Input.get_action_strength("move_right" + action_suffix)
 			- Input.get_action_strength("move_left" + action_suffix)
 		),
-		-1 if is_on_floor() and Input.is_action_just_pressed("jump" + action_suffix) else 0
+		-1 if jump_is_permitted and just_jumped else 0
 	)
+	if just_jumped:
+		_has_extra_jump = false
+
+	return direction
 
 
 # This function calculates a new velocity whenever you need it.
@@ -124,7 +146,7 @@ func calculate_move_velocity(
 	if is_jump_interrupted:
 		# Decrease the Y velocity by multiplying it, but don't set it to 0
 		# as to not be too abrupt.
-		velocity.y *= 0.6
+		velocity.y *= 0.4
 	return velocity
 
 

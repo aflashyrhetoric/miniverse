@@ -59,7 +59,6 @@ func _physics_process(_delta):
 	var animation = get_new_animation()
 	if animation != animation_player.current_animation:
 		animation_player.play(animation)
-		print(animation_player.current_animation)
 
 
 func handle_wall_hit():
