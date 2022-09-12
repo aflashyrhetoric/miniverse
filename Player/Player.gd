@@ -68,9 +68,8 @@ func _on_Mini_ellie_exited_area() -> void:
 
 
 func mini_entered_hookzone():
-	print("detected")
 	mini.grant_extra_jump()
 
 
 func mini_exited_hookzone():
-	print("exited hookzone")
+	pass

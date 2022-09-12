@@ -18,7 +18,6 @@ func initialize_level():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta: float) -> void:
-	print(player.get_node("Mini").global_position, player.position)
 	if _should_respawn:
 		for child in player.get_children():
 			child.global_position = respawn_point.global_position

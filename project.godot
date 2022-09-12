@@ -102,10 +102,6 @@ config/name="miniverse"
 run/main_scene="res://Main.tscn"
 config/icon="res://icon.png"
 
-[debug]
-
-settings/fps/force_fps=false
-
 [editor]
 
 version_control_autoload_on_startup=true
@@ -160,7 +156,7 @@ hook={
 [physics]
 
 common/enable_pause_aware_picking=true
-2d/default_gravity=1225
+2d/default_gravity=1000
 
 [rendering]
 

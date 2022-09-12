@@ -11,6 +11,7 @@ var direction := Vector2.ZERO
 onready var hitbox := $Hitbox
 onready var sprite := $Sprite
 onready var impact_hitbox := $ImpactHitbox
+onready var disappear_timer := $DisappearTimer
 
 var _damage := 10
 
@@ -20,8 +21,9 @@ func _ready():
 	look_at(get_global_mouse_position())
 
 
-# func _physics_process(_delta: float) -> void:
-# look_at(self.linear_velocity)
+func _physics_process(_delta: float) -> void:
+	if disappear_timer.get_time_left() == 0.0:
+		pass
 
 
 func destroy():
@@ -29,9 +31,10 @@ func destroy():
 
 
 func _on_FloorCollisionArea_body_entered(_tile_that_we_hit: Node) -> void:
+	sprite.visible = false
+	disappear_timer.start()
 	var hit_sprite = HitSprite.instance()
 	hit_sprite.global_position = global_position
 	hit_sprite.set_as_toplevel(true)
 	hit_sprite.get_node("AnimationPlayer").play("hit")
 	add_child(hit_sprite)
-	queue_free()	

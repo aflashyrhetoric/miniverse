@@ -119,7 +119,7 @@ func calculate_move_velocity(
 	current_linear_velocity: Vector2,
 	direction: Vector2,
 	speed_setting: Vector2,
-	is_jump_interrupted: bool
+	dampen_second_jump_from_interrupted_jump: bool
 ):
 	var velocity = current_linear_velocity
 
@@ -143,7 +143,7 @@ func calculate_move_velocity(
 
 	if direction.y != 0.0:
 		velocity.y = speed_setting.y * direction.y
-	if is_jump_interrupted:
+	if dampen_second_jump_from_interrupted_jump:
 		# Decrease the Y velocity by multiplying it, but don't set it to 0
 		# as to not be too abrupt.
 		velocity.y *= 0.4
