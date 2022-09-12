@@ -34,7 +34,6 @@ func _on_FloorCollisionArea_body_entered(_tile_that_we_hit: Node) -> void:
 	sprite.visible = false
 	disappear_timer.start()
 	var hit_sprite = HitSprite.instance()
-	hit_sprite.global_position = global_position
-	hit_sprite.set_as_toplevel(true)
-	hit_sprite.get_node("AnimationPlayer").play("hit")
 	add_child(hit_sprite)
+	hit_sprite.global_position = global_position
+	hit_sprite.get_node("AnimationPlayer").play("hit")
