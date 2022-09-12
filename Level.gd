@@ -3,22 +3,27 @@ extends Node2D
 onready var respawn_point = $RespawnPoint
 onready var out_of_bounds = $OutOfBounds
 onready var player = $Player
+onready var hook_point_group = $HookPoints
+onready var hook_points = hook_point_group.get_children()
 
 var _should_respawn = false
 
+func _ready():
+	initialize_level()	
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass  # Replace with function body.
-
+func initialize_level():
+	for hp in hook_points:
+		hp.connect("mini_entered_hookzone", player, "mini_entered_hookzone")
+		hp.connect("mini_exited_hookzone", player, "mini_exited_hookzone")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta: float) -> void:
-	print(player.global_position, respawn_point.global_position)
+func _physics_process(_delta: float) -> void:
+	print(player.get_node("Mini").global_position, player.position)
 	if _should_respawn:
-		player.position = respawn_point.position
-		_should_respawn = false
+		for child in player.get_children():
+			child.global_position = respawn_point.global_position
+			_should_respawn = false
 
 
-func _on_OutOfBounds_body_entered(body: Node) -> void:
+func _on_OutOfBounds_body_entered(_body: Node) -> void:
 	_should_respawn = true

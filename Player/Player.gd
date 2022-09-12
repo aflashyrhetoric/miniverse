@@ -12,10 +12,13 @@ onready var ellie = $Ellie
 # Instance variables
 var _ellie_is_inside_float_area = true
 
-
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass  # Replace with function body.
+# func _ready() -> void:
+# 	var hook_points = get_tree().get_nodes_in_group("hook_points")
+# 	for hook_point in hook_points:
+# 		print(hook_point)
+# 		hook_point.connect("body_entered", self, "_on_HookPoint_mini_entered")
+# 		hook_point.connect("body_exited", self, "_on_HookPoint_mini_exited")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -64,12 +67,10 @@ func _on_Mini_ellie_exited_area() -> void:
 	_ellie_is_inside_float_area = false
 
 
-func _on_HookPoint_mini_entered() -> void:
-	print("entered")
+func mini_entered_hookzone():
+	print("detected")
 	mini.grant_extra_jump()
 
 
-func _on_HookPoint_mini_exited() -> void:
-	print("exited")
-	pass
-	# _has_extra_jump = false
+func mini_exited_hookzone():
+	print("exited hookzone")

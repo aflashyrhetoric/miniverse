@@ -1,21 +1,23 @@
 extends Node2D
 
-signal mini_entered
-signal mini_exited
+onready var hook_zone = $HookZone
+
+signal mini_entered_hookzone
+signal mini_exited_hookzone
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass  # Replace with function body.
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta: float) -> void:
-#	pass
-
-
-func _on_HookZone_body_entered(_body:Node) -> void:
-	emit_signal("mini_entered")
+	print("Initializing hook zone")
+	print(hook_zone)
+	hook_zone.connect("body_entered", self, "_mini_entered")
+	hook_zone.connect("body_exited", self, "mini_exited")
 
 
-func _on_HookZone_body_exited(_body:Node) -> void:
-	emit_signal("mini_exited")
+func _mini_entered(_body):
+	emit_signal("mini_entered_hookzone")
+	print("mini_entered_hookzone")
+
+
+func mini_exited(_body):
+	emit_signal("mini_exited_hookzone")
+	print("mini_exited_hookzone")

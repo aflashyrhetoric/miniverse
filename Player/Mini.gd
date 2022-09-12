@@ -157,13 +157,13 @@ func get_new_animation(is_shooting = false):
 			animation_new = "run"
 		else:
 			animation_new = "idle"
-	else:
-		if _velocity.y > 0:
-			animation_new = "falling"
-		else:
-			animation_new = "jumping"
-	if is_shooting:
-		animation_new += "_weapon"
+	# else:
+	# 	if _velocity.y > 0:
+	# 		animation_new = "falling"
+	# 	else:
+	# 		animation_new = "jumping"
+	# if is_shooting:
+	# 	animation_new += "_weapon"
 	return animation_new
 
 

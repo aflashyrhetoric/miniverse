@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=2]
+[gd_scene load_steps=68 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World/rpg_asset_spritesheet.png" type="Texture" id=2]
@@ -18,10 +18,11 @@
 [ext_resource path="res://assets/art/parallax/Background layers/Layer_0009_2.png" type="Texture" id=16]
 [ext_resource path="res://assets/audio/music/The Verdant Grove LOOP.wav" type="AudioStream" id=17]
 [ext_resource path="res://Player/EnemyWorm.tscn" type="PackedScene" id=18]
-[ext_resource path="res://World/HookPoint.tscn" type="PackedScene" id=19]
+[ext_resource path="res://World/HookPoint.gd" type="Script" id=19]
 [ext_resource path="res://Player/EnemyRobo.tscn" type="PackedScene" id=20]
 [ext_resource path="res://Player/EnemyFly.tscn" type="PackedScene" id=21]
 [ext_resource path="res://Level.gd" type="Script" id=22]
+[ext_resource path="res://World/HookPointSmall.tscn" type="PackedScene" id=23]
 
 [sub_resource type="ConvexPolygonShape2D" id=17]
 points = PoolVector2Array( 128, 128, 0, 128, 0, 0, 128, 0 )
@@ -1283,18 +1284,6 @@ stream = ExtResource( 17 )
 [node name="EnemyWorm" parent="." instance=ExtResource( 18 )]
 position = Vector2( 349, 272 )
 
-[node name="HookPoint" parent="." instance=ExtResource( 19 )]
-position = Vector2( 950, 93 )
-
-[node name="HookPoint3" parent="." instance=ExtResource( 19 )]
-position = Vector2( 1189, 102 )
-
-[node name="HookPoint4" parent="." instance=ExtResource( 19 )]
-position = Vector2( 1455, 55 )
-
-[node name="HookPoint2" parent="." instance=ExtResource( 19 )]
-position = Vector2( 786, 138 )
-
 [node name="EnemyRobo" parent="." instance=ExtResource( 20 )]
 position = Vector2( 1000, 78 )
 
@@ -1315,12 +1304,22 @@ shape = SubResource( 60 )
 [node name="RespawnPoint" type="Position2D" parent="."]
 position = Vector2( 587, 232 )
 
-[connection signal="mini_entered" from="HookPoint" to="Player" method="_on_HookPoint_mini_entered"]
-[connection signal="mini_exited" from="HookPoint" to="Player" method="_on_HookPoint_mini_exited"]
-[connection signal="mini_entered" from="HookPoint3" to="Player" method="_on_HookPoint_mini_entered"]
-[connection signal="mini_exited" from="HookPoint3" to="Player" method="_on_HookPoint_mini_exited"]
-[connection signal="mini_entered" from="HookPoint4" to="Player" method="_on_HookPoint_mini_entered"]
-[connection signal="mini_exited" from="HookPoint4" to="Player" method="_on_HookPoint_mini_exited"]
-[connection signal="mini_entered" from="HookPoint2" to="Player" method="_on_HookPoint_mini_entered"]
-[connection signal="mini_exited" from="HookPoint2" to="Player" method="_on_HookPoint_mini_exited"]
+[node name="HookPoints" type="Node2D" parent="."]
+
+[node name="HookPointSmall" parent="HookPoints" instance=ExtResource( 23 )]
+position = Vector2( 816, 162 )
+script = ExtResource( 19 )
+
+[node name="HookPointSmall2" parent="HookPoints" instance=ExtResource( 23 )]
+position = Vector2( 920, 128 )
+script = ExtResource( 19 )
+
+[node name="HookPointSmall3" parent="HookPoints" instance=ExtResource( 23 )]
+position = Vector2( 1175, 122 )
+script = ExtResource( 19 )
+
+[node name="HookPointSmall4" parent="HookPoints" instance=ExtResource( 23 )]
+position = Vector2( 1434, 88 )
+script = ExtResource( 19 )
+
 [connection signal="body_entered" from="OutOfBounds" to="." method="_on_OutOfBounds_body_entered"]

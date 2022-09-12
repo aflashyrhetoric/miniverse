@@ -97,6 +97,5 @@ func _on_Hitbox_body_entered(projectile: Node) -> void:
 	hit_sprite.get_node("AnimationPlayer").play("hit")
 	hit_sprite.set_as_toplevel(true)
 	projectile.queue_free()
-
 	add_child(hit_sprite)
 	print("enemy hit")

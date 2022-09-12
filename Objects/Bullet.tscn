@@ -96,6 +96,15 @@ rotation = 1.5708
 scale = Vector2( 0.399999, 0.399999 )
 shape = SubResource( 7 )
 
+[node name="FloorCollisionArea" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FloorCollisionArea"]
+position = Vector2( 0, -9.53674e-07 )
+rotation = 1.5708
+scale = Vector2( 0.399999, 0.399999 )
+shape = SubResource( 7 )
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/destroy = SubResource( 5 )
 
@@ -103,4 +112,5 @@ anims/destroy = SubResource( 5 )
 one_shot = true
 autostart = true
 
+[connection signal="body_entered" from="FloorCollisionArea" to="." method="_on_FloorCollisionArea_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="destroy"]
