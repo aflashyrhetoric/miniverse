@@ -177,12 +177,6 @@ process_mode = 0
 wait_time = 0.2
 one_shot = true
 
-[node name="PlatformDetector" type="RayCast2D" parent="."]
-position = Vector2( 0, -6 )
-enabled = true
-cast_to = Vector2( 0, 6 )
-collision_mask = 8
-
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -12 )
 texture = ExtResource( 2 )
@@ -191,6 +185,21 @@ frame = 1
 
 [node name="FlowerGun" parent="Sprite" instance=ExtResource( 4 )]
 position = Vector2( 7, 2 )
+
+[node name="PlatformDetector" type="RayCast2D" parent="."]
+position = Vector2( 0, -6 )
+enabled = true
+cast_to = Vector2( 0, 6 )
+
+[node name="WallGrabForwardDetector" type="RayCast2D" parent="."]
+position = Vector2( 0, -6 )
+enabled = true
+cast_to = Vector2( 7, 0 )
+
+[node name="WallGrabDetector" type="RayCast2D" parent="."]
+position = Vector2( 0, -6 )
+enabled = true
+cast_to = Vector2( 0, 37 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 2.6
