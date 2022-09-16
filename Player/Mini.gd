@@ -8,10 +8,14 @@ signal ellie_entered_area
 signal ellie_exited_area
 
 const FLOOR_DETECT_DISTANCE = 5.0
-const WALK_SPEED = 200
-const WALK_ACCEL = WALK_SPEED / 20
-const WALK_DECAY = 0.95  # unit slowed down per frame
-const WALL_HOP_COUNTER_VELOCITY = 300
+const MAX_SPEED = Vector2(150, 600)
+const WALK_ACCEL = 150 / 20
+const WALK_DECAY_AIR = 0.98  # unit slowed down per frame
+const WALK_DECAY_GROUND = 0.70  # unit slowed down per frame
+const AIR_STOMP_VELOCITY = Vector2(0, 800)
+const TURN_SPEED_MULTIPLER = 1.45
+
+const WALL_HOP_COUNTER_VELOCITY = 380
 const WALL_GRAB_FALL_SPEED = 50
 
 ## EXPORTED VARIABLES
@@ -25,11 +29,21 @@ onready var animation_player = $AnimationPlayer
 onready var shoot_timer = $ShootAnimation
 onready var sprite = $Sprite
 onready var sound_jump = $Jump
+
 onready var label = $Label
+
 onready var gun = sprite.get_node(@"FlowerGun")
+
 onready var ellie_float_range = $EllieFloatRange
 
+# JUICE
+onready var juice_animation_player = $JuiceAnimationPlayer
+onready var jump_dust = $JumpDust
+onready var land_dust = $LandDust
+
 # Instance Variables
+var _is_air_stomping = false
+var _has_jumped = false
 var _has_extra_jump = true
 
 
@@ -39,15 +53,20 @@ func _ready():
 
 
 func _physics_process(_delta):
-	if is_on_floor() and _has_extra_jump:
-		print("jump reset")
-		_has_extra_jump = false
+	if is_on_floor() and _has_jumped:
+		_has_jumped = false
+		_is_air_stomping = false
+		juice_animation_player.play("land")
+		print("played land")
+		if _has_extra_jump:
+			_has_extra_jump = false
 
 	# Play jump sound
 	#	if Input.is_action_just_pressed("jump" + action_suffix) and is_on_floor():
 	#		sound_jump.play()
 
 	var direction: Vector2 = get_direction()
+
 	var dampen_second_jump_from_interrupted_jump: bool
 	dampen_second_jump_from_interrupted_jump = (
 		Input.is_action_just_released("jump" + action_suffix)
@@ -133,6 +152,13 @@ func get_direction_x():
 func get_direction() -> Vector2:
 	var jump_is_permitted = check_jump_permissions()
 	var just_jumped = Input.is_action_just_pressed("jump" + action_suffix)
+
+	# DO JUMP RELATED JUICE
+	if jump_is_permitted and just_jumped:
+		_has_jumped = true
+		# juice_animation_player.play("jump")
+		print("played jump")
+
 	var direction = Vector2(get_direction_x(), -1 if jump_is_permitted and just_jumped else 0)
 	if just_jumped:
 		_has_extra_jump = false
@@ -157,6 +183,18 @@ func calculate_move_velocity(
 	dampen_second_jump_from_interrupted_jump: bool
 ):
 	var velocity = current_linear_velocity
+
+	if (
+		_is_air_stomping
+		or (
+			not is_on_floor()
+			and not platform_detector.is_colliding()
+			and Input.is_action_just_pressed("air_stomp")
+		)
+	):
+		_is_air_stomping = true
+		return AIR_STOMP_VELOCITY
+
 	var x_direction = -1 if player_input_direction.x < 0 else 1
 
 	# COMPUTE X VELOCITY
@@ -164,28 +202,23 @@ func calculate_move_velocity(
 		var accel := 0.0
 		print(player_input_direction.x, "||||", current_linear_velocity.x)
 
-		# if player_input_direction.x == 1 and current_linear_velocity.x < 0:
-		# 	accel = WALK_ACCEL
-		# elif player_input_direction.x == -1 and current_linear_velocity.x > 0:
-		# 	accel = -WALK_ACCEL
-		# if player_input_direction.x == 1:
-		# 	accel = WALK_ACCEL
-		# if player_input_direction.x == 1:
-		# 	accel = -WALK_ACCEL
 		accel = WALK_ACCEL if player_input_direction.x == 1 else -WALK_ACCEL
 		if opposite_directions(player_input_direction.x, current_linear_velocity.x):
-			accel *= 1.25
+			accel *= TURN_SPEED_MULTIPLER
 			pass
 
 		var would_be_speed_x = current_linear_velocity.x + accel  #* x_direction
 		# If we're going to go faster than our max, cap horizontal speed
 		velocity.x = (
 			would_be_speed_x
-			if abs(would_be_speed_x) < max_speed.x
-			else max_speed.x * x_direction
+			if abs(would_be_speed_x) < MAX_SPEED.x
+			else MAX_SPEED.x * x_direction
 		)
 	else:
-		var would_be_speed_x = current_linear_velocity.x * WALK_DECAY
+		var would_be_speed_x = (
+			current_linear_velocity.x
+			* (WALK_DECAY_GROUND if is_on_floor() else WALK_DECAY_AIR)
+		)
 		# if would_be_speed_x < 0:
 		# 	would_be_speed_x = 0
 		# We can't exceed x max speed while no inputs are pressed

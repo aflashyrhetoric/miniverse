@@ -5,7 +5,6 @@ extends KinematicBody2D
 # such as speed and are affected by gravity.
 
 export var speed = Vector2(150.0, 350.0)
-export var max_speed = Vector2(220, 600)
 
 onready var gravity = ProjectSettings.get("physics/2d/default_gravity")
 
