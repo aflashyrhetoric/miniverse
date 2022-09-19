@@ -17,5 +17,8 @@ func _ready() -> void:
 #func _process(delta: float) -> void:
 #	pass
 
+func died() -> void:
+	pass
+
 func _physics_process(delta):
 	global_position = global_position + (_velocity * delta)

@@ -258,7 +258,7 @@ cast_to = Vector2( 7, 0 )
 [node name="WallGrabDetector" type="RayCast2D" parent="."]
 position = Vector2( 0, -6 )
 enabled = true
-cast_to = Vector2( 0, 37 )
+cast_to = Vector2( 0, 25 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 4.0
@@ -271,14 +271,6 @@ anims/jumping_weapon = SubResource( 7 )
 anims/run = SubResource( 1 )
 anims/run_weapon = SubResource( 9 )
 anims/standing_weapon_ready = SubResource( 10 )
-
-[node name="Camera" type="Camera2D" parent="."]
-position = Vector2( 0, -28 )
-current = true
-zoom = Vector2( 0.5, 0.5 )
-process_mode = 0
-limit_smoothed = true
-drag_margin_v_enabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -12 )

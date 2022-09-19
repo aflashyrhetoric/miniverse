@@ -11,7 +11,6 @@ script = ExtResource( 2 )
 
 [node name="Ellie" parent="." instance=ExtResource( 11 )]
 position = Vector2( -16, -31 )
-max_speed = null
 
 [connection signal="ellie_entered_area" from="Mini" to="." method="_on_Mini_ellie_entered_area"]
 [connection signal="ellie_exited_area" from="Mini" to="." method="_on_Mini_ellie_exited_area"]

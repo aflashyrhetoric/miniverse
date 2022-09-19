@@ -10,6 +10,7 @@ enum Wall { LEFT, RIGHT }
 
 var _state = State.WALKING
 
+export var speed = 120
 export(int) var max_health = 100
 var _health = max_health
 
@@ -29,7 +30,7 @@ onready var last_wall_hit: int = Wall.LEFT if sprite.scale.x > 0 else Wall.Right
 
 
 func _ready():
-	_velocity.x = speed.x
+	_velocity.x = speed
 
 
 func _physics_process(_delta):
@@ -37,9 +38,9 @@ func _physics_process(_delta):
 
 	# If the enemy encounters a wall or an edge, the horizontal velocity is flipped.
 	if not floor_detector_left.is_colliding() and not collision_exists:
-		_velocity.x = speed.x
+		_velocity.x = speed
 	elif not floor_detector_right.is_colliding() and not collision_exists:
-		_velocity.x = -speed.x
+		_velocity.x = -speed
 
 	# Alternate direction when the wall is hit
 	if collision_exists:

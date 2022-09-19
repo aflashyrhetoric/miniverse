@@ -9,7 +9,7 @@ onready var hook_points = hook_point_group.get_children()
 var _should_respawn = false
 
 func _ready():
-	initialize_level()	
+	initialize_level()
 
 func initialize_level():
 	for hp in hook_points:
@@ -21,6 +21,7 @@ func _physics_process(_delta: float) -> void:
 	if _should_respawn:
 		for child in player.get_children():
 			child.global_position = respawn_point.global_position
+			child.died()
 			_should_respawn = false
 
 
