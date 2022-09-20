@@ -67,9 +67,9 @@ func _on_Mini_ellie_exited_area() -> void:
 	_ellie_is_inside_float_area = false
 
 
-func mini_entered_hookzone():
+func mini_entered_bubble():
 	mini.grant_extra_jump()
 
 
-func mini_exited_hookzone():
+func mini_exited_bubble():
 	pass
