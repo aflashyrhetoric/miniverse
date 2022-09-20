@@ -1,5 +1,9 @@
 extends Node2D
 
+onready var display_width = ProjectSettings.get("display/window/size/width")
+onready var display_height = ProjectSettings.get("display/window/size/height")
+
+onready var viewport = $Camera
 onready var respawn_point = $RespawnPoint
 onready var out_of_bounds = $OutOfBounds
 onready var player = $Player

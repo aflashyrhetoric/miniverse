@@ -19,8 +19,8 @@ const AIR_STOMP_VELOCITY = Vector2(0, 800)
 const TURN_SPEED_MULTIPLER = 1.75
 
 # const BUBBLE_FLY_TO_ORIGIN_SPEED = 200
-const BUBBLE_DASH_VELOCITY = 300
-const BUBBLE_DASH_FRAME_DURATION = 10
+const BUBBLE_DASH_VELOCITY = 200
+const BUBBLE_DASH_FRAME_DURATION = 20
 
 const WALL_HOP_COUNTER_VELOCITY = 100
 const WALL_GRAB_FALL_SPEED = 50
@@ -95,14 +95,18 @@ func _physics_process(_delta):
 	var direction: Vector2 = get_direction()
 	var dampen_second_jump_from_interrupted_jump: bool
 	dampen_second_jump_from_interrupted_jump = (
-		Input.is_action_just_released("jump")
+		not _is_bubble_dashing
+		and Input.is_action_just_released("jump")
 		and _velocity.y < 0.0
 	)
 
 	# Wall Hop
-	if Input.is_action_just_pressed("jump") and wall_grab_forward_detector.is_colliding():
-		_velocity.x = direction.x * WALL_HOP_COUNTER_VELOCITY
-		print(_velocity.x, "just jumped")
+	if wall_grab_forward_detector.is_colliding():
+		if _is_bubble_dashing:
+			end_bubble_dash()
+		if Input.is_action_just_pressed("jump"):
+			_velocity.x = direction.x * WALL_HOP_COUNTER_VELOCITY
+			print(_velocity.x, "just jumped")
 
 	_velocity = calculate_move_velocity(
 		_velocity, direction, dampen_second_jump_from_interrupted_jump
@@ -226,6 +230,15 @@ func opposite_directions(a, b):
 	return false
 
 
+func end_bubble_dash():
+	enable_gravity()
+	_is_bubble_dashing = false
+	_is_inside_bubble = false
+	_just_bubble_dashed = true
+	_frames_since_started_bubble_dashing = 0
+	_bubble_origin = Vector2.ZERO
+
+
 # This function calculates a new velocity whenever you need it.
 # It allows you to interrupt jumps.
 func calculate_move_velocity(
@@ -243,16 +256,11 @@ func calculate_move_velocity(
 		_frames_since_started_bubble_dashing += 1
 
 		if _frames_since_started_bubble_dashing <= BUBBLE_DASH_FRAME_DURATION:
-			return current_linear_velocity.normalized() * BUBBLE_DASH_VELOCITY
+			return current_linear_velocity
 
 		# Bubble dash is over
-		enable_gravity()
-		_is_bubble_dashing = false
-		_is_inside_bubble = false
-		_just_bubble_dashed = true
-		_frames_since_started_bubble_dashing = 0
-		_bubble_origin = Vector2.ZERO
-		print("bubble dash ENDED")
+		end_bubble_dash()
+		# Only grant bubble dash jump if they reached the full extent of the dash
 		grant_bubble_dash_jump()
 
 	if _is_inside_bubble:
@@ -262,7 +270,6 @@ func calculate_move_velocity(
 			disable_gravity()
 			print("DASHING AT ANGLE:", x_direction, y_direction)
 			var planned_direction := Vector2(x_direction, y_direction)
-			print(planned_direction)
 			# Dash straight forward if there's no given direction
 			var direction_to_dash := (
 				planned_direction
@@ -332,7 +339,8 @@ func calculate_move_velocity(
 		velocity.x = would_be_speed_x
 
 	# If jumping
-	if player_input_direction.y == -1:
+	if player_input_direction.y == -1 and not _just_bubble_dashed:
+		print("hit a jump")
 		velocity.y = JUMP_SPEED * player_input_direction.y  # velocity.y will always be negative, it's not being multiplied by itself
 
 	# If falling:
