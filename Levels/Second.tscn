@@ -427,7 +427,7 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 extents = Vector2( 159.875, 63 )
 
 [sub_resource type="RectangleShape2D" id=71]
-extents = Vector2( 2, 92 )
+extents = Vector2( 0, 92 )
 
 [node name="Second" type="Node2D"]
 script = ExtResource( 1 )
@@ -477,7 +477,7 @@ position = Vector2( 232, 226 )
 [node name="LevelBoundary" type="Area2D" parent="Boundaries"]
 position = Vector2( 2, 0 )
 collision_layer = 512
-collision_mask = 2
+collision_mask = 1024
 
 [node name="First" type="CollisionShape2D" parent="Boundaries/LevelBoundary"]
 position = Vector2( -7, 92 )

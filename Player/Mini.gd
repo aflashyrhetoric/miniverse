@@ -13,7 +13,7 @@ const JUMP_SPEED = 250.0
 const FALL_SPEED = 200.0
 const WALK_ACCEL_AIR = 20  # added per frame
 const WALK_ACCEL_GROUND = 5  # added per frame
-const WALK_DECAY_AIR = 0.50  # multiplied per5frame
+const WALK_DECAY_AIR = 0.90  # multiplied per5frame
 const WALK_DECAY_GROUND = 0.70  # multiplied per frame
 const AIR_STOMP_VELOCITY = Vector2(0, 800)
 const TURN_SPEED_MULTIPLER = 1.75
@@ -22,7 +22,7 @@ const TURN_SPEED_MULTIPLER = 1.75
 const BUBBLE_DASH_VELOCITY = 200
 const BUBBLE_DASH_FRAME_DURATION = 20
 
-const WALL_HOP_COUNTER_VELOCITY = 100
+const WALL_HOP_COUNTER_VELOCITY = 300
 const WALL_GRAB_FALL_SPEED = 50
 
 ## EXPORTED VARIABLES
@@ -36,6 +36,8 @@ onready var animation_player = $AnimationPlayer
 onready var shoot_timer = $ShootAnimation
 onready var sprite = $Sprite
 onready var sound_jump = $Jump
+
+onready var level_boundary_trigger = $LevelBoundaryTrigger
 
 onready var label = $Label
 
@@ -58,6 +60,11 @@ var _is_air_stomping = false
 var _has_jumped = false
 var _has_extra_jump = false
 var _has_bubble_dash_jump = false
+
+# Physics-pause, used for transitioning rooms
+var _pause_movement = false
+var _just_unpaused = false
+var _pre_pause_velocity: Vector2 = Vector2.ZERO
 
 
 func _ready():
@@ -222,6 +229,16 @@ func get_direction() -> Vector2:
 	return direction
 
 
+func pause_movement():
+	_pause_movement = true
+	_pre_pause_velocity = _velocity
+
+
+func unpause_movement():
+	_pause_movement = false
+	_just_unpaused = true
+
+
 func opposite_directions(a, b):
 	if a < 0 and b > 0:
 		return true
@@ -246,6 +263,15 @@ func calculate_move_velocity(
 	player_input_direction: Vector2,  # INPUT DIRECTION
 	dampen_second_jump_from_interrupted_jump: bool
 ):
+	if _pause_movement:
+		return Vector2(0, 0)
+	elif _just_unpaused:
+		_just_unpaused = false
+		var _temp = _pre_pause_velocity
+		_pre_pause_velocity = Vector2.ZERO
+		print("restoring velocity to: ", _pre_pause_velocity)
+		return _temp
+
 	var velocity = current_linear_velocity
 	var x_direction_int = sprite.scale.x
 	var x_direction = get_direction_x()

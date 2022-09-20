@@ -29,6 +29,8 @@ func _move_camera(name_of_room: String):
 	if _active_room == name_of_room:
 		return
 
+	# If we're here, we're trying to transition rooms!
+	player.mini.pause_movement()
 	print("trying to get name of room: ", name_of_room)
 	var new_pos: Vector2 = get_node(name_of_room).cam_anchor.global_position
 	print("position of room: ", new_pos)
@@ -43,4 +45,5 @@ func _move_camera(name_of_room: String):
 
 func update_room_name(_obj, _key, name_of_room: String):
 	print("updated to ", name_of_room)
+	player.mini.unpause_movement()
 	_active_room = name_of_room

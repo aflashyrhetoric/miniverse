@@ -26,7 +26,8 @@ func _ready():
 	# Initialize out of bounds
 	out_of_bounds.connect("body_entered", self, "mini_fell_out_of_bounds")
 	for boundary in boundaries.get_children():
-		boundary.connect("body_entered", self, "change_room_to", [boundary.get_child(0).name])
+		print("processing boundary", boundary.name)
+		boundary.connect("area_entered", self, "change_room_to", [boundary.get_child(0).name])
 
 
 func initialize_level(player):
@@ -46,6 +47,7 @@ func _physics_process(_delta: float) -> void:
 			_should_respawn = false
 
 func change_room_to(_body, name_of_room):
+	print("detected")
 	emit_signal("change_room", name_of_room)
 
 func mini_fell_out_of_bounds(_body: Node) -> void:
