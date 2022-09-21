@@ -4,6 +4,8 @@ extends Actor
 # warning-ignore:unused_signal
 signal collect_coin
 
+signal mini_died
+
 signal ellie_entered_area
 signal ellie_exited_area
 
@@ -29,6 +31,7 @@ const WALL_GRAB_FALL_SPEED = 50
 # export(String) var action_suffix = ""
 #####################
 
+onready var hazard_collision_shape = $HazardCollisionShape
 onready var platform_detector = $PlatformDetector
 onready var wall_grab_detector = $WallGrabDetector  # Must be a certain height above the ground to wall grab
 onready var wall_grab_forward_detector = $WallGrabForwardDetector  # Must be a certain distance from the wall to grab
@@ -68,7 +71,7 @@ var _pre_pause_velocity: Vector2 = Vector2.ZERO
 
 
 func _ready():
-	pass
+	hazard_collision_shape.connect("area_entered", self, "died")
 	# Static types are necessary here to avoid warnings.
 
 
@@ -419,6 +422,8 @@ func _on_EllieFloatRange_body_entered(_body: Node) -> void:
 func _on_EllieFloatRange_body_exited(_body: Node) -> void:
 	emit_signal("ellie_exited_area")
 
+func mini_died():
+	emit_signal("mini_died")
 
 func died():
 	_is_inside_bubble = false
