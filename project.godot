@@ -99,9 +99,11 @@ config/icon="res://icon.png"
 [autoload]
 
 Events="*res://Events.gd"
+WorldVars="*res://WorldVars.gd"
 
 [debug]
 
+gdscript/warnings/unused_variable=false
 gdscript/warnings/unused_signal=false
 
 [display]

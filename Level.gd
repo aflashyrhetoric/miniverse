@@ -24,27 +24,31 @@ func _ready():
 	bubbles = bubbles_group.get_children() if bubbles_group != null else null
 
 	# Initialize out of bounds
-	out_of_bounds.connect("body_entered", self, "mini_fell_out_of_bounds")
+	out_of_bounds.connect("body_entered", self, "mini_died")
+	Events.connect("mini_died", self, "handle_death")
+
 	for boundary in boundaries.get_children():
 		print("processing boundary", boundary.name)
+		# The only thing that can enter this boundary is mini's room-change-trigger
 		boundary.connect("area_entered", self, "change_room_to", [boundary.get_child(0).name])
 
 
 func initialize_level(player):
 	_player = player
-	# Connect the signals emitted by the bubble to the handler in Mini.gd
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta: float) -> void:
-	if _should_respawn:
+	if _should_respawn and name == WorldVars._active_room:
 		for child in _player.get_children():
 			child.global_position = respawn_point.global_position
-			child.died()
+			child.handle_death()
 			_should_respawn = false
 
 func change_room_to(_body, name_of_room):
-	print("detected")
 	emit_signal("change_room", name_of_room)
 
-func mini_fell_out_of_bounds(_body: Node) -> void:
+func mini_died(_body: Node) -> void:
+	Events.emit_signal("mini_died")
+
+func handle_death():
 	_should_respawn = true

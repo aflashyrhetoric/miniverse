@@ -13,8 +13,6 @@ onready var player = $Player
 
 var _should_respawn = false
 
-var _active_room := "First"
-
 
 func _ready():
 	cam.global_position = first.cam_anchor.position
@@ -26,8 +24,8 @@ func _ready():
 
 
 func _move_camera(name_of_room: String):
-	if _active_room == name_of_room:
-		return
+	if WorldVars._active_room == name_of_room:
+		return true
 
 	# If we're here, we're trying to transition rooms!
 	player.mini.pause_movement()
@@ -46,4 +44,4 @@ func _move_camera(name_of_room: String):
 func update_room_name(_obj, _key, name_of_room: String):
 	print("updated to ", name_of_room)
 	player.mini.unpause_movement()
-	_active_room = name_of_room
+	WorldVars._active_room = name_of_room

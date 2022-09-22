@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://assets/art/hazards/spike.png" type="Texture" id=1]
 [ext_resource path="res://World/ApproachableObject.tscn" type="PackedScene" id=4]
@@ -38,6 +38,9 @@ polygon = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=66]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=83]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 
 [sub_resource type="OccluderPolygon2D" id=73]
 polygon = PoolVector2Array( 48, 16, 0, 16, 0, 0, 48, 0 )
@@ -433,9 +436,16 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 24/navigation_offset = Vector2( 0, 0 )
 24/shape_offset = Vector2( 0, 0 )
 24/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+24/shape = SubResource( 83 )
 24/shape_one_way = false
-24/shape_one_way_margin = 0.0
-24/shapes = [  ]
+24/shape_one_way_margin = 1.0
+24/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 83 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 24/z_index = 0
 25/name = "tileset.png 25"
 25/texture = ExtResource( 19 )
@@ -529,7 +539,7 @@ position = Vector2( 159.875, 243 )
 shape = SubResource( 60 )
 
 [node name="RespawnPoint" type="Position2D" parent="."]
-position = Vector2( 96, 128 )
+position = Vector2( 139, 124 )
 
 [node name="Bubbles" type="Node2D" parent="."]
 position = Vector2( -24, -106 )

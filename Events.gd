@@ -1,6 +1,6 @@
 extends Node
 
-signal change_room(name_of_room)
+# signal change_room(name_of_room)
 
 signal mini_died
 
