@@ -1,11 +1,9 @@
-[gd_scene load_steps=54 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://Player/Mini.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/player/character/idle_4.png" type="Texture" id=2]
 [ext_resource path="res://assets/audio/sfx/jump.wav" type="AudioStream" id=3]
 [ext_resource path="res://Weapons/FlowerGun.tscn" type="PackedScene" id=4]
-[ext_resource path="res://assets/art/juice/JumpDust.png" type="Texture" id=5]
-[ext_resource path="res://assets/art/juice/LandDust.png" type="Texture" id=6]
 [ext_resource path="res://assets/shaders/light_shader_sprite.png" type="Texture" id=7]
 [ext_resource path="res://assets/art/player/character/jump_down_3.png" type="Texture" id=8]
 [ext_resource path="res://assets/art/player/character/jump_up_3.png" type="Texture" id=9]
@@ -290,59 +288,11 @@ tracks/0/keys = {
 resource_name = "jump"
 length = 0.2
 step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("JumpDust:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.05, 0.1, 0.15 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("JumpDust:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.174161 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
 
 [sub_resource type="Animation" id=24]
 resource_name = "land"
 length = 0.2
 step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("LandDust:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.05, 0.1, 0.15 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("LandDust:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.17438 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
 
 [sub_resource type="Curve" id=54]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
@@ -394,7 +344,7 @@ one_shot = true
 position = Vector2( 0, -8 )
 frames = SubResource( 53 )
 animation = "idle"
-frame = 2
+frame = 1
 playing = true
 
 [node name="FlowerGun" parent="AnimatedSprite" instance=ExtResource( 4 )]
@@ -448,30 +398,17 @@ shape = SubResource( 22 )
 [node name="PointBehindMini" type="Position2D" parent="EllieFloatRange"]
 position = Vector2( -13, -29 )
 
-[node name="JumpDust" type="Sprite" parent="."]
-visible = false
-position = Vector2( 0, -4 )
-scale = Vector2( 2, 1 )
-texture = ExtResource( 5 )
-hframes = 4
-frame = 3
-
-[node name="LandDust" type="Sprite" parent="."]
-visible = false
-position = Vector2( 0, -7 )
-scale = Vector2( 2, 1 )
-texture = ExtResource( 6 )
-hframes = 4
-
 [node name="JuiceAnimationPlayer" type="AnimationPlayer" parent="."]
 anims/jump = SubResource( 23 )
 anims/land = SubResource( 24 )
 
-[node name="Particles2D" type="Particles2D" parent="."]
+[node name="Dust" type="Particles2D" parent="."]
 position = Vector2( -4, -1 )
 amount = 20
 lifetime = 0.3
-randomness = 0.1
+speed_scale = 0.8
+explosiveness = 0.66
+randomness = 0.11
 visibility_rect = Rect2( 0, 0, 0, 0 )
 local_coords = false
 process_material = SubResource( 25 )
@@ -479,8 +416,8 @@ process_material = SubResource( 25 )
 [node name="Light2D" type="Light2D" parent="."]
 position = Vector2( 0, -10 )
 texture = ExtResource( 7 )
-texture_scale = 2.0
-energy = 0.7
+energy = 0.35
+range_layer_min = -1
 shadow_enabled = true
 shadow_gradient_length = 3.0
 

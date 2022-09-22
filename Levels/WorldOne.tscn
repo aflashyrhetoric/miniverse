@@ -24,6 +24,7 @@ position = Vector2( 320, 0 )
 position = Vector2( 88, 120 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+layer = -1
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_mirroring = Vector2( 288, 0 )
@@ -54,3 +55,5 @@ stream = ExtResource( 17 )
 current = true
 
 [node name="CamTween" type="Tween" parent="."]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]

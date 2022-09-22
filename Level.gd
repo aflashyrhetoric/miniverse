@@ -66,3 +66,5 @@ func create_land_dust(_feet_position: Vector2):
 	land_dust.centered = true
 	land_dust.global_position = _feet_position
 	add_child(land_dust)
+	yield(get_tree().create_timer(WorldVars.DUST_LIFETIME), "timeout")
+	land_dust.queue_free()

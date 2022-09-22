@@ -42,6 +42,7 @@ onready var ellie_float_range = $EllieFloatRange
 
 # JUICE
 onready var feet_position = $FeetPosition
+onready var dust = $Dust
 onready var juice_animation_player = $JuiceAnimationPlayer
 
 # Instance Variables
@@ -67,6 +68,7 @@ func _ready():
 	ellie_float_range.connect("body_exited", self, "_on_EllieFloatRange_body_exited")
 	Events.connect("mini_entered_bubble", self, "grant_extra_jump")
 	Events.connect("mini_died", self, "handle_death")
+	dust.lifetime = WorldVars.DUST_LIFETIME
 
 
 func _physics_process(_delta):
@@ -344,6 +346,7 @@ func calculate_move_velocity(
 
 	# COMPUTE X VELOCITY
 	if player_input_direction.x != 0.0:
+		dust.emitting = true
 		var accel := 0.0
 
 		if is_on_floor():
@@ -375,6 +378,9 @@ func calculate_move_velocity(
 		)
 		# We can't exceed x max speed while no inputs are pressed
 		velocity.x = would_be_speed_x
+
+	if abs(velocity.x) < 25.0:
+		dust.emitting = false
 
 	# If jumping
 	if player_input_direction.y == -1 and not _just_bubble_dashed:
