@@ -2,12 +2,12 @@ class_name Mini
 extends Actor
 
 # warning-ignore:unused_signal
-signal collect_coin
+# signal collect_coin
 
-signal mini_died
+# signal mini_died
 
-signal ellie_entered_area
-signal ellie_exited_area
+# signal ellie_entered_area
+# signal ellie_exited_area
 
 const FLOOR_DETECT_DISTANCE = 5.0
 const MAX_SPEED = Vector2(120, 600)
@@ -72,8 +72,9 @@ var _pre_pause_velocity: Vector2 = Vector2.ZERO
 
 func _ready():
 	hazard_collision_shape.connect("area_entered", self, "died")
-	# Static types are necessary here to avoid warnings.
-
+	ellie_float_range.connect("body_entered", self, "_on_EllieFloatRange_body_entered")
+	ellie_float_range.connect("body_exited", self, "_on_EllieFloatRange_body_exited")
+	Events.connect("mini_entered_bubble", self, "grant_extra_jump")
 
 func _physics_process(_delta):
 	if _is_inside_bubble:
@@ -416,11 +417,11 @@ func get_new_animation(_is_shooting = false):
 
 
 func _on_EllieFloatRange_body_entered(_body: Node) -> void:
-	emit_signal("ellie_entered_area")
+	Events.emit_signal("ellie_entered_area")
 
 
 func _on_EllieFloatRange_body_exited(_body: Node) -> void:
-	emit_signal("ellie_exited_area")
+	Events.emit_signal("ellie_exited_area")
 
 func mini_died():
 	emit_signal("mini_died")

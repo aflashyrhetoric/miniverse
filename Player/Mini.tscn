@@ -368,6 +368,3 @@ priority = 1.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelBoundaryTrigger"]
 scale = Vector2( 2, 2 )
 shape = SubResource( 28 )
-
-[connection signal="body_entered" from="EllieFloatRange" to="." method="_on_EllieFloatRange_body_entered"]
-[connection signal="body_exited" from="EllieFloatRange" to="." method="_on_EllieFloatRange_body_exited"]

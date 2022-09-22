@@ -62,7 +62,7 @@ func _mini_entered(_mini):
 	_mini_ref = _mini
 	_mini_ref.enter_bubble(global_position)
 	_orb_boundary.modulate.a = 0.2
-	emit_signal("mini_entered_bubble")
+	Events.emit_signal("mini_entered_bubble")
 
 
 func _mini_exited(_mini):
@@ -78,7 +78,7 @@ func _mini_exited(_mini):
 
 	# Restore the center orb's visibility and function
 	_disable_orb = false
-	emit_signal("mini_exited_bubble")
+	Events.emit_signal("mini_exited_bubble")
 
 
 func _orb_hit_mini(_mini):

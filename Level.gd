@@ -33,10 +33,6 @@ func _ready():
 func initialize_level(player):
 	_player = player
 	# Connect the signals emitted by the bubble to the handler in Mini.gd
-	for hp in bubbles:
-		hp.connect("mini_entered_bubble", player, "mini_entered_bubble")
-		hp.connect("mini_exited_bubble", player, "mini_exited_bubble")
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta: float) -> void:

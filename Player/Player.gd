@@ -12,40 +12,20 @@ onready var ellie = $Ellie
 # Instance variables
 var _ellie_is_inside_float_area = true
 
+
 # Called when the node enters the scene tree for the first time.
-# func _ready() -> void:
-# 	var hook_points = get_tree().get_nodes_in_group("hook_points")
-# 	for hook_point in hook_points:
-# 		print(hook_point)
-# 		hook_point.connect("body_entered", self, "_on_HookPoint_mini_entered")
-# 		hook_point.connect("body_exited", self, "_on_HookPoint_mini_exited")
+func _ready() -> void:
+	Events.connect("ellie_entered_area", self, "_on_Mini_ellie_entered_area")
+	Events.connect("ellie_exited_area", self, "_on_Mini_ellie_exited_area")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta: float) -> void:
 	handle_ellie_position()
-	hook_if_possible()
-	pass
-
-
-func hook_if_possible():
-	pass
 
 
 func handle_ellie_position():
-	var is_attacking = false  # TODO: Make this dynamically update when ellie is actually attacking
-	if !is_attacking:
-		# if mini is on the floor, adjust y movement speed toward position2d to mitigate wobble
-		if !mini.is_on_floor():
-			pass
-
-		# If ellie is out of the box, move toward the point
-		compute_direction_and_distance_accel()
-	pass
-
-
-# Which direction should ellie move, and how fast?
-func compute_direction_and_distance_accel():
+	# Which direction should ellie move, and how fast?
 	var point_to_approach = point_for_ellie_to_approach()
 	var speed = ELLIE_FLIGHT_SPEED if _ellie_is_inside_float_area else ELLIE_RETURN_SPEED
 	var direction = ellie.global_position.direction_to(point_to_approach.global_position)
@@ -65,11 +45,3 @@ func _on_Mini_ellie_entered_area() -> void:
 
 func _on_Mini_ellie_exited_area() -> void:
 	_ellie_is_inside_float_area = false
-
-
-func mini_entered_bubble():
-	mini.grant_extra_jump()
-
-
-func mini_exited_bubble():
-	pass

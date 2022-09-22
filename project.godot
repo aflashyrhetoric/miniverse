@@ -29,11 +29,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Objects/Bullet.gd"
 }, {
-"base": "Area2D",
-"class": "Coin",
-"language": "GDScript",
-"path": "res://Objects/Coin.gd"
-}, {
 "base": "Actor",
 "class": "Ellie",
 "language": "GDScript",
@@ -84,7 +79,6 @@ _global_script_class_icons={
 "ActorFlying": "",
 "Bird": "",
 "Bullet": "",
-"Coin": "",
 "Ellie": "",
 "Enemy": "",
 "EnemyFlying": "",
@@ -101,6 +95,14 @@ _global_script_class_icons={
 config/name="miniverse"
 run/main_scene="res://Levels/WorldOne.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Events="*res://Events.gd"
+
+[debug]
+
+gdscript/warnings/unused_signal=false
 
 [display]
 
@@ -127,6 +129,7 @@ singletons=[ "res://addons/godot-git-plugin/git_api.gdnlib" ]
 [global]
 
 grav=false
+unused=false
 
 [gui]
 
