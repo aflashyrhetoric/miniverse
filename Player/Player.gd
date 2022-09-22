@@ -6,7 +6,7 @@ const ELLIE_FLIGHT_SPEED = Vector2(50, 30)
 const ELLIE_RETURN_SPEED = Vector2(10, 10)
 
 # The BBs! :D
-onready var mini = $Mini
+onready var mini = $Hero # TO DO FIX
 onready var ellie = $Ellie
 
 # Instance variables

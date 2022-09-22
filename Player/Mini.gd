@@ -2,7 +2,7 @@ class_name Mini
 extends Actor
 
 # GAME CONSTANTS
-const FLOOR_DETECT_DISTANCE = 5.0
+const FLOOR_DETECT_DISTANCE = 8.0
 const MAX_SPEED = Vector2(120, 600)
 const JUMP_SPEED = 250.0
 const FALL_SPEED = 200.0
@@ -29,7 +29,7 @@ onready var wall_grab_min_height_detector = $WallGrabDetector  # Must be a certa
 onready var wall_grab_forward_detector = $WallGrabForwardDetector  # Must be a certain distance from the wall to grab
 onready var animation_player = $AnimationPlayer
 onready var shoot_timer = $ShootAnimation
-onready var sprite = $Sprite
+onready var sprite = $AnimatedSprite
 onready var sound_jump = $Jump
 
 onready var level_boundary_trigger = $LevelBoundaryTrigger
@@ -71,6 +71,7 @@ func _ready():
 
 
 func _physics_process(_delta):
+	# print(Input.get_action_strength("move_left"))
 	if _is_inside_bubble:
 		_is_air_stomping = false
 
@@ -143,11 +144,12 @@ func _physics_process(_delta):
 	if Input.is_action_just_pressed("shoot"):
 		is_shooting = gun.shoot()
 
-	var animation = get_new_animation(is_shooting)
-	if animation != animation_player.current_animation and shoot_timer.is_stopped():
-		if is_shooting:
-			shoot_timer.start()
-		animation_player.play(animation)
+	play_correct_animation()
+	# var animation = get_new_animation(is_shooting)
+	# if animation != animation_player.current_animation and shoot_timer.is_stopped():
+	# 	if is_shooting:
+	# 		shoot_timer.start()
+	# 	animation_player.play(animation)
 
 
 func grant_extra_jump():
@@ -182,15 +184,17 @@ func check_jump_permissions():
 
 # Returns a value from -1 to 0, float, representing strength of player input on x-axis
 func get_direction_x():
-	if (
-		wall_grab_forward_detector.is_colliding()
-		and Input.is_action_just_pressed("jump")
-		and not wall_grab_min_height_detector.is_colliding()
-	):
-		if sprite.scale.x > 0:
-			return -1
-		else:
-			return 1
+
+	# TODO - ADD BACK WALL HOP
+	# if (
+	# 	wall_grab_forward_detector.is_colliding()
+	# 	and Input.is_action_just_pressed("jump")
+	# 	and not wall_grab_min_height_detector.is_colliding()
+	# ):
+	# 	if sprite.scale.x > 0:
+	# 		return -1
+	# 	else:
+	# 		return 1
 
 	return Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 
@@ -289,6 +293,9 @@ func calculate_move_velocity(
 		if _frames_since_started_bubble_dashing <= BUBBLE_DASH_FRAME_DURATION:
 			return current_linear_velocity
 
+		if is_on_floor() or is_on_wall():
+			end_bubble_dash()
+
 		# Bubble dash is over
 		end_bubble_dash()
 		# Only grant bubble dash jump if they reached the full extent of the dash
@@ -307,6 +314,7 @@ func calculate_move_velocity(
 				if planned_direction != Vector2.ZERO
 				else Vector2(x_direction_int, 0)
 			)
+
 			return direction_to_dash.normalized() * BUBBLE_DASH_VELOCITY
 
 		if not just_jumped and not _is_bubble_dashing:
@@ -349,8 +357,8 @@ func calculate_move_velocity(
 			opposite_directions(player_input_direction.x, current_linear_velocity.x)
 			and is_on_floor()
 		):
-			accel *= TURN_SPEED_MULTIPLER
 			pass
+			# accel *= TURN_SPEED_MULTIPLER
 
 		var would_be_speed_x = current_linear_velocity.x + accel  #* x_direction
 		# If we're going to go faster than our max, cap horizontal speed
@@ -359,13 +367,13 @@ func calculate_move_velocity(
 			if abs(would_be_speed_x) < MAX_SPEED.x
 			else MAX_SPEED.x * x_direction_int
 		)
+		print("accelerating at, ", accel)
 	else:
+		print("slowing down")
 		var would_be_speed_x = (
 			current_linear_velocity.x
 			* (WALK_DECAY_GROUND if is_on_floor() else WALK_DECAY_AIR)
 		)
-		# if would_be_speed_x < 0:
-		# 	would_be_speed_x = 0
 		# We can't exceed x max speed while no inputs are pressed
 		velocity.x = would_be_speed_x
 
@@ -398,6 +406,19 @@ func is_wall_grabbing(_v: Vector2) -> bool:
 		and not wall_grab_min_height_detector.is_colliding()  # Must be a minimum distance from the ground
 		and _v.y > 0
 	)  # Only if user is currently falling, so we don't wall grab on the way up
+
+
+func play_correct_animation():
+	if is_on_floor():
+		if abs(_velocity.x) > 0.1:
+			sprite.animation = "run"
+		else:
+			sprite.animation = "idle"
+	else:
+		if _velocity.y < 0:
+			sprite.animation = "jump_up"
+		if _velocity.y > 0:
+			sprite.animation = "jump_down"
 
 
 func get_new_animation(_is_shooting = false):
