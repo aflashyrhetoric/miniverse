@@ -13,6 +13,10 @@ onready var bubbles_group = $Bubbles
 
 onready var boundaries = $Boundaries
 
+# JUICE
+var jump_dust_texture = preload("res://assets/art/juice/JumpDust.png")
+var land_dust_texture = preload("res://assets/art/juice/JumpDust.png")
+
 var bubbles
 
 var _should_respawn = false
@@ -26,6 +30,7 @@ func _ready():
 	# Initialize out of bounds
 	out_of_bounds.connect("body_entered", self, "mini_died")
 	Events.connect("mini_died", self, "handle_death")
+	Events.connect("mini_landed", self, "create_land_dust")
 
 	for boundary in boundaries.get_children():
 		print("processing boundary", boundary.name)
@@ -52,3 +57,12 @@ func mini_died(_body: Node) -> void:
 
 func handle_death():
 	_should_respawn = true
+
+func create_land_dust(_feet_position: Vector2):
+	var land_dust = Sprite.new()
+	land_dust.texture = land_dust_texture
+	land_dust.vframes = 1
+	land_dust.hframes = 4
+	land_dust.centered = true
+	land_dust.global_position = _feet_position
+	add_child(land_dust)

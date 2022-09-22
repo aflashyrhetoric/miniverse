@@ -11,7 +11,7 @@ const WALK_ACCEL_GROUND = 5  # added per frame
 const WALK_DECAY_AIR = 0.90  # multiplied per5frame
 const WALK_DECAY_GROUND = 0.70  # multiplied per frame
 const AIR_STOMP_VELOCITY = Vector2(0, 800)
-const TURN_SPEED_MULTIPLER = 1.75
+const TURN_SPEED_MULTIPLER = 1.95
 
 const BUBBLE_DASH_VELOCITY = 200
 const BUBBLE_DASH_FRAME_DURATION = 20
@@ -41,9 +41,8 @@ onready var gun = sprite.get_node(@"FlowerGun")
 onready var ellie_float_range = $EllieFloatRange
 
 # JUICE
+onready var feet_position = $FeetPosition
 onready var juice_animation_player = $JuiceAnimationPlayer
-onready var jump_dust = $JumpDust
-onready var land_dust = $LandDust
 
 # Instance Variables
 var _is_inside_bubble = false
@@ -90,7 +89,8 @@ func _physics_process(_delta):
 		if _is_air_stomping:
 			_is_air_stomping = false
 		# anims
-		juice_animation_player.play("land")
+		# juice_animation_player.play("land")
+		Events.emit_signal("mini_landed", [feet_position.global_position])
 		# logging
 		# print("played land")
 		# if platform_detector.get_collider()
@@ -357,8 +357,7 @@ func calculate_move_velocity(
 			opposite_directions(player_input_direction.x, current_linear_velocity.x)
 			and is_on_floor()
 		):
-			pass
-			# accel *= TURN_SPEED_MULTIPLER
+			accel *= TURN_SPEED_MULTIPLER
 
 		var would_be_speed_x = current_linear_velocity.x + accel  #* x_direction
 		# If we're going to go faster than our max, cap horizontal speed

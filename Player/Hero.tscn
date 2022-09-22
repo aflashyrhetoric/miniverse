@@ -344,22 +344,24 @@ tracks/1/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Gradient" id=26]
-offsets = PoolRealArray( 0.00127065, 1 )
-colors = PoolColorArray( 0.261087, 0.175754, 0.754053, 1, 1, 1, 1, 1 )
+[sub_resource type="Curve" id=54]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="GradientTexture" id=27]
-gradient = SubResource( 26 )
+[sub_resource type="CurveTexture" id=55]
+curve = SubResource( 54 )
 
 [sub_resource type="ParticlesMaterial" id=25]
+lifetime_randomness = 1.0
+trail_size_modifier = SubResource( 55 )
 emission_shape = 1
-emission_sphere_radius = 0.01
+emission_sphere_radius = 1.0
 flag_disable_z = true
 direction = Vector3( 0, 0, 0 )
-gravity = Vector3( 0, 0, 0 )
+spread = 127.11
+flatness = 0.15
+gravity = Vector3( -10, -20, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-color_ramp = SubResource( 27 )
 
 [sub_resource type="CircleShape2D" id=28]
 radius = 1.0
@@ -392,7 +394,7 @@ one_shot = true
 position = Vector2( 0, -8 )
 frames = SubResource( 53 )
 animation = "idle"
-frame = 1
+frame = 2
 playing = true
 
 [node name="FlowerGun" parent="AnimatedSprite" instance=ExtResource( 4 )]
@@ -466,7 +468,10 @@ anims/jump = SubResource( 23 )
 anims/land = SubResource( 24 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
-position = Vector2( -2, -9 )
+position = Vector2( -4, -1 )
+amount = 20
+lifetime = 0.3
+randomness = 0.1
 visibility_rect = Rect2( 0, 0, 0, 0 )
 local_coords = false
 process_material = SubResource( 25 )
@@ -489,3 +494,5 @@ priority = 1.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelBoundaryTrigger"]
 scale = Vector2( 2, 2 )
 shape = SubResource( 28 )
+
+[node name="FeetPosition" type="Position2D" parent="."]
