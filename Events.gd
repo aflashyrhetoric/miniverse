@@ -4,6 +4,8 @@ extends Node
 
 signal mini_died
 
+signal mini_landed
+
 signal ellie_entered_area
 signal ellie_exited_area
 

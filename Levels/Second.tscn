@@ -464,7 +464,7 @@ position = Vector2( 159.875, 244 )
 shape = SubResource( 60 )
 
 [node name="RespawnPoint" type="Position2D" parent="."]
-position = Vector2( 32, 64 )
+position = Vector2( 32, 72 )
 
 [node name="Bubbles" type="Node2D" parent="."]
 position = Vector2( -24, -106 )

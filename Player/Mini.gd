@@ -43,7 +43,11 @@ onready var ellie_float_range = $EllieFloatRange
 # JUICE
 onready var feet_position = $FeetPosition
 onready var dust = $Dust
+onready var bubble_dash_particles = $BubbleDashParticles
 onready var juice_animation_player = $JuiceAnimationPlayer
+
+onready var coyote_timer = $CoyoteTimer
+var _was_on_floor: bool
 
 # Instance Variables
 var _is_inside_bubble = false
@@ -71,35 +75,33 @@ func _ready():
 	dust.lifetime = WorldVars.DUST_LIFETIME
 
 
+func _process(_delta: float) -> void:
+	if not is_on_floor() and _was_on_floor:
+		print("timer start")
+		coyote_timer.start()
+
+	# stop the timer if it's running
+	if is_on_floor() and not coyote_timer.is_stopped():
+		coyote_timer.stop()
+
+	_was_on_floor = is_on_floor()
+
+
 func _physics_process(_delta):
-	# print(Input.get_action_strength("move_left"))
 	if _is_inside_bubble:
 		_is_air_stomping = false
 
-	if is_on_floor() and _has_jumped:
+	if allowed_to_jump() and _has_jumped:
 		# vars
 		_has_jumped = false
 		_is_air_stomping = false
-
-		# bubble vars
-		_just_bubble_dashed = false
-		_is_bubble_dashing = false
-		_has_bubble_dash_jump = false
 
 		if _has_extra_jump:
 			_has_extra_jump = false
 		if _is_air_stomping:
 			_is_air_stomping = false
-		# anims
-		# juice_animation_player.play("land")
-		Events.emit_signal("mini_landed", [feet_position.global_position])
-		# logging
-		# print("played land")
-		# if platform_detector.get_collider()
 
-	# Play jump sound
-	#	if Input.is_action_just_pressed("jump") and is_on_floor():
-	#		sound_jump.play()
+		Events.emit_signal("mini_landed", [feet_position.global_position])
 
 	var direction: Vector2 = get_direction()
 	var dampen_second_jump_from_interrupted_jump: bool
@@ -110,12 +112,9 @@ func _physics_process(_delta):
 	)
 
 	# Wall Hop
-	if wall_grab_forward_detector.is_colliding():
-		if _is_bubble_dashing:
-			end_bubble_dash()
-		if Input.is_action_just_pressed("jump"):
-			_velocity.x = direction.x * WALL_HOP_COUNTER_VELOCITY
-			# print(_velocity.x, "just jumped")
+	# if wall_grab_forward_detector.is_colliding():
+	# 	if Input.is_action_just_pressed("jump"):
+	# 		_velocity.x = direction.x * WALL_HOP_COUNTER_VELOCITY
 
 	_velocity = calculate_move_velocity(
 		_velocity, direction, dampen_second_jump_from_interrupted_jump
@@ -147,11 +146,6 @@ func _physics_process(_delta):
 		is_shooting = gun.shoot()
 
 	play_correct_animation()
-	# var animation = get_new_animation(is_shooting)
-	# if animation != animation_player.current_animation and shoot_timer.is_stopped():
-	# 	if is_shooting:
-	# 		shoot_timer.start()
-	# 	animation_player.play(animation)
 
 
 func grant_extra_jump():
@@ -175,9 +169,10 @@ func turn_sprites(direction, sprites_to_turn):
 
 # Check if a jump is allowed on the current frame.
 # ! DOES NOT INCLUDE bubble_dash permissions!
-func check_jump_permissions():
+func allowed_to_jump():
 	return (
-		is_on_floor()
+		(is_on_floor() and not _is_bubble_dashing)
+		or (not is_on_floor() and not coyote_timer.is_stopped())
 		or _has_extra_jump
 		or _has_bubble_dash_jump
 		or wall_grab_forward_detector.is_colliding()
@@ -186,7 +181,6 @@ func check_jump_permissions():
 
 # Returns a value from -1 to 0, float, representing strength of player input on x-axis
 func get_direction_x():
-
 	# TODO - ADD BACK WALL HOP
 	# if (
 	# 	wall_grab_forward_detector.is_colliding()
@@ -207,27 +201,26 @@ func get_direction_y() -> float:
 
 
 func get_direction() -> Vector2:
-	var jump_is_permitted = check_jump_permissions()
-	var just_jumped = Input.is_action_just_pressed("jump")
+	var jump_is_permitted = allowed_to_jump()
+	var just_entered_jump_input = Input.is_action_just_pressed("jump")
 
 	# DO JUMP RELATED JUICE
-	if jump_is_permitted and just_jumped:
+	if jump_is_permitted and just_entered_jump_input:
+		print("_has_jumped = true")
 		_has_jumped = true
-		# juice_animation_player.play("jump")
-		# print("played jump")
 
 	var direction_y = 0
-	if jump_is_permitted and just_jumped:
+	if jump_is_permitted and just_entered_jump_input:
 		direction_y = -1
 
-	if not just_jumped and not is_on_floor():
+	if not just_entered_jump_input and not is_on_floor():
 		direction_y = 1
 
 	if _is_bubble_dashing:
 		direction_y = _velocity.y
 
 	var direction = Vector2(get_direction_x(), direction_y)
-	if just_jumped:
+	if just_entered_jump_input:
 		if _has_extra_jump:
 			_has_extra_jump = false
 
@@ -260,8 +253,8 @@ func opposite_directions(a, b):
 
 func end_bubble_dash():
 	enable_gravity()
+	bubble_dash_particles.emitting = false
 	_is_bubble_dashing = false
-	_is_inside_bubble = false
 	_just_bubble_dashed = true
 	_frames_since_started_bubble_dashing = 0
 	_bubble_origin = Vector2.ZERO
@@ -292,14 +285,15 @@ func calculate_move_velocity(
 	if _is_bubble_dashing:
 		_frames_since_started_bubble_dashing += 1
 
-		if _frames_since_started_bubble_dashing <= BUBBLE_DASH_FRAME_DURATION:
-			return current_linear_velocity
-
 		if is_on_floor() or is_on_wall():
 			end_bubble_dash()
 
+		if _frames_since_started_bubble_dashing <= BUBBLE_DASH_FRAME_DURATION:
+			return current_linear_velocity
+
 		# Bubble dash is over
 		end_bubble_dash()
+
 		# Only grant bubble dash jump if they reached the full extent of the dash
 		grant_bubble_dash_jump()
 
@@ -307,6 +301,8 @@ func calculate_move_velocity(
 		var just_jumped = Input.is_action_just_pressed("jump")
 		if just_jumped:
 			_is_bubble_dashing = true
+			bubble_dash_particles.emitting = true
+			dust.emitting = false
 			disable_gravity()
 			# print("DASHING AT ANGLE:", x_direction, y_direction)
 			var planned_direction := Vector2(x_direction, y_direction)
@@ -369,9 +365,9 @@ func calculate_move_velocity(
 			if abs(would_be_speed_x) < MAX_SPEED.x
 			else MAX_SPEED.x * x_direction_int
 		)
-		print("accelerating at, ", accel)
+		# print("accelerating at, ", accel)
 	else:
-		print("slowing down")
+		# print("slowing down")
 		var would_be_speed_x = (
 			current_linear_velocity.x
 			* (WALK_DECAY_GROUND if is_on_floor() else WALK_DECAY_AIR)
@@ -426,23 +422,6 @@ func play_correct_animation():
 			sprite.animation = "jump_down"
 
 
-func get_new_animation(_is_shooting = false):
-	var animation_new = ""
-	if is_on_floor():
-		if abs(_velocity.x) > 0.1:
-			animation_new = "run"
-		else:
-			animation_new = "idle"
-	# else:
-	# 	if _velocity.y > 0:
-	# 		animation_new = "falling"
-	# 	else:
-	# 		animation_new = "jumping"
-	# if is_shooting:
-	# 	animation_new += "_weapon"
-	return animation_new
-
-
 func _on_EllieFloatRange_body_entered(_body: Node) -> void:
 	Events.emit_signal("ellie_entered_area")
 
@@ -452,7 +431,6 @@ func _on_EllieFloatRange_body_exited(_body: Node) -> void:
 
 
 func died(_body):
-	# print("chicken")
 	Events.emit_signal("mini_died")
 
 
@@ -490,4 +468,3 @@ func enter_bubble(bubble_origin: Vector2):
 
 func exit_bubble():
 	_is_inside_bubble = false
-	# _is_bubble_dashing = false

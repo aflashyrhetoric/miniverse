@@ -30,7 +30,7 @@ func _ready():
 	# Initialize out of bounds
 	out_of_bounds.connect("body_entered", self, "mini_died")
 	Events.connect("mini_died", self, "handle_death")
-	Events.connect("mini_landed", self, "create_land_dust")
+	# Events.connect("mini_landed", self, "create_land_dust")
 
 	for boundary in boundaries.get_children():
 		print("processing boundary", boundary.name)
@@ -53,6 +53,7 @@ func change_room_to(_body, name_of_room):
 	emit_signal("change_room", name_of_room)
 
 func mini_died(_body: Node) -> void:
+	print('mini died')
 	Events.emit_signal("mini_died")
 
 func handle_death():
