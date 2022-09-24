@@ -1,6 +1,8 @@
 class_name Mini
 extends Actor
 
+var is_mini = true
+
 # GAME CONSTANTS
 const FLOOR_DETECT_DISTANCE = 8.0
 const MAX_SPEED = Vector2(120, 600)
@@ -20,7 +22,7 @@ const WALL_HOP_COUNTER_VELOCITY = 300
 const WALL_GRAB_FALL_SPEED = 50
 
 ## EXPORTED VARIABLES
-# export(String) var action_suffix = ""
+export(float) var bubble_dash_particles_speed = 500.0
 #####################
 
 onready var hazard_collision_shape = $HazardCollisionShape
@@ -30,7 +32,6 @@ onready var wall_grab_forward_detector = $WallGrabForwardDetector  # Must be a c
 onready var animation_player = $AnimationPlayer
 onready var shoot_timer = $ShootAnimation
 onready var sprite = $AnimatedSprite
-onready var sound_jump = $Jump
 
 onready var level_boundary_trigger = $LevelBoundaryTrigger
 
@@ -40,10 +41,19 @@ onready var gun = sprite.get_node(@"FlowerGun")
 
 onready var ellie_float_range = $EllieFloatRange
 
-# JUICE
+# JUICE - AUDIO
+onready var sound_jump = $Jump
+onready var footstep = $Footstep
+onready var footstep_timer = $FootstepTimer
+
+# JUICE - DUST
 onready var feet_position = $FeetPosition
 onready var dust = $Dust
+
+# JUICE - BUBBLES
 onready var bubble_dash_particles = $BubbleDashParticles
+
+# JUICE
 onready var juice_animation_player = $JuiceAnimationPlayer
 
 onready var coyote_timer = $CoyoteTimer
@@ -84,10 +94,12 @@ func _process(_delta: float) -> void:
 	if is_on_floor() and not coyote_timer.is_stopped():
 		coyote_timer.stop()
 
+	########## KEEEEEEEEEEEEP LAST
 	_was_on_floor = is_on_floor()
 
 
 func _physics_process(_delta):
+	animate_scale()
 	if _is_inside_bubble:
 		_is_air_stomping = false
 
@@ -119,6 +131,19 @@ func _physics_process(_delta):
 	_velocity = calculate_move_velocity(
 		_velocity, direction, dampen_second_jump_from_interrupted_jump
 	)
+
+	if not Util.float_is_zero(_velocity.x, 0.01):
+		if abs(_velocity.x) > 25.0:
+			dust.emitting = true
+			if footstep_timer.is_stopped() and not footstep.playing and is_on_floor():
+				footstep.play()
+				footstep_timer.start()
+		else:
+			dust.emitting = false
+	else:
+		dust.emitting = false
+		footstep.stop()
+		footstep_timer.stop()
 
 	var snap_vector = Vector2.ZERO
 	if direction.y == 0.0:
@@ -206,7 +231,6 @@ func get_direction() -> Vector2:
 
 	# DO JUMP RELATED JUICE
 	if jump_is_permitted and just_entered_jump_input:
-		print("_has_jumped = true")
 		_has_jumped = true
 
 	var direction_y = 0
@@ -301,8 +325,6 @@ func calculate_move_velocity(
 		var just_jumped = Input.is_action_just_pressed("jump")
 		if just_jumped:
 			_is_bubble_dashing = true
-			bubble_dash_particles.emitting = true
-			dust.emitting = false
 			disable_gravity()
 			# print("DASHING AT ANGLE:", x_direction, y_direction)
 			var planned_direction := Vector2(x_direction, y_direction)
@@ -313,7 +335,32 @@ func calculate_move_velocity(
 				else Vector2(x_direction_int, 0)
 			)
 
-			return direction_to_dash.normalized() * BUBBLE_DASH_VELOCITY
+			var new_velocity = direction_to_dash.normalized() * BUBBLE_DASH_VELOCITY
+
+			# #########################
+			# Takes care of some juice!
+			# #########################
+
+			# Configure bubble particles
+			if not bubble_dash_particles.emitting:
+				bubble_dash_particles.emitting = true
+				var direction_from_mini_to_bubble_she_left = new_velocity.normalized() * -1
+				print(
+					stepify(direction_from_mini_to_bubble_she_left.x, 1.0),
+					stepify(direction_from_mini_to_bubble_she_left.y, 1.0)
+				)
+				# Round the direction to the nearest whole number and go!
+				bubble_dash_particles.process_material.gravity = (
+					Vector3(
+						stepify(direction_from_mini_to_bubble_she_left.x, 1.0),
+						stepify(direction_from_mini_to_bubble_she_left.y, 1.0),
+						0
+					)
+					* bubble_dash_particles_speed
+				)
+
+			# Return the bubble_dash_velocity
+			return new_velocity
 
 		if not just_jumped and not _is_bubble_dashing:
 			if _bubble_origin != global_position:
@@ -342,7 +389,6 @@ func calculate_move_velocity(
 
 	# COMPUTE X VELOCITY
 	if player_input_direction.x != 0.0:
-		dust.emitting = true
 		var accel := 0.0
 
 		if is_on_floor():
@@ -365,18 +411,13 @@ func calculate_move_velocity(
 			if abs(would_be_speed_x) < MAX_SPEED.x
 			else MAX_SPEED.x * x_direction_int
 		)
-		# print("accelerating at, ", accel)
 	else:
-		# print("slowing down")
 		var would_be_speed_x = (
 			current_linear_velocity.x
 			* (WALK_DECAY_GROUND if is_on_floor() else WALK_DECAY_AIR)
 		)
 		# We can't exceed x max speed while no inputs are pressed
 		velocity.x = would_be_speed_x
-
-	if abs(velocity.x) < 25.0:
-		dust.emitting = false
 
 	# If jumping
 	if player_input_direction.y == -1 and not _just_bubble_dashed:
@@ -407,6 +448,26 @@ func is_wall_grabbing(_v: Vector2) -> bool:
 		and not wall_grab_min_height_detector.is_colliding()  # Must be a minimum distance from the ground
 		and _v.y > 0
 	)  # Only if user is currently falling, so we don't wall grab on the way up
+
+
+enum SCALE_STATE { BASE, JUMPING, LANDING }
+
+
+func animate_scale():
+	if not _is_bubble_dashing and (Input.is_action_just_pressed("jump")):
+		scale = Vector2(0.80, 1.10)
+
+	if is_on_floor():
+		if not _was_on_floor:
+			print("squash")
+			scale = Vector2(1.10, .90)
+			return
+
+		if not _is_inside_bubble and not is_wall_grabbing(_velocity) and scale != Vector2(1, 1):
+			scale = lerp(scale, Vector2(1, 1), 0.2)
+
+	if _is_inside_bubble:
+		scale = lerp(scale, Vector2(1, 1), 0.2)
 
 
 func play_correct_animation():
@@ -456,6 +517,7 @@ func reset_bubble_variables():
 	_is_inside_bubble = false
 	_is_bubble_dashing = false
 	_has_bubble_dash_jump = false
+	bubble_dash_particles.emitting = false
 	_frames_since_started_bubble_dashing = 0
 	_bubble_origin = Vector2.ZERO
 

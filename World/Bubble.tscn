@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://World/Bubble.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/misc/orb_boundary.png" type="Texture" id=2]
 [ext_resource path="res://assets/art/misc/orb_anim_strip_6.png" type="Texture" id=3]
 [ext_resource path="res://assets/audio/sfx/orb_hit.mp3" type="AudioStream" id=4]
+[ext_resource path="res://assets/audio/sfx/jdwasabi.itch.io:8-bit-16-bit-sound-effects-pack/Bubble 1.wav" type="AudioStream" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 19.0263
@@ -66,7 +67,7 @@ monitorable = false
 
 [node name="OrbSprite" type="AnimatedSprite" parent="Orb"]
 frames = SubResource( 8 )
-frame = 4
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Orb"]
@@ -78,3 +79,6 @@ margin_bottom = 14.0
 
 [node name="OrbHit" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
+
+[node name="BubbleEntry" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )

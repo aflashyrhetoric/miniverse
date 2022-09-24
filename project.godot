@@ -100,6 +100,7 @@ config/icon="res://icon.png"
 
 Events="*res://Events.gd"
 WorldVars="*res://WorldVars.gd"
+Util="*res://Util.gd"
 
 [debug]
 

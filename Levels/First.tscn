@@ -9,7 +9,7 @@
 [ext_resource path="res://Level.gd" type="Script" id=22]
 
 [sub_resource type="ConvexPolygonShape2D" id=83]
-points = PoolVector2Array( 8, 4, 0, 4, 0, 0, 8, 0 )
+points = PoolVector2Array( 0, 0, 0, 0, 8, 0, 8, 4, 0, 4, 0, 0, 0, 0 )
 
 [sub_resource type="TileSet" id=82]
 0/name = "spike.png 0"
@@ -102,7 +102,7 @@ cell_tile_origin = 1
 show_collision = true
 cell_clip_uv = true
 collision_layer = 256
-collision_mask = 2
+collision_mask = 0
 format = 1
 tile_data = PoolIntArray( 458822, -1610612736, 0, 524358, -1610612736, 0, 589864, 1610612736, 0, 589866, 1610612736, 0, 589868, 1610612736, 0, 589870, 1610612736, 0, 589894, -1610612736, 0, 655430, -1610612736, 0, 720966, -1610612736, 0, 786497, -1073741824, 0, 786502, -1610612736, 0, 852033, -1073741824, 0, 852038, -1610612736, 0, 917569, -1073741824, 0, 917574, -1610612736, 0, 983105, -1073741824, 0, 983110, -1610612736, 0, 1048641, -1073741824, 0, 1048646, -1610612736, 0 )
 

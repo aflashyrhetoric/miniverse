@@ -9,6 +9,7 @@ onready var orb = $Orb
 onready var _original_orb_position: Vector2 = orb.global_position
 onready var bubble_shape = $BubbleShape
 onready var orb_hit = $OrbHit
+onready var bubble_entry_sound = $BubbleEntry
 
 var _label
 var _should_reset_position = false
@@ -62,6 +63,7 @@ func _mini_entered(_mini):
 	_mini_ref = _mini
 	_mini_ref.enter_bubble(global_position)
 	_orb_boundary.modulate.a = 0.2
+	bubble_entry_sound.play()
 	Events.emit_signal("mini_entered_bubble")
 
 

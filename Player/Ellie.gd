@@ -5,6 +5,8 @@ extends Actor
 # var a: int = 2
 # var b: String = "text"
 
+var is_mini = false
+
 onready var sprite = $Sprite
 
 var _direction = Vector2.ZERO
@@ -13,8 +15,10 @@ var _direction = Vector2.ZERO
 # func _ready() -> void:
 # 	pass  # Replace with function body.
 
+
 func handle_death() -> void:
 	pass
+
 
 func _physics_process(delta):
 	global_position = global_position + (_velocity * delta)

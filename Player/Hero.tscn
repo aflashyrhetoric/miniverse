@@ -1,9 +1,10 @@
-[gd_scene load_steps=55 format=2]
+[gd_scene load_steps=56 format=2]
 
 [ext_resource path="res://Player/Mini.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/player/character/idle_4.png" type="Texture" id=2]
 [ext_resource path="res://assets/audio/sfx/jump.wav" type="AudioStream" id=3]
 [ext_resource path="res://Weapons/FlowerGun.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/audio/sfx/mayragandra.itch.io/Grass Running.wav" type="AudioStream" id=5]
 [ext_resource path="res://assets/shaders/light_shader_sprite.png" type="Texture" id=7]
 [ext_resource path="res://assets/art/player/character/jump_down_3.png" type="Texture" id=8]
 [ext_resource path="res://assets/art/player/character/jump_up_3.png" type="Texture" id=9]
@@ -12,7 +13,7 @@
 
 [sub_resource type="CapsuleShape2D" id=21]
 radius = 6.0
-height = 2.54545
+height = 2.0
 
 [sub_resource type="AtlasTexture" id=29]
 atlas = ExtResource( 11 )
@@ -314,8 +315,8 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 
 [sub_resource type="Gradient" id=57]
-offsets = PoolRealArray( 0, 0.6 )
-colors = PoolColorArray( 0.447059, 0.619608, 0.882353, 1, 0.447059, 0.619608, 0.878431, 0.666667 )
+offsets = PoolRealArray( 0, 0.769643 )
+colors = PoolColorArray( 0.657107, 0.748802, 0.888428, 1, 0.447059, 0.619608, 0.878431, 0.666667 )
 
 [sub_resource type="GradientTexture" id=58]
 gradient = SubResource( 57 )
@@ -336,7 +337,7 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 1.5
 scale_random = 1.0
-color = Color( 0.592157, 0.745098, 0.980392, 1 )
+color = Color( 0.870588, 0.921569, 1, 1 )
 color_ramp = SubResource( 58 )
 
 [sub_resource type="CircleShape2D" id=28]
@@ -355,8 +356,6 @@ shape = SubResource( 21 )
 position = Vector2( 0, 1 )
 collision_layer = 0
 collision_mask = 256
-monitoring = false
-monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HazardCollisionShape"]
 position = Vector2( 0, -9 )
@@ -372,7 +371,7 @@ one_shot = true
 position = Vector2( 0, -8 )
 frames = SubResource( 53 )
 animation = "idle"
-frame = 2
+frame = 1
 playing = true
 
 [node name="FlowerGun" parent="AnimatedSprite" instance=ExtResource( 4 )]
@@ -407,6 +406,14 @@ anims/standing_weapon_ready = SubResource( 10 )
 
 [node name="Jump" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
+
+[node name="Footstep" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
+volume_db = -8.0
+
+[node name="FootstepTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
 
 [node name="Label" type="Label" parent="."]
 margin_right = 40.0
@@ -477,3 +484,5 @@ shape = SubResource( 28 )
 process_mode = 0
 wait_time = 0.1
 one_shot = true
+
+[node name="ScaleTween" type="Tween" parent="."]

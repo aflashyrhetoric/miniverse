@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Confirm 1.wav-83974788e862b16aa5fe909ead592ccb.sample"
+
+[deps]
+
+source_file="res://assets/audio/sfx/jdwasabi.itch.io:8-bit-16-bit-sound-effects-pack/Confirm 1.wav"
+dest_files=[ "res://.import/Confirm 1.wav-83974788e862b16aa5fe909ead592ccb.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

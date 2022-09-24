@@ -33,7 +33,7 @@ func _ready():
 	# Events.connect("mini_landed", self, "create_land_dust")
 
 	for boundary in boundaries.get_children():
-		print("processing boundary", boundary.name)
+		print("processing level boundary: ", boundary.name)
 		# The only thing that can enter this boundary is mini's room-change-trigger
 		boundary.connect("area_entered", self, "change_room_to", [boundary.get_child(0).name])
 
@@ -43,11 +43,13 @@ func initialize_level(player):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta: float) -> void:
-	if _should_respawn and name == WorldVars._active_room:
+	if _should_respawn:
+		_should_respawn = false
 		for child in _player.get_children():
-			child.global_position = respawn_point.global_position
-			child.handle_death()
-			_should_respawn = false
+			print("fired")
+			if child.is_mini:
+				child.global_position = respawn_point.global_position
+				child.handle_death()
 
 func change_room_to(_body, name_of_room):
 	emit_signal("change_room", name_of_room)
@@ -57,7 +59,8 @@ func mini_died(_body: Node) -> void:
 	Events.emit_signal("mini_died")
 
 func handle_death():
-	_should_respawn = true
+	if name == WorldVars._active_room:
+		_should_respawn = true
 
 func create_land_dust(_feet_position: Vector2):
 	var land_dust = Sprite.new()
