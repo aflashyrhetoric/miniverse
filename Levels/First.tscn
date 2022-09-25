@@ -113,11 +113,11 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="OutOfBounds"]
-position = Vector2( 159.875, 243 )
+position = Vector2( 159.875, 256 )
 shape = SubResource( 60 )
 
 [node name="RespawnPoint" type="Position2D" parent="."]
-position = Vector2( 55, 133 )
+position = Vector2( 118, 130 )
 
 [node name="Bubbles" type="Node2D" parent="."]
 position = Vector2( -24, -106 )

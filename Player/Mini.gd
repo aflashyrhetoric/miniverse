@@ -94,12 +94,12 @@ func _process(_delta: float) -> void:
 	if is_on_floor() and not coyote_timer.is_stopped():
 		coyote_timer.stop()
 
+	animate_scale()
 	########## KEEEEEEEEEEEEP LAST
 	_was_on_floor = is_on_floor()
 
 
 func _physics_process(_delta):
-	animate_scale()
 	if _is_inside_bubble:
 		_is_air_stomping = false
 

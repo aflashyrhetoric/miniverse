@@ -371,7 +371,6 @@ one_shot = true
 position = Vector2( 0, -8 )
 frames = SubResource( 53 )
 animation = "idle"
-frame = 1
 playing = true
 
 [node name="FlowerGun" parent="AnimatedSprite" instance=ExtResource( 4 )]
@@ -438,7 +437,7 @@ anims/jump = SubResource( 23 )
 anims/land = SubResource( 24 )
 
 [node name="Dust" type="Particles2D" parent="."]
-position = Vector2( -4, -1 )
+position = Vector2( 0, -1 )
 amount = 20
 lifetime = 0.3
 speed_scale = 0.8
@@ -449,7 +448,7 @@ local_coords = false
 process_material = SubResource( 25 )
 
 [node name="BubbleDashParticles" type="Particles2D" parent="."]
-position = Vector2( -11, -7 )
+position = Vector2( 0, -7 )
 emitting = false
 amount = 30
 lifetime = 0.6
