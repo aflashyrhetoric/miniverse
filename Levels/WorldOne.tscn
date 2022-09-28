@@ -21,29 +21,32 @@ __meta__ = {
 position = Vector2( 320, 0 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 88, 120 )
+position = Vector2( 99, 136 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 layer = -1
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+[node name="Last + BG" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.2, 1 )
 motion_mirroring = Vector2( 288, 0 )
 
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/Last + BG"]
 position = Vector2( 144, 90 )
 texture = ExtResource( 3 )
 
-[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+[node name="Middle" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.4, 1 )
 motion_mirroring = Vector2( 288, 0 )
 
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer2"]
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/Middle"]
 position = Vector2( 144, 90 )
 texture = ExtResource( 2 )
 
-[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+[node name="Foremost" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.8, 1 )
 motion_mirroring = Vector2( 288, 0 )
 
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer3"]
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/Foremost"]
 position = Vector2( 144, 90 )
 texture = ExtResource( 6 )
 

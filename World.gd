@@ -24,9 +24,7 @@ func _move_camera(name_of_room: String):
 
 	# If we're here, we're trying to transition rooms!
 	player.mini.pause_movement()
-	# print("trying to get name of room: ", name_of_room)
 	var new_pos: Vector2 = get_node(name_of_room).cam_anchor.global_position
-	# print("position of room: ", new_pos)
 	var tween = $CamTween
 	tween.interpolate_property(
 		cam, "position", cam.global_position, new_pos, 0.65, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT

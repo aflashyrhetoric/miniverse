@@ -93,7 +93,7 @@ _global_script_class_icons={
 [application]
 
 config/name="miniverse"
-run/main_scene="res://Levels/WorldOne.tscn"
+run/main_scene="res://Levels/DebugWorld.tscn"
 config/icon="res://icon.png"
 
 [autoload]

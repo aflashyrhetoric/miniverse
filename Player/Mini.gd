@@ -4,16 +4,19 @@ extends Actor
 var is_mini = true
 
 # GAME CONSTANTS
-const FLOOR_DETECT_DISTANCE = 8.0
+const FLOOR_DETECT_DISTANCE = 2.0
 const MAX_SPEED = Vector2(120, 600)
+
 const JUMP_SPEED = 250.0
 const FALL_SPEED = 200.0
-const WALK_ACCEL_AIR = 20  # added per frame
-const WALK_ACCEL_GROUND = 5  # added per frame
-const WALK_DECAY_AIR = 0.90  # multiplied per5frame
-const WALK_DECAY_GROUND = 0.70  # multiplied per frame
+
+const SPEED_ACCEL_AIR = 20.0  # added per frame
+const SPEED_ACCEL_GROUND = 5.0  # added per frame
+const SPEED_DECAY_AIR = 0.9  # deducted per frame
+const SPEED_DECAY_GROUND = 0.7  # deducted per frame
+
 const AIR_STOMP_VELOCITY = Vector2(0, 800)
-const TURN_SPEED_MULTIPLER = 1.95
+const TURN_SPEED_MULTIPLER = 3.95
 
 const BUBBLE_DASH_VELOCITY = 200
 const BUBBLE_DASH_FRAME_DURATION = 20
@@ -87,7 +90,6 @@ func _ready():
 
 func _process(_delta: float) -> void:
 	if not is_on_floor() and _was_on_floor:
-		print("timer start")
 		coyote_timer.start()
 
 	# stop the timer if it's running
@@ -174,12 +176,10 @@ func _physics_process(_delta):
 
 
 func grant_extra_jump():
-	# print("extra jump granted")
 	_has_extra_jump = true
 
 
 func grant_bubble_dash_jump():
-	# print("bubble dash jump granted")
 	_has_bubble_dash_jump = true
 
 
@@ -250,7 +250,6 @@ func get_direction() -> Vector2:
 
 		# The first jump after a bubble dash should be permitted
 		if _just_bubble_dashed:
-			# print("just used bubble dash jump")
 			_just_bubble_dashed = false
 			_has_bubble_dash_jump = false
 
@@ -297,7 +296,6 @@ func calculate_move_velocity(
 		_just_unpaused = false
 		var _temp = _pre_pause_velocity
 		_pre_pause_velocity = Vector2.ZERO
-		# print("restoring velocity to: ", _pre_pause_velocity)
 		return _temp
 
 	var velocity = current_linear_velocity
@@ -326,7 +324,7 @@ func calculate_move_velocity(
 		if just_jumped:
 			_is_bubble_dashing = true
 			disable_gravity()
-			# print("DASHING AT ANGLE:", x_direction, y_direction)
+
 			var planned_direction := Vector2(x_direction, y_direction)
 			# Dash straight forward if there's no given direction
 			var direction_to_dash := (
@@ -345,11 +343,8 @@ func calculate_move_velocity(
 			if not bubble_dash_particles.emitting:
 				bubble_dash_particles.emitting = true
 				var direction_from_mini_to_bubble_she_left = new_velocity.normalized() * -1
-				print(
-					stepify(direction_from_mini_to_bubble_she_left.x, 1.0),
-					stepify(direction_from_mini_to_bubble_she_left.y, 1.0)
-				)
-				# Round the direction to the nearest whole number and go!
+
+				# Configure the "material" resource's gravity to get it to move
 				bubble_dash_particles.process_material.gravity = (
 					Vector3(
 						stepify(direction_from_mini_to_bubble_she_left.x, 1.0),
@@ -389,12 +384,7 @@ func calculate_move_velocity(
 
 	# COMPUTE X VELOCITY
 	if player_input_direction.x != 0.0:
-		var accel := 0.0
-
-		if is_on_floor():
-			accel = WALK_ACCEL_GROUND if player_input_direction.x == 1 else -WALK_ACCEL_GROUND
-		else:
-			accel = WALK_ACCEL_AIR if player_input_direction.x == 1 else -WALK_ACCEL_AIR
+		var accel := SPEED_ACCEL_GROUND if is_on_floor() else SPEED_ACCEL_AIR
 
 		#	If we're turning around, we have to subtract from the velocity,
 		# but lets do it quickly with a multiplier, and only if we're grounded
@@ -404,29 +394,30 @@ func calculate_move_velocity(
 		):
 			accel *= TURN_SPEED_MULTIPLER
 
-		var would_be_speed_x = current_linear_velocity.x + accel  #* x_direction
+		var increased_speed_x = current_linear_velocity.x + accel * x_direction_int
 		# If we're going to go faster than our max, cap horizontal speed
 		velocity.x = (
-			would_be_speed_x
-			if abs(would_be_speed_x) < MAX_SPEED.x
+			increased_speed_x
+			if abs(increased_speed_x) < MAX_SPEED.x
 			else MAX_SPEED.x * x_direction_int
 		)
 	else:
-		var would_be_speed_x = (
+		var reduced_speed_x: float = (
 			current_linear_velocity.x
-			* (WALK_DECAY_GROUND if is_on_floor() else WALK_DECAY_AIR)
+			* (SPEED_DECAY_GROUND if is_on_floor() else SPEED_DECAY_AIR)
 		)
 		# We can't exceed x max speed while no inputs are pressed
-		velocity.x = would_be_speed_x
+		if abs(reduced_speed_x) < 3:
+			velocity.x = 0
+		else:
+			velocity.x = reduced_speed_x
 
 	# If jumping
 	if player_input_direction.y == -1 and not _just_bubble_dashed:
-		# print("hit a jump")
 		velocity.y = JUMP_SPEED * player_input_direction.y  # velocity.y will always be negative, it's not being multiplied by itself
 
 	# If falling:
 	if velocity.y > 0 and not _is_air_stomping:
-		# print("falling!!!", velocity)
 		pass
 
 	if dampen_second_jump_from_interrupted_jump:
@@ -435,7 +426,6 @@ func calculate_move_velocity(
 		velocity.y *= 0.4
 
 	if is_wall_grabbing(velocity):
-		print("reduced speed")
 		velocity.y = WALL_GRAB_FALL_SPEED
 	return velocity
 
@@ -454,12 +444,12 @@ enum SCALE_STATE { BASE, JUMPING, LANDING }
 
 
 func animate_scale():
+	return
 	if not _is_bubble_dashing and (Input.is_action_just_pressed("jump")):
 		scale = Vector2(0.80, 1.10)
 
 	if is_on_floor():
 		if not _was_on_floor:
-			print("squash")
 			scale = Vector2(1.10, .90)
 			return
 
@@ -496,7 +486,7 @@ func died(_body):
 
 
 # Alias for easy external use
-func handle_death():
+func handle_ath():
 	_velocity = Vector2.ZERO
 	reset_state_variables()
 
@@ -523,6 +513,8 @@ func reset_bubble_variables():
 
 
 func enter_bubble(bubble_origin: Vector2):
+	if _is_bubble_dashing:
+		end_bubble_dash()
 	_is_inside_bubble = true
 	_bubble_origin = bubble_origin
 	_has_extra_jump = false
