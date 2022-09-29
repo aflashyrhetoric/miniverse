@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/art/parallax/stringstar_parallax/background_1.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://assets/audio/ambience/rain.wav" type="AudioStream" id=8]
 [ext_resource path="res://Fauna/Bird.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Levels/Audio.gd" type="Script" id=10]
+[ext_resource path="res://World/Rain/RainParticleMaterial.tres" type="Material" id=11]
 [ext_resource path="res://assets/audio/music/The Verdant Grove LOOP.wav" type="AudioStream" id=17]
 
 [sub_resource type="Gradient" id=1]
@@ -19,15 +20,16 @@ colors = PoolColorArray( 1, 1, 1, 1, 0.532205, 0.73618, 1, 1 )
 [sub_resource type="GradientTexture" id=2]
 gradient = SubResource( 1 )
 
-[sub_resource type="ParticlesMaterial" id=3]
-trail_divisor = 10
+[sub_resource type="ParticlesMaterial" id=5]
+lifetime_randomness = 1.0
+trail_divisor = 15
 trail_color_modifier = SubResource( 2 )
 emission_shape = 2
 emission_box_extents = Vector3( 160, 90, 1 )
 flag_disable_z = true
-spread = 5.0
+spread = 23.0
 flatness = 1.0
-gravity = Vector3( -510, 980, 0 )
+gravity = Vector3( -595, 680, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 
@@ -94,8 +96,13 @@ autoplay = true
 
 [node name="RainParticles" type="Particles2D" parent="."]
 position = Vector2( 160, 88 )
-amount = 800
-process_material = SubResource( 3 )
+amount = 400
+process_material = ExtResource( 11 )
+
+[node name="RainParticles2" type="Particles2D" parent="."]
+position = Vector2( 160, 88 )
+amount = 200
+process_material = SubResource( 5 )
 
 [node name="Bird" parent="." instance=ExtResource( 9 )]
 position = Vector2( 24, 64 )
