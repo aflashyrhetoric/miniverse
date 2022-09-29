@@ -1,10 +1,11 @@
-[gd_scene load_steps=56 format=2]
+[gd_scene load_steps=57 format=2]
 
 [ext_resource path="res://Player/Mini.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/player/character/idle_4.png" type="Texture" id=2]
 [ext_resource path="res://assets/audio/sfx/jump.wav" type="AudioStream" id=3]
 [ext_resource path="res://Weapons/FlowerGun.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/audio/sfx/mayragandra.itch.io/Grass Running.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/audio/sfx/land.wav" type="AudioStream" id=6]
 [ext_resource path="res://assets/shaders/light_shader_sprite.png" type="Texture" id=7]
 [ext_resource path="res://assets/art/player/character/jump_down_3.png" type="Texture" id=8]
 [ext_resource path="res://assets/art/player/character/jump_up_3.png" type="Texture" id=9]
@@ -371,6 +372,7 @@ one_shot = true
 position = Vector2( 0, -8 )
 frames = SubResource( 53 )
 animation = "idle"
+frame = 2
 playing = true
 
 [node name="FlowerGun" parent="AnimatedSprite" instance=ExtResource( 4 )]
@@ -405,6 +407,11 @@ anims/standing_weapon_ready = SubResource( 10 )
 
 [node name="Jump" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
+volume_db = -8.0
+
+[node name="Land" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 6 )
+volume_db = -8.0
 
 [node name="Footstep" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 5 )

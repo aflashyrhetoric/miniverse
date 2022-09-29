@@ -9,6 +9,8 @@ onready var disappear_timer = $DisappearTimer
 onready var sprite = $Sprite
 onready var flying_sprite = $FlyingSprite
 
+onready var sound_flapping = $Flap
+
 
 func _ready() -> void:
 	animation_player.play("idle")
@@ -26,6 +28,7 @@ func _on_ScareRadius_body_entered(body: Node) -> void:
 	animation_player.play("flying")
 	sprite.visible = false
 	flying_sprite.visible = true
+	sound_flapping.play()
 
 	var direction = body.global_position.direction_to(global_position)
 	_velocity = direction * fly_speed

@@ -3,10 +3,12 @@ extends Node2D
 onready var display_width = ProjectSettings.get("display/window/size/width")
 onready var display_height = ProjectSettings.get("display/window/size/height")
 
-# LEVELS
 onready var first = $First
 onready var cam = $Camera
 onready var player = $Player
+
+onready var song = $Song
+onready var ambience = $Rain
 
 
 func _ready():

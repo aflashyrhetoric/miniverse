@@ -46,6 +46,7 @@ onready var ellie_float_range = $EllieFloatRange
 
 # JUICE - AUDIO
 onready var sound_jump = $Jump
+# onready var sound_land = $Land
 onready var footstep = $Footstep
 onready var footstep_timer = $FootstepTimer
 
@@ -231,6 +232,7 @@ func get_direction() -> Vector2:
 
 	# DO JUMP RELATED JUICE
 	if jump_is_permitted and just_entered_jump_input:
+		sound_jump.play()
 		_has_jumped = true
 
 	var direction_y = 0
@@ -486,7 +488,7 @@ func died(_body):
 
 
 # Alias for easy external use
-func handle_ath():
+func handle_death():
 	_velocity = Vector2.ZERO
 	reset_state_variables()
 

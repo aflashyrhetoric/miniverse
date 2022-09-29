@@ -10,6 +10,8 @@ onready var _original_orb_position: Vector2 = orb.global_position
 onready var bubble_shape = $BubbleShape
 onready var orb_hit = $OrbHit
 onready var bubble_entry_sound = $BubbleEntry
+onready var bubble_exit_sound = $BubbleExit
+
 onready var mini_placement = $MiniPlacement
 
 var _label
@@ -70,6 +72,7 @@ func _mini_entered(_mini):
 
 func _mini_exited(_mini):
 	# Update the orchestration variables
+	bubble_exit_sound.play()
 	_should_reset_position = true
 	_mini_ref.exit_bubble()
 	_mini_ref = null
