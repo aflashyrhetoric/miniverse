@@ -354,14 +354,12 @@ position = Vector2( 0, -8 )
 shape = SubResource( 21 )
 
 [node name="HazardCollisionShape" type="Area2D" parent="."]
-position = Vector2( 0, 1 )
 collision_layer = 0
 collision_mask = 256
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HazardCollisionShape"]
-position = Vector2( 0, -9 )
-scale = Vector2( 1.1, 1.1 )
-shape = SubResource( 21 )
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HazardCollisionShape"]
+position = Vector2( 4, -14 )
+polygon = PoolVector2Array( -1, 13, 0, 0, -7, 0, -10, 12 )
 
 [node name="ShootAnimation" type="Timer" parent="."]
 process_mode = 0
@@ -372,7 +370,7 @@ one_shot = true
 position = Vector2( 0, -8 )
 frames = SubResource( 53 )
 animation = "idle"
-frame = 2
+frame = 1
 playing = true
 
 [node name="FlowerGun" parent="AnimatedSprite" instance=ExtResource( 4 )]
@@ -466,7 +464,7 @@ local_coords = false
 process_material = SubResource( 56 )
 
 [node name="Light2D" type="Light2D" parent="."]
-position = Vector2( 0, -10 )
+position = Vector2( 0, -11 )
 texture = ExtResource( 7 )
 energy = 0.35
 range_layer_min = -1

@@ -77,7 +77,6 @@ texture = ExtResource( 6 )
 
 [node name="Song" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 17 )
-autoplay = true
 bus = "Music"
 script = ExtResource( 10 )
 
@@ -99,11 +98,11 @@ amount = 800
 process_material = SubResource( 3 )
 
 [node name="Bird" parent="." instance=ExtResource( 9 )]
-position = Vector2( 16, 160 )
+position = Vector2( 24, 64 )
 scale = Vector2( -1, 1 )
 
 [node name="Bird2" parent="." instance=ExtResource( 9 )]
-position = Vector2( 264, 24 )
+position = Vector2( 272, 48 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/muffle_audio = SubResource( 4 )

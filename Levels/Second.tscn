@@ -1,6 +1,7 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Level.gd" type="Script" id=1]
+[ext_resource path="res://assets/art/hazards/spike.png" type="Texture" id=2]
 [ext_resource path="res://World/ApproachableObject.tscn" type="PackedScene" id=4]
 [ext_resource path="res://World/Bubble.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/art/tileset/tileset.png" type="Texture" id=19]
@@ -423,6 +424,32 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 } ]
 25/z_index = 0
 
+[sub_resource type="ConvexPolygonShape2D" id=83]
+points = PoolVector2Array( 0, 0, 0, 0, 8, 0, 8, 4, 0, 4, 0, 0, 0, 0 )
+
+[sub_resource type="TileSet" id=84]
+0/name = "spike.png 0"
+0/texture = ExtResource( 2 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 4, 8, 4 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape = SubResource( 83 )
+0/shape_one_way = false
+0/shape_one_way_margin = 1.0
+0/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 83 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+0/z_index = 0
+
 [sub_resource type="RectangleShape2D" id=60]
 extents = Vector2( 159.875, 63 )
 
@@ -444,6 +471,17 @@ cell_size = Vector2( 8, 8 )
 collision_mask = 42
 format = 1
 tile_data = PoolIntArray( -65536, 17, 0, -65535, 17, 0, -65534, 17, 0, -65533, 17, 0, -65532, 17, 0, -65531, 17, 0, -65530, 17, 0, -65529, 17, 0, -65528, 17, 0, -65527, 17, 0, -65526, 17, 0, -65525, 17, 0, -65524, 17, 0, -65523, 17, 0, -65522, 17, 0, -65521, 17, 0, -65520, 17, 0, -65519, 17, 0, -65518, 17, 0, -65517, 17, 0, -65516, 17, 0, -65515, 17, 0, -65514, 17, 0, -65513, 17, 0, -65512, 17, 0, -65511, 17, 0, -65510, 17, 0, -65509, 17, 0, -65508, 17, 0, -65507, 17, 0, -65505, 17, 0, -65504, 17, 0, -65503, 17, 0, -65501, 17, 0, -65499, 17, 0, -65498, 17, 0, 0, 17, 0, 2, 17, 0, 10, 17, 0, 11, 17, 0, 20, 17, 0, 22, 17, 0, 65540, 1073741836, 0, 65542, 1610612743, 0, 65554, -1073741802, 0, 131074, 536870921, 0, 131092, 17, 0, 131094, 1610612758, 0, 196628, 17, 0, 262155, 13, 0, 327700, -1073741806, 0, 327702, 11, 0, 393227, 17, 0, 458763, 17, 0, 524299, 17, 0, 589835, 17, 0, 589846, 17, 0, 589848, 17, 0, 589850, 17, 0, 655360, 3, 0, 655362, 3, 0, 655364, 4, 0, 655371, -536870888, 0, 720907, 17, 0, 786443, -1073741800, 0, 786466, 1, 0, 786468, 4, 0, 851979, 17, 0, 917515, -1073741800, 0, 1048574, 536870918, 0, 1310718, 536870929, 0, 1245184, 17, 0, 1245186, 17, 0, 1245187, 17, 0, 1245188, 17, 0, 1245189, 17, 0, 1245190, 17, 0 )
+
+[node name="Hazards" type="TileMap" parent="."]
+tile_set = SubResource( 84 )
+cell_size = Vector2( 4, 8 )
+cell_tile_origin = 1
+show_collision = true
+cell_clip_uv = true
+collision_layer = 256
+collision_mask = 0
+format = 1
+tile_data = PoolIntArray( 131092, 1610612736, 0, 131094, 1610612736, 0, 393237, -1073741824, 0, 393242, -1610612736, 0, 458773, -1073741824, 0, 458778, -1610612736, 0, 524309, -1073741824, 0, 1048598, 1610612736, 0, 1048600, 1610612736, 0 )
 
 [node name="ApproachableObject" parent="." instance=ExtResource( 4 )]
 

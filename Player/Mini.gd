@@ -12,8 +12,8 @@ const FALL_SPEED = 200.0
 
 const SPEED_ACCEL_AIR = 20.0  # added per frame
 const SPEED_ACCEL_GROUND = 5.0  # added per frame
-const SPEED_DECAY_AIR = 0.9  # deducted per frame
-const SPEED_DECAY_GROUND = 0.7  # deducted per frame
+const SPEED_DECAY_AIR = 0.8  # deducted per frame
+const SPEED_DECAY_GROUND = 0.66  # deducted per frame
 
 const AIR_STOMP_VELOCITY = Vector2(0, 800)
 const TURN_SPEED_MULTIPLER = 3.95
