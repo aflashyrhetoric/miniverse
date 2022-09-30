@@ -499,9 +499,6 @@ collision_mask = 0
 format = 1
 tile_data = PoolIntArray( 131092, 1610612736, 0, 131094, 1610612736, 0, 393237, -1073741824, 0, 393242, -1610612736, 0, 458773, -1073741824, 0, 458778, -1610612736, 0, 524309, -1073741824, 0, 1048598, 1610612736, 0, 1048600, 1610612736, 0, 2162758, 536870912, 0, 2228293, -2147483648, 0, 2359361, -2147483648, 0, 2490429, -2147483648, 0, 2621501, -2147483648, 0 )
 
-[node name="RespawnPoint" type="Position2D" parent="."]
-position = Vector2( 40, 78 )
-
 [node name="Bubbles" type="Node2D" parent="."]
 position = Vector2( -24, -106 )
 
@@ -540,3 +537,8 @@ collision_mask = 1024
 [node name="TallChamber" type="CollisionShape2D" parent="Boundaries/LevelBoundary2"]
 position = Vector2( 322.5, 44 )
 shape = SubResource( 88 )
+
+[node name="RespawnPoints" type="Node2D" parent="."]
+
+[node name="RespawnPoint" type="Position2D" parent="RespawnPoints" groups=["respawn_points"]]
+position = Vector2( 160, 160 )

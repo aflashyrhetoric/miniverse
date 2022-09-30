@@ -10,36 +10,67 @@ onready var player = $Player
 onready var song = $Song
 onready var ambience = $Rain
 
-var camera_track_prefixes = ["Tall", "Wide"]
+const CAMERA_TRACK_PREFIX_TALL = "Tall"
+const CAMERA_TRACK_PREFIX_WIDE = "Wide"
 
-var _should_track_camera_actively = false
+enum CAMERA_TRACK_MODES { STATIC, X, Y }
+
+var _camera_track_mode = CAMERA_TRACK_MODES.STATIC
 
 
 func _ready():
 	cam.global_position = first.cam_anchor.position
+	Events.connect("mini_died", self, "handle_death")
 	var rooms = get_tree().get_nodes_in_group("rooms")
 	for room in rooms:
-		room.initialize_level(player)
 		room.connect("change_room", self, "_move_camera")
 
 
 func _process(_delta: float) -> void:
-	if _should_track_camera_actively:
+	if _camera_track_mode == CAMERA_TRACK_MODES.X:
+		cam.position.x = lerp(cam.position.x, player.mini.global_position.x, 0.1)
+	if _camera_track_mode == CAMERA_TRACK_MODES.Y:
 		cam.position.y = lerp(cam.position.y, player.mini.global_position.y, 0.1)
+	if _camera_track_mode == CAMERA_TRACK_MODES.STATIC:
+		# Do nothing after the CamAnchor has been focused and centered!
+		pass
+
+
+func handle_death(_pos_of_death: Vector2):
+	var respawn_pt = get_nearest_respawn_point(_pos_of_death)
+	player.mini.global_position = respawn_pt.global_position
+	pass
+
+
+func get_nearest_respawn_point(_pos: Vector2) -> Position2D:
+	var current_room_respawn_points = WorldVars.levels_to_respawn_points[WorldVars.current_room]
+	var closest = null
+	var closest_distance = 99999.0
+
+	for respawn_point in current_room_respawn_points:
+		var d = _pos.distance_to(respawn_point.global_position)
+		if closest == null or d < closest_distance:
+			closest = respawn_point
+			closest_distance = d
+
+	print(closest)
+	return closest
 
 
 func _move_camera(name_of_room: String):
 	# reset
-	_should_track_camera_actively = false
+	_camera_track_mode = CAMERA_TRACK_MODES.STATIC
 
-	if WorldVars._active_room == name_of_room:
+	if WorldVars.current_room == name_of_room:
 		return true
 
-	for prefix in camera_track_prefixes:
-		if Util.str_includes(name_of_room, prefix):
-			_should_track_camera_actively = true
+	if Util.str_includes(name_of_room, CAMERA_TRACK_PREFIX_TALL):
+		_camera_track_mode = CAMERA_TRACK_MODES.Y
 
-	print("entered room, ", name_of_room, ". active cam is set to: ", _should_track_camera_actively)
+	if Util.str_includes(name_of_room, CAMERA_TRACK_PREFIX_WIDE):
+		_camera_track_mode = CAMERA_TRACK_MODES.X
+
+	print("entered room, ", name_of_room, ". active cam is set to: ", _camera_track_mode)
 
 	# If we're here, we're trying to transition rooms!
 	player.mini.pause_movement()
@@ -56,4 +87,4 @@ func _move_camera(name_of_room: String):
 func update_room_name(_obj, _key, name_of_room: String):
 	print("updated to ", name_of_room)
 	player.mini.unpause_movement()
-	WorldVars._active_room = name_of_room
+	WorldVars.current_room = name_of_room

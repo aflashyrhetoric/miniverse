@@ -49,7 +49,7 @@ script = ExtResource( 2 )
 fly_speed = Vector2( 50, 70 )
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( -2, 2 )
+scale = Vector2( -1, 1 )
 texture = ExtResource( 1 )
 hframes = 8
 

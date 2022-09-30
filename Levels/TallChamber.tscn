@@ -1,9 +1,10 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://World/Bubble.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/art/hazards/spike.png" type="Texture" id=2]
 [ext_resource path="res://assets/art/tileset/tileset.png" type="Texture" id=3]
 [ext_resource path="res://Level.gd" type="Script" id=4]
+[ext_resource path="res://World/ApproachableObject.tscn" type="PackedScene" id=5]
 
 [sub_resource type="ConvexPolygonShape2D" id=72]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
@@ -496,9 +497,6 @@ collision_mask = 0
 format = 1
 tile_data = PoolIntArray( 1179684, 1610612736, 0, 1179686, 1610612736, 0, 1179688, 1610612736, 0, 1179690, 1610612736, 0, 1638436, 0, 0, 1638438, 0, 0, 1638440, 0, 0, 1638442, 0, 0, 2752534, -1610612736, 0, 2883606, -1610612736, 0, 3145744, 1610612736, 0, 3145746, 1610612736, 0, 3473434, 0, 0, 3473436, 0, 0 )
 
-[node name="RespawnPoint" type="Position2D" parent="."]
-position = Vector2( 40, 78 )
-
 [node name="Bubbles" type="Node2D" parent="."]
 position = Vector2( -24, -106 )
 
@@ -536,3 +534,14 @@ collision_mask = 1024
 
 [node name="Second" type="CollisionShape2D" parent="Boundaries/LevelBoundary3"]
 shape = SubResource( 87 )
+
+[node name="ApproachableObject" parent="." instance=ExtResource( 5 )]
+position = Vector2( 210, 288 )
+
+[node name="RespawnPoints" type="Node2D" parent="."]
+
+[node name="RespawnPoint" type="Position2D" parent="RespawnPoints" groups=["respawn_points"]]
+position = Vector2( 24, 60 )
+
+[node name="RespawnPoint2" type="Position2D" parent="RespawnPoints" groups=["respawn_points"]]
+position = Vector2( 135, 163 )

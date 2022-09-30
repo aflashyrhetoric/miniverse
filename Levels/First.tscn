@@ -116,9 +116,6 @@ collision_mask = 2
 position = Vector2( 159.875, 256 )
 shape = SubResource( 60 )
 
-[node name="RespawnPoint" type="Position2D" parent="."]
-position = Vector2( 118, 130 )
-
 [node name="Bubbles" type="Node2D" parent="."]
 position = Vector2( -24, -106 )
 
@@ -135,3 +132,8 @@ collision_mask = 1024
 [node name="Second" type="CollisionShape2D" parent="Boundaries/LevelBoundary"]
 position = Vector2( 328, 92 )
 shape = SubResource( 71 )
+
+[node name="RespawnPoints" type="Node2D" parent="."]
+
+[node name="RespawnPoint" type="Position2D" parent="RespawnPoints" groups=["respawn_points"]]
+position = Vector2( 144, 132 )

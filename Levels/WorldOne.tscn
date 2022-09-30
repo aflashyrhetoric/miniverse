@@ -52,39 +52,14 @@ position = Vector2( 320, 0 )
 [node name="Upper" parent="." groups=["rooms"] instance=ExtResource( 12 )]
 position = Vector2( 320, -176 )
 
+[node name="TallChamber" parent="." groups=["rooms"] instance=ExtResource( 13 )]
+position = Vector2( 640, -176 )
+
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 99, 136 )
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-layer = -1
-
-[node name="Last + BG" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.2, 1 )
-motion_mirroring = Vector2( 288, 0 )
-
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/Last + BG"]
-position = Vector2( 144, 90 )
-texture = ExtResource( 3 )
-
-[node name="Middle" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.4, 1 )
-motion_mirroring = Vector2( 288, 0 )
-
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/Middle"]
-position = Vector2( 144, 90 )
-texture = ExtResource( 2 )
-
-[node name="Foremost" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.8, 1 )
-motion_mirroring = Vector2( 288, 0 )
-
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/Foremost"]
-position = Vector2( 144, 90 )
-texture = ExtResource( 6 )
-
 [node name="Song" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 17 )
-autoplay = true
 bus = "Music"
 script = ExtResource( 10 )
 
@@ -112,14 +87,38 @@ amount = 200
 process_material = SubResource( 5 )
 
 [node name="Bird" parent="." instance=ExtResource( 9 )]
-position = Vector2( 24, 64 )
+position = Vector2( 28, 68 )
 scale = Vector2( -1, 1 )
 
 [node name="Bird2" parent="." instance=ExtResource( 9 )]
-position = Vector2( 272, 48 )
+position = Vector2( 247, 52 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/muffle_audio = SubResource( 4 )
 
-[node name="TallChamber" parent="." instance=ExtResource( 13 )]
-position = Vector2( 640, -176 )
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+layer = -1
+
+[node name="Last + BG" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.2, 1 )
+motion_mirroring = Vector2( 288, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/Last + BG"]
+position = Vector2( 144, 90 )
+texture = ExtResource( 3 )
+
+[node name="Middle" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.4, 1 )
+motion_mirroring = Vector2( 288, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/Middle"]
+position = Vector2( 144, 90 )
+texture = ExtResource( 2 )
+
+[node name="Foremost" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.8, 1 )
+motion_mirroring = Vector2( 288, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/Foremost"]
+position = Vector2( 144, 90 )
+texture = ExtResource( 6 )

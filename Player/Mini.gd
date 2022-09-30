@@ -484,7 +484,8 @@ func _on_EllieFloatRange_body_exited(_body: Node) -> void:
 
 
 func died(_body):
-	Events.emit_signal("mini_died")
+	# Indicate death, and send along the position of death (so we can calculate nearest respawn)
+	Events.emit_signal("mini_died", _body.global_position)
 
 
 # Alias for easy external use
