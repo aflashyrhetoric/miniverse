@@ -53,7 +53,6 @@ func get_nearest_respawn_point(_pos: Vector2) -> Position2D:
 			closest = respawn_point
 			closest_distance = d
 
-	print(closest)
 	return closest
 
 

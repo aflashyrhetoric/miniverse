@@ -292,6 +292,9 @@ func calculate_move_velocity(
 	player_input_direction: Vector2,  # INPUT DIRECTION
 	dampen_second_jump_from_interrupted_jump: bool
 ):
+	##########################
+	# FOR CAMERA TRANSITIONS #
+	##########################
 	if _pause_movement:
 		return Vector2(0, 0)
 	elif _just_unpaused:
@@ -300,17 +303,26 @@ func calculate_move_velocity(
 		_pre_pause_velocity = Vector2.ZERO
 		return _temp
 
+	################
+	# UTILITY VARS #
+	################
 	var velocity = current_linear_velocity
 	var x_direction_int = sprite.scale.x
 	var x_direction = get_direction_x()
 	var y_direction = get_direction_y()
 
-	# Bubble-physics is a high-hierarchy operation
+	############################
+	# BEGIN MOVEMENT HIERARCHY #
+	############################
+
+	# Bubble-physics is a high-hierarchy operation, so check first
 	if _is_bubble_dashing:
 		_frames_since_started_bubble_dashing += 1
 
 		if is_on_floor() or is_on_wall():
+			print("hit a floor or wall")
 			end_bubble_dash()
+			return Vector2(0, 0)
 
 		if _frames_since_started_bubble_dashing <= BUBBLE_DASH_FRAME_DURATION:
 			return current_linear_velocity
@@ -427,12 +439,12 @@ func calculate_move_velocity(
 		# as to not be too abrupt.
 		velocity.y *= 0.4
 
-	if is_wall_grabbing(velocity):
+	if is_wall_sliding(velocity):
 		velocity.y = WALL_GRAB_FALL_SPEED
 	return velocity
 
 
-func is_wall_grabbing(_v: Vector2) -> bool:
+func is_wall_sliding(_v: Vector2) -> bool:
 	return (
 		wall_grab_forward_detector.is_colliding()  # Must be close to the wall
 		and (Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"))  # Must be pressing L/R to express intent
@@ -455,7 +467,7 @@ func animate_scale():
 			scale = Vector2(1.10, .90)
 			return
 
-		if not _is_inside_bubble and not is_wall_grabbing(_velocity) and scale != Vector2(1, 1):
+		if not _is_inside_bubble and not is_wall_sliding(_velocity) and scale != Vector2(1, 1):
 			scale = lerp(scale, Vector2(1, 1), 0.2)
 
 	if _is_inside_bubble:

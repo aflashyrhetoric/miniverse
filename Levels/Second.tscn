@@ -511,10 +511,10 @@ shape = SubResource( 60 )
 position = Vector2( -24, -106 )
 
 [node name="Bubble" parent="Bubbles" instance=ExtResource( 7 )]
-position = Vector2( 202, 251 )
+position = Vector2( 179, 220 )
 
 [node name="Bubble2" parent="Bubbles" instance=ExtResource( 7 )]
-position = Vector2( 118, 264 )
+position = Vector2( 128, 264 )
 
 [node name="Boundaries" type="Node2D" parent="."]
 
