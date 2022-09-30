@@ -28,7 +28,8 @@ func _ready():
 	bubbles = bubbles_group.get_children() if bubbles_group != null else null
 
 	# Initialize out of bounds
-	out_of_bounds.connect("body_entered", self, "mini_died")
+	if out_of_bounds != null:
+		out_of_bounds.connect("body_entered", self, "mini_died")
 	Events.connect("mini_died", self, "handle_death")
 	# Events.connect("mini_landed", self, "create_land_dust")
 
@@ -40,6 +41,7 @@ func _ready():
 func initialize_level(player):
 	_player = player
 
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta: float) -> void:
 	if _should_respawn:
@@ -49,15 +51,19 @@ func _physics_process(_delta: float) -> void:
 				child.global_position = respawn_point.global_position
 				child.handle_death()
 
+
 func change_room_to(_body, name_of_room):
 	emit_signal("change_room", name_of_room)
+
 
 func mini_died(_body: Node) -> void:
 	Events.emit_signal("mini_died")
 
+
 func handle_death():
 	if name == WorldVars._active_room:
 		_should_respawn = true
+
 
 func create_land_dust(_feet_position: Vector2):
 	var land_dust = Sprite.new()

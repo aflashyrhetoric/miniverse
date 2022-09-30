@@ -106,6 +106,7 @@ Util="*res://Util.gd"
 
 gdscript/warnings/unused_variable=false
 gdscript/warnings/unused_signal=false
+gdscript/warnings/return_value_discarded=false
 
 [display]
 

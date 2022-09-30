@@ -67,6 +67,7 @@ monitorable = false
 
 [node name="OrbSprite" type="AnimatedSprite" parent="Orb"]
 frames = SubResource( 8 )
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Orb"]
