@@ -2,6 +2,7 @@ extends Node
 
 # signal change_room(name_of_room)
 
+signal mini_should_die
 signal mini_died
 
 signal mini_landed

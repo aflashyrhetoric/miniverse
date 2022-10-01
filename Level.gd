@@ -41,7 +41,7 @@ func change_room_to(_body, name_of_room):
 
 func handle_out_of_bounds(_body: Node2D) -> void:
 	print(_body.global_position)
-	Events.emit_signal("mini_died", _body.global_position)
+	Events.emit_signal("mini_should_die", _body)
 
 
 func create_land_dust(_feet_position):

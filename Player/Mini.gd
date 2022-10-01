@@ -7,8 +7,8 @@ var is_mini = true
 const FLOOR_DETECT_DISTANCE = 2.0
 const MAX_SPEED = Vector2(120, 600)
 
-const JUMP_SPEED = 250.0
-const FALL_SPEED = 200.0
+const JUMP_SPEED = 200.0
+# const FALL_SPEED = 200.0
 
 const SPEED_ACCEL_AIR = 20.0  # added per frame
 const SPEED_ACCEL_GROUND = 5.0  # added per frame
@@ -19,10 +19,13 @@ const AIR_STOMP_VELOCITY = Vector2(0, 800)
 const TURN_SPEED_MULTIPLER = 3.95
 
 const BUBBLE_DASH_VELOCITY = 200
-const BUBBLE_DASH_FRAME_DURATION = 20
+const BUBBLE_DASH_FRAME_DURATION = 12
 
-const WALL_HOP_COUNTER_VELOCITY = 300
-const WALL_GRAB_FALL_SPEED = 50
+const WALL_HOP_COUNTER_VELOCITY = Vector2(180, -160)
+const WALL_SLIDE_FALL_SPEED = 50
+
+const WALL_GRAB_CLIMB_VELOCITY = Vector2(0, -80)
+const WALL_GRAB_FALL_VELOCITY = Vector2(0, 100)
 
 ## EXPORTED VARIABLES
 export(float) var bubble_dash_particles_speed = 500.0
@@ -49,6 +52,7 @@ onready var sound_jump = $Jump
 # onready var sound_land = $Land
 onready var footstep = $Footstep
 onready var footstep_timer = $FootstepTimer
+onready var sound_spawn = $SoundSpawn
 
 # JUICE - DUST
 onready var feet_position = $FeetPosition
@@ -64,6 +68,7 @@ onready var coyote_timer = $CoyoteTimer
 var _was_on_floor: bool
 
 # Instance Variables
+var _is_dying = false
 var _is_inside_bubble = false
 var _is_bubble_dashing = false
 var _just_bubble_dashed = false
@@ -81,12 +86,15 @@ var _pre_pause_velocity: Vector2 = Vector2.ZERO
 
 
 func _ready():
-	hazard_collision_shape.connect("body_entered", self, "died")
+	hazard_collision_shape.connect("body_entered", self, "begin_dying")
+	Events.connect("mini_entered_bubble", self, "grant_extra_jump")
+	Events.connect("mini_should_die", self, "begin_dying")
+	Events.connect("mini_died", self, "handle_death")
+
+	dust.lifetime = WorldVars.DUST_LIFETIME
+
 	ellie_float_range.connect("body_entered", self, "_on_EllieFloatRange_body_entered")
 	ellie_float_range.connect("body_exited", self, "_on_EllieFloatRange_body_exited")
-	Events.connect("mini_entered_bubble", self, "grant_extra_jump")
-	Events.connect("mini_died", self, "handle_death")
-	dust.lifetime = WorldVars.DUST_LIFETIME
 
 
 func _process(_delta: float) -> void:
@@ -103,6 +111,9 @@ func _process(_delta: float) -> void:
 
 
 func _physics_process(_delta):
+	if _is_dying:
+		return
+
 	if _is_inside_bubble:
 		_is_air_stomping = false
 
@@ -125,11 +136,6 @@ func _physics_process(_delta):
 		and Input.is_action_just_released("jump")
 		and _velocity.y < 0.0
 	)
-
-	# Wall Hop
-	# if wall_grab_forward_detector.is_colliding():
-	# 	if Input.is_action_just_pressed("jump"):
-	# 		_velocity.x = direction.x * WALL_HOP_COUNTER_VELOCITY
 
 	_velocity = calculate_move_velocity(
 		_velocity, direction, dampen_second_jump_from_interrupted_jump
@@ -195,7 +201,7 @@ func turn_sprites(direction, sprites_to_turn):
 
 # Check if a jump is allowed on the current frame.
 # ! DOES NOT INCLUDE bubble_dash permissions!
-func allowed_to_jump():
+func allowed_to_jump() -> bool:
 	return (
 		(is_on_floor() and not _is_bubble_dashing)
 		or (not is_on_floor() and not coyote_timer.is_stopped())
@@ -205,18 +211,24 @@ func allowed_to_jump():
 	)
 
 
+# Check if a jump is allowed on the current frame.
+# ! DOES NOT INCLUDE bubble_dash permissions!
+func allowed_to_grab() -> bool:
+	return wall_grab_forward_detector.is_colliding()
+
+
 # Returns a value from -1 to 0, float, representing strength of player input on x-axis
 func get_direction_x():
 	# TODO - ADD BACK WALL HOP
-	# if (
-	# 	wall_grab_forward_detector.is_colliding()
-	# 	and Input.is_action_just_pressed("jump")
-	# 	and not wall_grab_min_height_detector.is_colliding()
-	# ):
-	# 	if sprite.scale.x > 0:
-	# 		return -1
-	# 	else:
-	# 		return 1
+	if (
+		wall_grab_forward_detector.is_colliding()
+		and Input.is_action_just_pressed("jump")
+		and not wall_grab_min_height_detector.is_colliding()
+	):
+		if sprite.scale.x > 0:
+			return -1
+		else:
+			return 1
 
 	return Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 
@@ -314,6 +326,40 @@ func calculate_move_velocity(
 	############################
 	# BEGIN MOVEMENT HIERARCHY #
 	############################
+	if Input.is_action_pressed("wall_grab") and allowed_to_grab():
+		# If holding both directions for some reason, return neither.
+		if Input.is_action_pressed("move_up") and Input.is_action_pressed("move_down"):
+			return Vector2(0, 0)
+
+		if Input.is_action_pressed("move_up"):
+			return WALL_GRAB_CLIMB_VELOCITY
+
+		if Input.is_action_pressed("move_down"):
+			return WALL_GRAB_FALL_VELOCITY
+
+		# Wall Hop
+		if wall_grab_forward_detector.is_colliding():
+			if Input.is_action_just_pressed("jump"):
+				velocity = Vector2(
+					sprite.scale.x * -1 * WALL_HOP_COUNTER_VELOCITY.x, WALL_HOP_COUNTER_VELOCITY.y
+				)
+				# Do nothing but wallhop for now
+				return velocity
+
+		return Vector2(0, 0)
+
+	# Wall Hop
+	if (
+		wall_grab_forward_detector.is_colliding()
+		and not is_on_floor()
+		and (Input.is_action_pressed("move_right") or Input.is_action_pressed("move_left"))
+	):
+		if Input.is_action_just_pressed("jump"):
+			velocity = Vector2(
+				sprite.scale.x * -1 * WALL_HOP_COUNTER_VELOCITY.x, WALL_HOP_COUNTER_VELOCITY.y
+			)
+			# Do nothing but wallhop for now
+			return velocity
 
 	# Bubble-physics is a high-hierarchy operation, so check first
 	if _is_bubble_dashing:
@@ -322,7 +368,6 @@ func calculate_move_velocity(
 		if is_on_floor() or is_on_wall():
 			print("hit a floor or wall")
 			end_bubble_dash()
-			return Vector2(0, 0)
 
 		if _frames_since_started_bubble_dashing <= BUBBLE_DASH_FRAME_DURATION:
 			return current_linear_velocity
@@ -440,7 +485,7 @@ func calculate_move_velocity(
 		velocity.y *= 0.4
 
 	if is_wall_sliding(velocity):
-		velocity.y = WALL_GRAB_FALL_SPEED
+		velocity.y = WALL_SLIDE_FALL_SPEED
 	return velocity
 
 
@@ -495,20 +540,44 @@ func _on_EllieFloatRange_body_exited(_body: Node) -> void:
 	Events.emit_signal("ellie_exited_area")
 
 
-func died(_body):
+func begin_dying(_body):
 	# Indicate death, and send along the position of death (so we can calculate nearest respawn)
-	Events.emit_signal("mini_died", _body.global_position)
+	_is_dying = true
+	sprite.playing = false
+	animation_player.play("dying")
+	print("before animation")
+	yield(animation_player, "animation_finished")
+	print("after animation")
+	send_death_signal(_body)
+
+
+func send_death_signal(_body):
+	# Indicate death, and send along the position of death (so we can calculate nearest respawn)
+	Events.emit_signal("mini_died", _body)
 
 
 # Alias for easy external use
-func handle_death():
+func handle_death(_body):
 	_velocity = Vector2.ZERO
+	sound_spawn.play()
 	reset_state_variables()
 
 
 func reset_state_variables():
+	reset_death_orchestration_variables()
+	reset_sprite_variables()
 	reset_movement_variables()
 	reset_bubble_variables()
+
+
+func reset_death_orchestration_variables():
+	_is_dying = false
+
+
+func reset_sprite_variables():
+	print("reset")
+	sprite.offset = Vector2(0, 0)
+	sprite.animation = "idle"
 
 
 func reset_movement_variables():

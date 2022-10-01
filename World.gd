@@ -36,8 +36,8 @@ func _process(_delta: float) -> void:
 		pass
 
 
-func handle_death(_pos_of_death: Vector2):
-	var respawn_pt = get_nearest_respawn_point(_pos_of_death)
+func handle_death(_body):
+	var respawn_pt = get_nearest_respawn_point(_body.global_position)
 	player.mini.global_position = respawn_pt.global_position
 	pass
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=2]
+[gd_scene load_steps=60 format=2]
 
 [ext_resource path="res://Player/Mini.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/player/character/idle_4.png" type="Texture" id=2]
@@ -11,6 +11,8 @@
 [ext_resource path="res://assets/art/player/character/jump_up_3.png" type="Texture" id=9]
 [ext_resource path="res://assets/art/player/character/run_6.png" type="Texture" id=10]
 [ext_resource path="res://assets/art/player/character/death_8.png" type="Texture" id=11]
+[ext_resource path="res://assets/audio/sfx/death.wav" type="AudioStream" id=12]
+[ext_resource path="res://assets/audio/sfx/spawn.wav" type="AudioStream" id=13]
 
 [sub_resource type="CapsuleShape2D" id=21]
 radius = 6.0
@@ -115,9 +117,9 @@ region = Rect2( 80, 0, 16, 16 )
 [sub_resource type="SpriteFrames" id=53]
 animations = [ {
 "frames": [ SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ) ],
-"loop": true,
+"loop": false,
 "name": "death",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [ SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ) ],
 "loop": true,
@@ -139,6 +141,60 @@ animations = [ {
 "name": "run",
 "speed": 10.0
 } ]
+
+[sub_resource type="Animation" id=59]
+resource_name = "dying"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.439857 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "death" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.357423, 0.403038 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -4, -10 ), Vector2( -7, -14 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimatedSprite:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.457063 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath("SoundDeath")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.00203945 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+} ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "falling"
@@ -369,8 +425,8 @@ one_shot = true
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -8 )
 frames = SubResource( 53 )
-animation = "idle"
-frame = 2
+animation = "death"
+frame = 7
 playing = true
 
 [node name="FlowerGun" parent="AnimatedSprite" instance=ExtResource( 4 )]
@@ -393,6 +449,7 @@ cast_to = Vector2( 0, 25 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 4.0
+anims/dying = SubResource( 59 )
 anims/falling = SubResource( 2 )
 anims/falling_weapon = SubResource( 3 )
 anims/idle = SubResource( 4 )
@@ -490,3 +547,11 @@ wait_time = 0.1
 one_shot = true
 
 [node name="ScaleTween" type="Tween" parent="."]
+
+[node name="SoundDeath" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 12 )
+volume_db = -12.0
+
+[node name="SoundSpawn" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 13 )
+volume_db = -12.0

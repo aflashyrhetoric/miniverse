@@ -1,7 +1,9 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Level.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/hazards/spike.png" type="Texture" id=2]
+[ext_resource path="res://Levels/LightsTileset.tres" type="TileSet" id=3]
+[ext_resource path="res://assets/shaders/light_shader_sprite.png" type="Texture" id=4]
 [ext_resource path="res://World/Bubble.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/art/tileset/tileset.png" type="Texture" id=19]
 
@@ -475,7 +477,7 @@ extents = Vector2( 1, 29 )
 [node name="Second" type="Node2D"]
 script = ExtResource( 1 )
 __meta__ = {
-"_edit_horizontal_guides_": [ 217.0 ]
+"_edit_horizontal_guides_": [ 217.0, 157.0 ]
 }
 
 [node name="CamAnchor" type="Position2D" parent="."]
@@ -486,7 +488,7 @@ tile_set = SubResource( 62 )
 cell_size = Vector2( 8, 8 )
 collision_mask = 42
 format = 1
-tile_data = PoolIntArray( -65536, 17, 0, -65535, 17, 0, -65534, 17, 0, -65533, 17, 0, -65532, 17, 0, -65531, 17, 0, -65530, 17, 0, -65529, 17, 0, -65528, 17, 0, -65527, 17, 0, -65526, 17, 0, -65525, 17, 0, -65524, 17, 0, -65523, 17, 0, -65522, 17, 0, -65521, 17, 0, -65520, 17, 0, -65519, 17, 0, -65518, 17, 0, -65517, 17, 0, -65516, 17, 0, -65509, 17, 0, -65508, 17, 0, -65507, 17, 0, -65505, 17, 0, -65504, 17, 0, -65503, 17, 0, -65501, 17, 0, -65499, 17, 0, -65498, 17, 0, 0, 17, 0, 2, 17, 0, 10, 17, 0, 11, 17, 0, 20, 17, 0, 65540, 1073741836, 0, 65542, 1610612743, 0, 65554, -1073741802, 0, 65574, 1610612753, 0, 131074, 536870921, 0, 131092, 17, 0, 196628, 17, 0, 196646, 1610612753, 0, 262155, 13, 0, 327700, -1073741806, 0, 327702, 11, 0, 327718, 1610612753, 0, 393227, 17, 0, 458763, 17, 0, 458790, 1610612753, 0, 524299, 17, 0, 589835, 17, 0, 589846, 17, 0, 589848, 17, 0, 589862, 1610612753, 0, 655360, 3, 0, 655362, 3, 0, 655364, 4, 0, 655371, -536870888, 0, 720907, 17, 0, 720926, 1, 0, 720928, 4, 0, 720934, 1610612753, 0, 786443, -1073741800, 0, 851979, 17, 0, 852006, 1610612753, 0, 917515, -1073741800, 0, 1048574, 536870918, 0, 983068, 1610612753, 0, 983070, 1610612753, 0, 983072, 1610612753, 0, 983074, 1610612753, 0, 983076, 1610612753, 0, 983078, 1610612753, 0, 1114140, -1073741802, 0, 1114142, -1073741807, 0, 1114144, -1073741807, 0, 1114146, -1073741807, 0, 1114148, -1073741807, 0, 1114150, -1073741807, 0, 1310718, 536870929, 0, 1245184, 17, 0, 1245186, 17, 0, 1245187, 17, 0, 1245188, 17, 0, 1245189, 17, 0, 1245190, 17, 0, 1245214, -1073741802, 0, 1245216, -1073741807, 0, 1245218, -1073741807, 0, 1245220, -1073741807, 0, 1245222, -1073741807, 0, 1376288, -1073741802, 0, 1376290, -1073741807, 0, 1376292, -1073741807, 0, 1376294, -1073741807, 0 )
+tile_data = PoolIntArray( -65536, 17, 0, -65535, 17, 0, -65534, 17, 0, -65533, 17, 0, -65532, 17, 0, -65531, 17, 0, -65530, 17, 0, -65529, 17, 0, -65528, 17, 0, -65527, 17, 0, -65526, 17, 0, -65525, 17, 0, -65524, 17, 0, -65523, 17, 0, -65522, 17, 0, -65521, 17, 0, -65520, 536870936, 0, -65519, 17, 0, -65518, 17, 0, -65517, 17, 0, -65516, 17, 0, -65509, 17, 0, -65508, 17, 0, -65507, 17, 0, -65505, 17, 0, -65504, 17, 0, -65503, 17, 0, -65501, 17, 0, -65499, 17, 0, -65498, 17, 0, 0, 17, 0, 2, 17, 0, 10, 17, 0, 11, 17, 0, 20, 17, 0, 65540, 1073741836, 0, 65542, 1610612743, 0, 65554, -1073741802, 0, 65570, 9, 0, 65572, -1073741801, 0, 65574, 1610612753, 0, 131074, 536870921, 0, 131092, 17, 0, 196628, 17, 0, 196646, 1610612753, 0, 262155, 13, 0, 327700, -1073741806, 0, 327718, 1610612753, 0, 393227, 17, 0, 458763, 17, 0, 458774, 536870935, 0, 458775, 1610612750, 0, 458776, 1610612750, 0, 458790, 1610612753, 0, 524299, 17, 0, 589835, 17, 0, 589846, 536870931, 0, 589862, 1610612753, 0, 655360, 3, 0, 655362, 3, 0, 655364, 4, 0, 655371, -536870888, 0, 720907, 17, 0, 720916, 536870927, 0, 720917, 536870927, 0, 720919, 15, 0, 720920, 15, 0, 720926, 1, 0, 720928, 4, 0, 720934, 1610612753, 0, 786443, -1073741800, 0, 851979, 17, 0, 851996, 1610612750, 0, 851997, 1610612750, 0, 851998, 1073741838, 0, 852000, 1073741838, 0, 852001, 1610612750, 0, 852002, 1610612750, 0, 852004, -2147483625, 0, 852006, 1610612753, 0, 917515, -1073741800, 0, 1048574, 536870918, 0, 983068, 536870931, 0, 983071, 536870931, 0, 983073, 536870931, 0, 983074, 536870931, 0, 983078, 1610612753, 0, 1114118, 1610612750, 0, 1114140, -1073741802, 0, 1114142, -1073741807, 0, 1114144, -1073741807, 0, 1114146, -1073741807, 0, 1114148, -1073741807, 0, 1114150, -1073741807, 0, 1310718, 536870931, 0, 1245184, 536870931, 0, 1245187, 536870931, 0, 1245188, 536870931, 0, 1245214, -1073741802, 0, 1245216, -1073741807, 0, 1245218, -1073741807, 0, 1245220, -1073741807, 0, 1245222, -1073741807, 0, 1376288, -1073741802, 0, 1376290, -1073741807, 0, 1376292, -1073741807, 0, 1376294, -1073741807, 0 )
 
 [node name="Hazards" type="TileMap" parent="."]
 tile_set = SubResource( 84 )
@@ -499,6 +501,44 @@ collision_mask = 0
 format = 1
 tile_data = PoolIntArray( 131092, 1610612736, 0, 131094, 1610612736, 0, 393237, -1073741824, 0, 393242, -1610612736, 0, 458773, -1073741824, 0, 458778, -1610612736, 0, 524309, -1073741824, 0, 1048598, 1610612736, 0, 1048600, 1610612736, 0 )
 
+[node name="Lights" type="TileMap" parent="."]
+z_index = 10
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 8, 8 )
+collision_layer = 0
+collision_mask = 0
+format = 1
+tile_data = PoolIntArray( 65573, 15, 0, 65574, 536870927, 0 )
+__meta__ = {
+"_editor_description_": "A tilemap that is exclusively for adding tilemaps that are lights. They will all come with a light shader."
+}
+
+[node name="Light2D" type="Light2D" parent="Lights"]
+position = Vector2( 25, 42 )
+texture = ExtResource( 4 )
+energy = 0.6
+range_layer_min = -1
+
+[node name="Light2D3" type="Light2D" parent="Lights"]
+position = Vector2( 278, 31 )
+texture = ExtResource( 4 )
+texture_scale = 0.8
+energy = 0.5
+range_layer_min = -1
+
+[node name="Light2D4" type="Light2D" parent="Lights"]
+position = Vector2( 194, 98 )
+texture = ExtResource( 4 )
+texture_scale = 0.8
+energy = 0.5
+range_layer_min = -1
+
+[node name="Light2D2" type="Light2D" parent="Lights"]
+position = Vector2( 171, 96 )
+texture = ExtResource( 4 )
+energy = 0.5
+range_layer_min = -1
+
 [node name="OutOfBounds" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 2
@@ -510,8 +550,8 @@ shape = SubResource( 60 )
 [node name="Bubbles" type="Node2D" parent="."]
 position = Vector2( -24, -106 )
 
-[node name="Bubble" parent="Bubbles" instance=ExtResource( 7 )]
-position = Vector2( 179, 220 )
+[node name="Bubble3" parent="Bubbles" instance=ExtResource( 7 )]
+position = Vector2( 200, 242 )
 
 [node name="Bubble2" parent="Bubbles" instance=ExtResource( 7 )]
 position = Vector2( 128, 264 )
@@ -534,7 +574,7 @@ collision_layer = 512
 collision_mask = 1024
 
 [node name="Upper" type="CollisionShape2D" parent="Boundaries/LevelBoundary2"]
-position = Vector2( 4, -13 )
+position = Vector2( 9, -13 )
 shape = SubResource( 87 )
 
 [node name="RespawnPoints" type="Node2D" parent="."]
@@ -543,4 +583,4 @@ shape = SubResource( 87 )
 position = Vector2( 42, 70 )
 
 [node name="RespawnPoint2" type="Position2D" parent="RespawnPoints" groups=["respawn_points"]]
-position = Vector2( 232, 111 )
+position = Vector2( 267, 82 )

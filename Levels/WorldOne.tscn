@@ -48,6 +48,9 @@ __meta__ = {
 
 [node name="Second" parent="." groups=["rooms"] instance=ExtResource( 5 )]
 position = Vector2( 320, 0 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 217.0 ]
+}
 
 [node name="Upper" parent="." groups=["rooms"] instance=ExtResource( 12 )]
 position = Vector2( 320, -176 )
@@ -76,13 +79,13 @@ volume_db = -8.0
 autoplay = true
 
 [node name="RainParticles" type="Particles2D" parent="."]
-position = Vector2( 328, -88 )
+position = Vector2( 521, -86 )
 amount = 400
 visibility_rect = Rect2( 0, 0, 0, 0 )
 process_material = ExtResource( 11 )
 
 [node name="RainParticles2" type="Particles2D" parent="."]
-position = Vector2( 328, -88 )
+position = Vector2( 521, -86 )
 amount = 200
 process_material = SubResource( 5 )
 
