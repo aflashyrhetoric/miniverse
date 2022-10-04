@@ -117,8 +117,7 @@ func _physics_process(_delta):
 	if _is_inside_bubble:
 		_is_air_stomping = false
 
-	if allowed_to_jump() and _has_jumped:
-		# vars
+	if is_on_floor():
 		_has_jumped = false
 		_is_air_stomping = false
 
@@ -477,7 +476,8 @@ func calculate_move_velocity(
 
 	# If falling:
 	if velocity.y > 0 and not _is_air_stomping:
-		pass
+		if velocity.y > MAX_SPEED.y:
+			velocity.y = MAX_SPEED.y
 
 	if dampen_second_jump_from_interrupted_jump:
 		# Decrease the Y velocity by multiplying it, but don't set it to 0

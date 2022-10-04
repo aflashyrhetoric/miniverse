@@ -545,3 +545,8 @@ position = Vector2( 24, 60 )
 
 [node name="RespawnPoint2" type="Position2D" parent="RespawnPoints" groups=["respawn_points"]]
 position = Vector2( 135, 163 )
+
+[node name="RoomTop" type="Position2D" parent="."]
+
+[node name="RoomBottom" type="Position2D" parent="."]
+position = Vector2( 0, 312 )

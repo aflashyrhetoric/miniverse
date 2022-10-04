@@ -10,12 +10,18 @@ onready var player = $Player
 onready var song = $Song
 onready var ambience = $Rain
 
+# TODO: Optimize later if necessary, make dynamic if necessary
+const WINDOW_WIDTH = 320.0
+const WINDOW_HEIGHT = 180.0
+
 const CAMERA_TRACK_PREFIX_TALL = "Tall"
 const CAMERA_TRACK_PREFIX_WIDE = "Wide"
 
 enum CAMERA_TRACK_MODES { STATIC, X, Y }
 
 var _camera_track_mode = CAMERA_TRACK_MODES.STATIC
+
+var _is_mid_transition: bool = false
 
 
 func _ready():
@@ -27,13 +33,20 @@ func _ready():
 
 
 func _process(_delta: float) -> void:
-	if _camera_track_mode == CAMERA_TRACK_MODES.X:
-		cam.position.x = lerp(cam.position.x, player.mini.global_position.x, 0.1)
-	if _camera_track_mode == CAMERA_TRACK_MODES.Y:
-		cam.position.y = lerp(cam.position.y, player.mini.global_position.y, 0.1)
-	if _camera_track_mode == CAMERA_TRACK_MODES.STATIC:
-		# Do nothing after the CamAnchor has been focused and centered!
-		pass
+	if not _is_mid_transition:
+		if _camera_track_mode == CAMERA_TRACK_MODES.X:
+			cam.position.x = lerp(cam.position.x, player.mini.global_position.x, 0.1)
+		if _camera_track_mode == CAMERA_TRACK_MODES.Y:
+			var room_top = WorldVars.current_room.get_node("RoomTop").global_position.y
+			var room_bottom = WorldVars.current_room.get_node("RoomBottom").global_position.y
+			room_top += WINDOW_HEIGHT / 2
+			room_bottom -= WINDOW_HEIGHT / 2
+			var would_be_pos_y: float = lerp(cam.position.y, player.mini.global_position.y, 0.1)
+			if would_be_pos_y > room_top and would_be_pos_y < room_bottom:
+				cam.position.y = would_be_pos_y
+		if _camera_track_mode == CAMERA_TRACK_MODES.STATIC:
+			# Do nothing after the CamAnchor has been focused and centered!
+			pass
 
 
 func handle_death(_body):
@@ -43,7 +56,7 @@ func handle_death(_body):
 
 
 func get_nearest_respawn_point(_pos: Vector2) -> Position2D:
-	var current_room_respawn_points = WorldVars.levels_to_respawn_points[WorldVars.current_room]
+	var current_room_respawn_points = WorldVars.levels_to_respawn_points[WorldVars.current_room_name]
 	var closest = null
 	var closest_distance = 99999.0
 
@@ -57,11 +70,12 @@ func get_nearest_respawn_point(_pos: Vector2) -> Position2D:
 
 
 func _move_camera(name_of_room: String):
+	_is_mid_transition = true
 	# reset
 	_camera_track_mode = CAMERA_TRACK_MODES.STATIC
 
-	if WorldVars.current_room == name_of_room:
-		return true
+	if WorldVars.current_room_name == name_of_room:
+		return
 
 	if Util.str_includes(name_of_room, CAMERA_TRACK_PREFIX_TALL):
 		_camera_track_mode = CAMERA_TRACK_MODES.Y
@@ -73,17 +87,21 @@ func _move_camera(name_of_room: String):
 
 	# If we're here, we're trying to transition rooms!
 	player.mini.pause_movement()
-	var new_pos: Vector2 = get_node(name_of_room).cam_anchor.global_position
+	var new_room = get_node(name_of_room)
+	var new_pos: Vector2 = new_room.cam_anchor.global_position
 	var tween = $CamTween
 	tween.interpolate_property(
 		cam, "position", cam.global_position, new_pos, 0.65, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT
 	)
-	tween.disconnect("tween_completed", self, "update_room_name")
-	tween.connect("tween_completed", self, "update_room_name", [name_of_room])
+	if tween.is_connected("tween_completed", self, "update_room_name"):
+		tween.disconnect("tween_completed", self, "update_room_name")
+	tween.connect("tween_completed", self, "update_room_name", [new_room])
 	tween.start()
 
 
-func update_room_name(_obj, _key, name_of_room: String):
-	print("updated to ", name_of_room)
+func update_room_name(_obj, _key, new_room: Node2D):
+	print("updated to ", new_room.name)
 	player.mini.unpause_movement()
-	WorldVars.current_room = name_of_room
+	WorldVars.current_room_name = new_room.name
+	WorldVars.current_room = new_room
+	_is_mid_transition = false
