@@ -383,7 +383,7 @@ func calculate_move_velocity(
 			_is_bubble_dashing = true
 			disable_gravity()
 
-			var planned_direction := Vector2(x_direction, y_direction)
+			var planned_direction := Vector2(stepify(x_direction, 1.0), stepify(y_direction, 1.0))
 			# Dash straight forward if there's no given direction
 			var direction_to_dash := (
 				planned_direction
