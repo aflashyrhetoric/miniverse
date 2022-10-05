@@ -25,10 +25,20 @@ func get_nearest_bubbles():
 
 func add_crosshair(_body) -> void:
 	crosshair.visible = true
+	for bubble in get_nearest_bubbles():
+		bubble.enable()
+		bubble._should_disable = false
+	
 
 
 func remove_crosshair(_body) -> void:
 	crosshair.visible = false
+	for bubble in get_nearest_bubbles():
+		print(bubble)
+		# We only want the bubbles that were ENABLED and do require activation
+		if bubble._require_activation and not bubble._disabled:
+			bubble._should_disable = true
+			bubble._should_disable = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta: float) -> void:

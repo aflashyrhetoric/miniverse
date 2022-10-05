@@ -58,6 +58,7 @@ script = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 93 )
+frame = 1
 playing = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]

@@ -6,6 +6,7 @@ signal mini_exited_bubble
 const ORB_FLIGHT_SPEED = 500
 
 onready var orb = $Orb
+onready var orb_boundary_sprite = $OrbBoundary
 onready var _original_orb_position: Vector2 = orb.global_position
 onready var bubble_shape = $BubbleShape
 onready var orb_hit = $OrbHit
@@ -14,14 +15,18 @@ onready var bubble_exit_sound = $BubbleExit
 
 onready var mini_placement = $MiniPlacement
 
+export(bool) var _require_activation = false
+
 var _label
 var _should_reset_position = false
 var _orb_boundary: Node = null
 var _direction: Vector2 = Vector2.ZERO
 var _velocity: Vector2 = Vector2.ZERO
 
-var _disable_orb = false
 var _mini_ref = null
+
+var _should_disable = false
+var _disabled = false
 
 
 func _ready() -> void:
@@ -37,17 +42,17 @@ func _ready() -> void:
 	_orb_boundary = get_node("OrbBoundary")
 	_label = orb.get_node("Label")
 
+	if _require_activation:
+		orb_boundary_sprite.visible = false
+
 
 func _process(_delta: float) -> void:
 	# Disable the orb if we've hit mini once
-	if _disable_orb:
-		_direction = Vector2.ZERO
-		_velocity = Vector2.ZERO
-		orb.visible = false
-		orb.monitoring = false
-	else:
-		orb.visible = true
-		orb.monitoring = true
+	if _should_disable and not _disabled:
+		disable()
+
+	if not _should_disable and _disabled:
+		enable()
 
 	if _should_reset_position:
 		orb.global_position = _original_orb_position
@@ -84,10 +89,31 @@ func _mini_exited(_mini):
 	_orb_boundary.modulate.a = 0.5
 
 	# Restore the center orb's visibility and function
-	_disable_orb = false
+	_should_disable = false
 	Events.emit_signal("mini_exited_bubble")
 
 
 func _orb_hit_mini(_mini):
 	orb_hit.play()
-	_disable_orb = true
+	_should_disable = true
+
+
+func disable():
+	print("disable")
+	_disabled = true
+	_direction = Vector2.ZERO
+	_velocity = Vector2.ZERO
+	orb.monitoring = false
+	if _require_activation:
+		orb_boundary_sprite.visible = false
+		orb.visible = true
+	else:
+		orb_boundary_sprite.visible = true
+		orb.visible = false
+
+
+func enable():
+	_disabled = false
+	orb.visible = true
+	orb.monitoring = true
+	orb_boundary_sprite.visible = true
