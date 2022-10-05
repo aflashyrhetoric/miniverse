@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/art/hazards/spike.png" type="Texture" id=1]
 [ext_resource path="res://Levels/LevelTileset.tres" type="TileSet" id=2]
 [ext_resource path="res://Levels/LightsTileset.tres" type="TileSet" id=3]
 [ext_resource path="res://World/ApproachableObject.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/shaders/light_shader_sprite.png" type="Texture" id=5]
+[ext_resource path="res://World/BubbleTrigger.tscn" type="PackedScene" id=6]
 [ext_resource path="res://World/Bubble.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Level.gd" type="Script" id=22]
 
@@ -103,7 +104,7 @@ cell_clip_uv = true
 collision_layer = 256
 collision_mask = 0
 format = 1
-tile_data = PoolIntArray( 458822, -1610612736, 0, 524358, -1610612736, 0, 589864, 1610612736, 0, 589866, 1610612736, 0, 589868, 1610612736, 0, 589870, 1610612736, 0, 589894, -1610612736, 0, 655430, -1610612736, 0, 720961, -1073741824, 0, 720966, -1610612736, 0, 786497, -1073741824, 0, 786502, -1610612736, 0, 852033, -1073741824, 0, 852038, -1610612736, 0, 917569, -1073741824, 0, 917574, -1610612736, 0, 983105, -1073741824, 0, 983110, -1610612736, 0, 1048641, -1073741824, 0, 1048646, -1610612736, 0 )
+tile_data = PoolIntArray( 458822, -1610612736, 0, 524358, -1610612736, 0, 589868, 1610612736, 0, 589870, 1610612736, 0, 589894, -1610612736, 0, 655430, -1610612736, 0, 720961, -1073741824, 0, 720966, -1610612736, 0, 786497, -1073741824, 0, 786502, -1610612736, 0, 852033, -1073741824, 0, 852038, -1610612736, 0, 917569, -1073741824, 0, 917574, -1610612736, 0, 983105, -1073741824, 0, 983110, -1610612736, 0, 1048641, -1073741824, 0, 1048646, -1610612736, 0 )
 
 [node name="ApproachableObject" parent="." instance=ExtResource( 4 )]
 
@@ -135,4 +136,6 @@ shape = SubResource( 71 )
 [node name="RespawnPoints" type="Node2D" parent="."]
 
 [node name="RespawnPoint" type="Position2D" parent="RespawnPoints" groups=["respawn_points"]]
-position = Vector2( 144, 132 )
+position = Vector2( 119, 124 )
+
+[node name="BubbleTrigger" parent="." instance=ExtResource( 6 )]

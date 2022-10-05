@@ -25,8 +25,13 @@ var _is_mid_transition: bool = false
 
 
 func _ready():
+	# Set the initial camera position
 	cam.global_position = first.cam_anchor.position
+
+	# Handle events
 	Events.connect("mini_died", self, "handle_death")
+
+	# For every room, initialize scene-change orchestration process
 	var rooms = get_tree().get_nodes_in_group("rooms")
 	for room in rooms:
 		room.connect("change_room", self, "_move_camera")

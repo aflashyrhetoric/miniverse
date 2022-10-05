@@ -59,7 +59,7 @@ position = Vector2( 320, -176 )
 position = Vector2( 640, -176 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 99, 136 )
+position = Vector2( 57, 136 )
 
 [node name="Song" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 17 )

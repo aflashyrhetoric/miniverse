@@ -25,6 +25,7 @@ var _mini_ref = null
 
 
 func _ready() -> void:
+	add_to_group("bubbles")
 	# Set up signals for the hook zone so we can detect mini entering
 	bubble_shape.connect("body_entered", self, "_mini_entered")
 	bubble_shape.connect("body_exited", self, "_mini_exited")

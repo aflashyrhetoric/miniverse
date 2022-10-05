@@ -1,0 +1,74 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://assets/art/misc/save_point_anim_strip_9.png" type="Texture" id=1]
+[ext_resource path="res://assets/art/misc/crosshair.png" type="Texture" id=2]
+[ext_resource path="res://World/BubbleTrigger.gd" type="Script" id=3]
+
+[sub_resource type="AtlasTexture" id=84]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 12, 20 )
+
+[sub_resource type="AtlasTexture" id=85]
+atlas = ExtResource( 1 )
+region = Rect2( 12, 0, 12, 20 )
+
+[sub_resource type="AtlasTexture" id=86]
+atlas = ExtResource( 1 )
+region = Rect2( 24, 0, 12, 20 )
+
+[sub_resource type="AtlasTexture" id=87]
+atlas = ExtResource( 1 )
+region = Rect2( 36, 0, 12, 20 )
+
+[sub_resource type="AtlasTexture" id=88]
+atlas = ExtResource( 1 )
+region = Rect2( 48, 0, 12, 20 )
+
+[sub_resource type="AtlasTexture" id=89]
+atlas = ExtResource( 1 )
+region = Rect2( 60, 0, 12, 20 )
+
+[sub_resource type="AtlasTexture" id=90]
+atlas = ExtResource( 1 )
+region = Rect2( 72, 0, 12, 20 )
+
+[sub_resource type="AtlasTexture" id=91]
+atlas = ExtResource( 1 )
+region = Rect2( 84, 0, 12, 20 )
+
+[sub_resource type="AtlasTexture" id=92]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 0, 12, 20 )
+
+[sub_resource type="SpriteFrames" id=93]
+animations = [ {
+"frames": [ SubResource( 84 ), SubResource( 85 ), SubResource( 86 ), SubResource( 87 ), SubResource( 88 ), SubResource( 89 ), SubResource( 90 ), SubResource( 91 ), SubResource( 92 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=94]
+extents = Vector2( 6, 10 )
+
+[node name="BubbleTrigger" type="Node2D"]
+position = Vector2( 168, 82 )
+rotation = 3.14159
+script = ExtResource( 3 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 93 )
+playing = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 2048
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource( 94 )
+
+[node name="Crosshair" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.113725 )
+position = Vector2( 3.05176e-05, -6 )
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 2 )

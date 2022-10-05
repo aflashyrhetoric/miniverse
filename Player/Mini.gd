@@ -46,6 +46,7 @@ onready var label = $Label
 onready var gun = sprite.get_node(@"FlowerGun")
 
 onready var ellie_float_range = $EllieFloatRange
+onready var ellie_action_range = $EllieActionRange
 
 # JUICE - AUDIO
 onready var sound_jump = $Jump
@@ -79,6 +80,9 @@ var _has_jumped = false
 var _has_extra_jump = false
 var _has_bubble_dash_jump = false
 
+# Ellie
+var _is_within_ellie_action_range = true
+
 # Physics-pause, used for transitioning rooms
 var _pause_movement = false
 var _just_unpaused = false
@@ -90,6 +94,10 @@ func _ready():
 	Events.connect("mini_entered_bubble", self, "grant_extra_jump")
 	Events.connect("mini_should_die", self, "begin_dying")
 	Events.connect("mini_died", self, "handle_death")
+
+	# Ellie-events
+	Events.connect("ellie_entered_action_range", self, "enable_ellie_action_range")
+	Events.connect("ellie_exited_action_range", self, "disable_ellie_action_range")
 
 	dust.lifetime = WorldVars.DUST_LIFETIME
 
@@ -606,3 +614,11 @@ func enter_bubble(bubble_origin: Vector2):
 
 func exit_bubble():
 	_is_inside_bubble = false
+
+
+func enable_ellie_action_range(_body) -> void:
+	_is_within_ellie_action_range = true
+
+
+func disable_ellie_action_range(_body) -> void:
+	_is_within_ellie_action_range = false

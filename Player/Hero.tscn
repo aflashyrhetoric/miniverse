@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=2]
+[gd_scene load_steps=62 format=2]
 
 [ext_resource path="res://Player/Mini.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/player/character/idle_4.png" type="Texture" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://assets/art/player/character/death_8.png" type="Texture" id=11]
 [ext_resource path="res://assets/audio/sfx/death.wav" type="AudioStream" id=12]
 [ext_resource path="res://assets/audio/sfx/spawn.wav" type="AudioStream" id=13]
+[ext_resource path="res://Player/EllieActionRange.gd" type="Script" id=14]
 
 [sub_resource type="CapsuleShape2D" id=21]
 radius = 6.0
@@ -400,6 +401,9 @@ color_ramp = SubResource( 58 )
 [sub_resource type="CircleShape2D" id=28]
 radius = 1.0
 
+[sub_resource type="CircleShape2D" id=60]
+radius = 65.0
+
 [node name="Hero" type="KinematicBody2D"]
 collision_layer = 2
 collision_mask = 0
@@ -425,8 +429,8 @@ one_shot = true
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -8 )
 frames = SubResource( 53 )
-animation = "death"
-frame = 7
+animation = "idle"
+frame = 3
 playing = true
 
 [node name="FlowerGun" parent="AnimatedSprite" instance=ExtResource( 4 )]
@@ -555,3 +559,11 @@ volume_db = -12.0
 [node name="SoundSpawn" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 13 )
 volume_db = -12.0
+
+[node name="EllieActionRange" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2048
+script = ExtResource( 14 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EllieActionRange"]
+shape = SubResource( 60 )

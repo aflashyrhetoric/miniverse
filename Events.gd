@@ -10,6 +10,9 @@ signal mini_landed
 signal ellie_entered_area
 signal ellie_exited_area
 
+signal ellie_entered_action_range
+signal ellie_exited_action_range
+
 signal mini_entered_bubble
 signal mini_exited_bubble
 
