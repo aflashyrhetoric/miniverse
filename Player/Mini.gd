@@ -18,7 +18,7 @@ const SPEED_DECAY_GROUND = 0.66  # deducted per frame
 const AIR_STOMP_VELOCITY = Vector2(0, 800)
 const TURN_SPEED_MULTIPLER = 3.95
 
-const BUBBLE_DASH_VELOCITY = 200
+const BUBBLE_DASH_VELOCITY = 200.0
 const BUBBLE_DASH_FRAME_DURATION = 12
 
 const WALL_HOP_COUNTER_VELOCITY = Vector2(180, -160)
@@ -28,7 +28,7 @@ const WALL_GRAB_CLIMB_VELOCITY = Vector2(0, -80)
 const WALL_GRAB_FALL_VELOCITY = Vector2(0, 100)
 
 ## EXPORTED VARIABLES
-export(float) var bubble_dash_particles_speed = 500.0
+export(float) var bubble_dash_particles_speed = BUBBLE_DASH_VELOCITY
 #####################
 
 onready var hazard_collision_shape = $HazardCollisionShape
@@ -119,6 +119,9 @@ func _process(_delta: float) -> void:
 
 
 func _physics_process(_delta):
+	var psn = owner.get_node("Ellie").global_position
+
+	# label.text = str(psn, "\n", WorldVars.nearest_interaction_point)
 	if _is_dying:
 		return
 
@@ -126,6 +129,8 @@ func _physics_process(_delta):
 		_is_air_stomping = false
 
 	if is_on_floor():
+		if _has_jumped:
+			Events.emit_signal("mini_landed", [feet_position.global_position])
 		_has_jumped = false
 		_is_air_stomping = false
 
@@ -133,8 +138,6 @@ func _physics_process(_delta):
 			_has_extra_jump = false
 		if _is_air_stomping:
 			_is_air_stomping = false
-
-		Events.emit_signal("mini_landed", [feet_position.global_position])
 
 	var direction: Vector2 = get_direction()
 	var dampen_second_jump_from_interrupted_jump: bool
@@ -391,7 +394,7 @@ func calculate_move_velocity(
 			_is_bubble_dashing = true
 			disable_gravity()
 
-			var planned_direction := Vector2(stepify(x_direction, 1.0), stepify(y_direction, 1.0))
+			var planned_direction := Vector2(stepify(x_direction, 0.5), stepify(y_direction, 0.5))
 			# Dash straight forward if there's no given direction
 			var direction_to_dash := (
 				planned_direction

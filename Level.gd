@@ -24,7 +24,6 @@ func _ready():
 	# Initialize out of bounds
 	if out_of_bounds != null:
 		out_of_bounds.connect("body_entered", self, "handle_out_of_bounds")
-	# Events.connect("mini_landed", self, "create_land_dust")
 
 	var current_room_respawn_points = respawn_points.get_children()
 

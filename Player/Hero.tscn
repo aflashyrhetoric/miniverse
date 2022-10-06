@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=2]
+[gd_scene load_steps=61 format=2]
 
 [ext_resource path="res://Player/Mini.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/player/character/idle_4.png" type="Texture" id=2]
@@ -15,9 +15,11 @@
 [ext_resource path="res://assets/audio/sfx/spawn.wav" type="AudioStream" id=13]
 [ext_resource path="res://Player/EllieActionRange.gd" type="Script" id=14]
 
-[sub_resource type="CapsuleShape2D" id=21]
-radius = 6.0
-height = 2.0
+[sub_resource type="CircleShape2D" id=28]
+radius = 1.0
+
+[sub_resource type="CircleShape2D" id=60]
+radius = 80.0
 
 [sub_resource type="AtlasTexture" id=29]
 atlas = ExtResource( 11 )
@@ -398,20 +400,25 @@ scale_random = 1.0
 color = Color( 0.870588, 0.921569, 1, 1 )
 color_ramp = SubResource( 58 )
 
-[sub_resource type="CircleShape2D" id=28]
-radius = 1.0
-
-[sub_resource type="CircleShape2D" id=60]
-radius = 65.0
-
 [node name="Hero" type="KinematicBody2D"]
 collision_layer = 2
 collision_mask = 0
 script = ExtResource( 1 )
 
-[node name="CollisionShape" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -8 )
-shape = SubResource( 21 )
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
+position = Vector2( 4, -14 )
+polygon = PoolVector2Array( -1, 13, 0, 0, -7, 0, -10, 12 )
+
+[node name="LevelBoundaryTrigger" type="Area2D" parent="."]
+position = Vector2( -4, -3 )
+collision_layer = 1024
+collision_mask = 0
+input_pickable = false
+priority = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelBoundaryTrigger"]
+scale = Vector2( 2, 2 )
+shape = SubResource( 28 )
 
 [node name="HazardCollisionShape" type="Area2D" parent="."]
 collision_layer = 0
@@ -420,6 +427,15 @@ collision_mask = 256
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HazardCollisionShape"]
 position = Vector2( 4, -14 )
 polygon = PoolVector2Array( -1, 13, 0, 0, -7, 0, -10, 12 )
+
+[node name="EllieActionRange" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 2048
+script = ExtResource( 14 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EllieActionRange"]
+shape = SubResource( 60 )
 
 [node name="ShootAnimation" type="Timer" parent="."]
 process_mode = 0
@@ -430,6 +446,7 @@ one_shot = true
 position = Vector2( 0, -8 )
 frames = SubResource( 53 )
 animation = "idle"
+frame = 3
 playing = true
 
 [node name="FlowerGun" parent="AnimatedSprite" instance=ExtResource( 4 )]
@@ -531,38 +548,17 @@ range_layer_min = -1
 shadow_enabled = true
 shadow_gradient_length = 3.0
 
-[node name="LevelBoundaryTrigger" type="Area2D" parent="."]
-position = Vector2( -4, -3 )
-collision_layer = 1024
-collision_mask = 0
-input_pickable = false
-priority = 1.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelBoundaryTrigger"]
-scale = Vector2( 2, 2 )
-shape = SubResource( 28 )
-
 [node name="FeetPosition" type="Position2D" parent="."]
 
 [node name="CoyoteTimer" type="Timer" parent="."]
 process_mode = 0
-wait_time = 0.1
+wait_time = 0.05
 one_shot = true
 
 [node name="ScaleTween" type="Tween" parent="."]
 
 [node name="SoundDeath" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 12 )
-volume_db = -12.0
 
 [node name="SoundSpawn" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 13 )
-volume_db = -12.0
-
-[node name="EllieActionRange" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 2048
-script = ExtResource( 14 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EllieActionRange"]
-shape = SubResource( 60 )

@@ -5,28 +5,25 @@ signal mini_exited_bubble
 
 const ORB_FLIGHT_SPEED = 500
 
-onready var orb = $Orb
+onready var orb = $OrbSprite
 onready var orb_boundary_sprite = $OrbBoundary
 onready var _original_orb_position: Vector2 = orb.global_position
 onready var bubble_shape = $BubbleShape
-onready var orb_hit = $OrbHit
+
 onready var bubble_entry_sound = $BubbleEntry
 onready var bubble_exit_sound = $BubbleExit
+onready var bubble_activated_sound = $BubbleActivated
+
+onready var label = $Label
 
 onready var mini_placement = $MiniPlacement
 
 export(bool) var _require_activation = false
+var _should_disable = false
+var _active = null
 
 var _label
-var _should_reset_position = false
-var _orb_boundary: Node = null
-var _direction: Vector2 = Vector2.ZERO
-var _velocity: Vector2 = Vector2.ZERO
-
-var _mini_ref = null
-
-var _should_disable = false
-var _disabled = false
+var _should_reset_orb_position = false
 
 
 func _ready() -> void:
@@ -35,85 +32,82 @@ func _ready() -> void:
 	bubble_shape.connect("body_entered", self, "_mini_entered")
 	bubble_shape.connect("body_exited", self, "_mini_exited")
 
-	# Set up signals for the orb so we can detect the orb flying to mini
-	orb.connect("body_entered", self, "_orb_hit_mini")
+	Events.connect("mini_died", self, "handle_mini_death")
+	Events.connect("mini_landed", self, "handle_mini_landed")
 
 	# Get child nodes that we need
-	_orb_boundary = get_node("OrbBoundary")
-	_label = orb.get_node("Label")
 
 	if _require_activation:
 		orb_boundary_sprite.visible = false
+		_should_disable = true
 
 
 func _process(_delta: float) -> void:
 	# Disable the orb if we've hit mini once
-	if _should_disable and not _disabled:
+	if _should_disable and _active:
 		disable()
-
-	if not _should_disable and _disabled:
+	elif not _should_disable and not _active:
 		enable()
 
-	if _should_reset_position:
-		orb.global_position = _original_orb_position
-		_should_reset_position = false
-
-	if not _should_reset_position and _mini_ref != null:
-		_direction = orb.global_position.direction_to(_mini_ref.global_position)
-		_velocity = (_direction * ORB_FLIGHT_SPEED)
+	label.text = str(_active)
 
 
-func _physics_process(delta: float) -> void:
-	orb.global_position += _velocity * delta
+func is_active() -> bool:
+	if _require_activation:
+		return _active
+
+	return true
+
+
+func handle_mini_death(_body):
+	_should_disable = true
+
+
+func handle_mini_landed(_body):
+	# print(_body)
+	pass
 
 
 func _mini_entered(_mini):
 	# Get a pointer to mini
-	_mini_ref = _mini
-	_mini_ref.enter_bubble(mini_placement.global_position)
-	_orb_boundary.modulate.a = 0.2
+	if not is_active():
+		return
+
+	_mini.enter_bubble(mini_placement.global_position)
+	orb.visible = false
+	orb_boundary_sprite.modulate.a = 0.2
 	bubble_entry_sound.play()
 	Events.emit_signal("mini_entered_bubble")
 
 
 func _mini_exited(_mini):
-	# Update the orchestration variables
-	bubble_exit_sound.play()
-	_should_reset_position = true
-	_mini_ref.exit_bubble()
-	_mini_ref = null
-	_direction = Vector2.ZERO
-	_velocity = Vector2.ZERO
+	_mini.exit_bubble()
+	if is_active():
+		# Update the orchestration variables
+		bubble_exit_sound.play()
+		_should_reset_orb_position = true
 
-	# Make the circle visible again
-	_orb_boundary.modulate.a = 0.5
+		# Make the circle visible again
+		orb.visible = true
+		orb_boundary_sprite.modulate.a = 0.5
 
-	# Restore the center orb's visibility and function
-	_should_disable = false
-	Events.emit_signal("mini_exited_bubble")
-
-
-func _orb_hit_mini(_mini):
-	orb_hit.play()
-	_should_disable = true
+		# Restore the center orb's visibility and function
+		_should_disable = false
+		Events.emit_signal("mini_exited_bubble")
+	else:
+		disable()
 
 
 func disable():
-	print("disable")
-	_disabled = true
-	_direction = Vector2.ZERO
-	_velocity = Vector2.ZERO
-	orb.monitoring = false
+	_active = false
 	if _require_activation:
 		orb_boundary_sprite.visible = false
-		orb.visible = true
 	else:
 		orb_boundary_sprite.visible = true
-		orb.visible = false
 
 
 func enable():
-	_disabled = false
+	bubble_activated_sound.play()
+	_active = true
 	orb.visible = true
-	orb.monitoring = true
 	orb_boundary_sprite.visible = true

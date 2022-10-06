@@ -61,19 +61,18 @@ position = Vector2( 640, -176 )
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 57, 136 )
 
-[node name="Song" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 17 )
-volume_db = -12.0
-autoplay = true
-bus = "Music"
-script = ExtResource( 10 )
-
 [node name="Camera" type="Camera2D" parent="."]
 current = true
 
 [node name="CamTween" type="Tween" parent="."]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+
+[node name="Song" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 17 )
+volume_db = -12.0
+bus = "Music"
+script = ExtResource( 10 )
 
 [node name="Rain" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )

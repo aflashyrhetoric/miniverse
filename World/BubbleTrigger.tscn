@@ -1,8 +1,11 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://assets/art/misc/save_point_anim_strip_9.png" type="Texture" id=1]
 [ext_resource path="res://assets/art/misc/crosshair.png" type="Texture" id=2]
 [ext_resource path="res://World/BubbleTrigger.gd" type="Script" id=3]
+[ext_resource path="res://assets/audio/sfx/ellie_entered_action_range.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/audio/sfx/ellie_exited_action_range.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/audio/sfx/bubble_trigger_hit.wav" type="AudioStream" id=6]
 
 [sub_resource type="AtlasTexture" id=84]
 atlas = ExtResource( 1 )
@@ -51,14 +54,21 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=94]
 extents = Vector2( 6, 10 )
 
+[sub_resource type="CircleShape2D" id=95]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id=96]
+radius = 90.0
+
 [node name="BubbleTrigger" type="Node2D"]
-position = Vector2( 168, 82 )
 rotation = 3.14159
 script = ExtResource( 3 )
+DETECTION_RANGE = 180
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, 6 )
 frames = SubResource( 93 )
-frame = 1
+frame = 4
 playing = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
@@ -70,6 +80,42 @@ shape = SubResource( 94 )
 
 [node name="Crosshair" type="Sprite" parent="."]
 modulate = Color( 1, 1, 1, 0.113725 )
-position = Vector2( 3.05176e-05, -6 )
+position = Vector2( 0.199972, -2.28882e-05 )
 scale = Vector2( 0.4, 0.4 )
 texture = ExtResource( 2 )
+
+[node name="OrbLocation" type="Position2D" parent="."]
+position = Vector2( 0, -1.14441e-05 )
+
+[node name="ShardHitRadius" type="Area2D" parent="."]
+position = Vector2( 0, -1.14441e-05 )
+collision_layer = 0
+collision_mask = 4096
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShardHitRadius"]
+shape = SubResource( 95 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="EllieExited" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+
+[node name="EllieEntered" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -6.0
+
+[node name="BubbleTriggerHit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+
+[node name="EllieDetector" type="Area2D" parent="."]
+position = Vector2( 0, -1.14441e-05 )
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EllieDetector"]
+shape = SubResource( 96 )
+
+[node name="Label" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
