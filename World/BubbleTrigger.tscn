@@ -68,7 +68,6 @@ DETECTION_RANGE = 180
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, 6 )
 frames = SubResource( 93 )
-frame = 4
 playing = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
