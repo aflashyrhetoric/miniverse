@@ -27,8 +27,8 @@ func _ready() -> void:
 
 onready var id = get_instance_id()
 
-func _process(_delta: float) -> void:
-	$Label.text = str(id)
+# func _process(_delta: float) -> void:
+	# $Label.text = str(id)
 
 
 func enter_interaction_range(_action_point) -> void:

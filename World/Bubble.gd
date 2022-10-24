@@ -49,7 +49,7 @@ func _process(_delta: float) -> void:
 	elif not _should_disable and not _active:
 		enable()
 
-	label.text = str(_active)
+	# label.text = str(_active)
 
 
 func is_active() -> bool:

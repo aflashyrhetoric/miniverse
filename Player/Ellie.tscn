@@ -1,9 +1,26 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Player/ellie_sprite.png" type="Texture" id=1]
+[ext_resource path="res://assets/art/player/ellie_idle_4.png" type="Texture" id=1]
 [ext_resource path="res://Player/Ellie.gd" type="Script" id=2]
 [ext_resource path="res://assets/audio/sfx/bubble_blurp.wav" type="AudioStream" id=3]
 [ext_resource path="res://assets/audio/sfx/ellie_fire_action_shard.wav" type="AudioStream" id=4]
+
+[sub_resource type="Animation" id=2]
+resource_name = "idle"
+loop = true
+step = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.0
@@ -15,9 +32,14 @@ collision_mask = 0
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -2.84217e-14 )
+scale = Vector2( 0.02, 0.02 )
 texture = ExtResource( 1 )
+hframes = 4
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/idle = SubResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )

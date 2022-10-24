@@ -13,6 +13,7 @@ onready var sprite = $Sprite
 onready var shard_shooter = $ShardShooter
 onready var shard_spawn_pt = $ShardSpawnPoint
 onready var ellie_fire_action_shard = $EllieFireActionShard
+onready var animation_player = $AnimationPlayer
 
 var _direction = Vector2.ZERO
 
@@ -23,6 +24,8 @@ var _nearest_activation_point_is_activated = false
 func _ready() -> void:
 	Events.connect("ellie_exited_action_range", self, "reset_action_range_vars")
 	Events.connect("mini_died", self, "handle_mini_death")
+	animation_player.play("idle")
+
 
 
 func _process(_body) -> void:
