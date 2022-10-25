@@ -18,8 +18,11 @@ const SPEED_DECAY_GROUND = 0.66  # deducted per frame
 const AIR_STOMP_VELOCITY = Vector2(0, 800)
 const TURN_SPEED_MULTIPLER = 3.95
 
-const BUBBLE_DASH_VELOCITY = 200.0
-const BUBBLE_DASH_FRAME_DURATION = 12
+const BUBBLE_DASH_VELOCITY = 300.0
+const BUBBLE_DASH_FRAME_DURATION = 8
+
+const DASH_VELOCITY = 200.0
+const DASH_FRAME_DURATION = 8
 
 const WALL_HOP_COUNTER_VELOCITY = Vector2(180, -160)
 const WALL_SLIDE_FALL_SPEED = 50
@@ -71,6 +74,12 @@ var _was_on_floor: bool
 # Instance Variables
 var _is_dying = false
 var _is_inside_bubble = false
+
+var _has_dash = false
+var _is_dashing = false
+var _just_dashed = false
+var _frames_since_started_dashing := 0
+
 var _is_bubble_dashing = false
 var _just_bubble_dashed = false
 var _frames_since_started_bubble_dashing := 0
@@ -209,16 +218,24 @@ func turn_sprites(direction, sprites_to_turn):
 				_sprite.scale.x = -1
 
 
+func is_dashing() -> bool:
+	return _is_bubble_dashing or _is_dashing
+
+
 # Check if a jump is allowed on the current frame.
 # ! DOES NOT INCLUDE bubble_dash permissions!
 func allowed_to_jump() -> bool:
 	return (
-		(is_on_floor() and not _is_bubble_dashing)
+		(is_on_floor() and not is_dashing())
 		or (not is_on_floor() and not coyote_timer.is_stopped())
 		or _has_extra_jump
 		or _has_bubble_dash_jump
 		or wall_grab_forward_detector.is_colliding()
 	)
+
+
+func allowed_to_dash() -> bool:
+	return _has_dash and (not is_dashing())
 
 
 # Check if a jump is allowed on the current frame.
@@ -247,28 +264,32 @@ func get_direction_x():
 func get_direction_y() -> float:
 	return Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
 
-
+# Returns a direction
 func get_direction() -> Vector2:
+	var dash_is_permitted = allowed_to_dash()
+	var just_entered_dash_input = Input.is_action_just_pressed("dash")
+
 	var jump_is_permitted = allowed_to_jump()
-	var just_entered_jump_input = Input.is_action_just_pressed("jump")
+	var just_entered_jump_input =  Input.is_action_just_pressed("jump")
+	var should_jump_this_frame = false if just_entered_dash_input else Input.is_action_just_pressed("jump")
 
 	# DO JUMP RELATED JUICE
-	if jump_is_permitted and just_entered_jump_input:
+	if jump_is_permitted and should_jump_this_frame:
 		sound_jump.play()
 		_has_jumped = true
 
 	var direction_y = 0
-	if jump_is_permitted and just_entered_jump_input:
+	if jump_is_permitted and should_jump_this_frame:
 		direction_y = -1
 
-	if not just_entered_jump_input and not is_on_floor():
+	if not should_jump_this_frame and not is_on_floor():
 		direction_y = 1
 
 	if _is_bubble_dashing:
 		direction_y = _velocity.y
 
 	var direction = Vector2(get_direction_x(), direction_y)
-	if just_entered_jump_input:
+	if should_jump_this_frame:
 		if _has_extra_jump:
 			_has_extra_jump = false
 
@@ -297,6 +318,11 @@ func opposite_directions(a, b):
 		return true
 	return false
 
+
+func end_dash():
+	_is_dashing = false
+	_just_dashed = true
+	_frames_since_started_dashing = 0
 
 func end_bubble_dash():
 	enable_gravity()
@@ -387,6 +413,32 @@ func calculate_move_velocity(
 
 		# Only grant bubble dash jump if they reached the full extent of the dash
 		grant_bubble_dash_jump()
+		
+	if _is_dashing:
+		_frames_since_started_dashing += 1
+
+		if is_on_floor() or is_on_wall():
+			end_dash()
+
+		if _frames_since_started_bubble_dashing <= DASH_FRAME_DURATION:
+			return current_linear_velocity
+
+		# Bubble dash is over
+		end_dash()
+
+	if allowed_to_dash() and Input.is_action_just_pressed("dash"):
+		_is_dashing = true
+		var planned_direction := Vector2(stepify(x_direction, 0.5), stepify(y_direction, 0.5))
+		# Dash straight forward if there's no given direction
+		var direction_to_dash := (
+			planned_direction
+			if planned_direction != Vector2.ZERO
+			else Vector2(x_direction_int, 0)
+		)
+
+		var new_velocity = direction_to_dash.normalized() * BUBBLE_DASH_VELOCITY
+		
+		return new_velocity
 
 	if _is_inside_bubble:
 		var just_jumped = Input.is_action_just_pressed("jump")
