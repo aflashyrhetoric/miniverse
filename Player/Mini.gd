@@ -18,7 +18,7 @@ const SPEED_DECAY_GROUND = 0.66  # deducted per frame
 const AIR_STOMP_VELOCITY = Vector2(0, 800)
 const TURN_SPEED_MULTIPLER = 3.95
 
-const BUBBLE_DASH_VELOCITY = 300.0
+const BUBBLE_DASH_VELOCITY = 240.0
 const BUBBLE_DASH_FRAME_DURATION = 8
 
 const DASH_VELOCITY = 200.0
@@ -77,7 +77,7 @@ var _is_inside_bubble = false
 
 var _has_dash = true
 var _is_dashing = false
-var _just_dashed = false
+var _should_refresh_dash_on_land = false
 var _frames_since_started_dashing := 0
 
 var _is_bubble_dashing = false
@@ -148,10 +148,9 @@ func _physics_process(_delta):
 		if _is_air_stomping:
 			_is_air_stomping = false
 
-		if _just_dashed:
-			_has_dash = true	
-			_is_dashing = false	
-			_just_dashed = false	
+		if _should_refresh_dash_on_land:
+			refresh_dash()
+			end_dash()
 
 	var direction: Vector2 = get_direction()
 	var dampen_second_jump_from_interrupted_jump: bool
@@ -230,6 +229,9 @@ func is_dashing() -> bool:
 # Check if a jump is allowed on the current frame.
 # ! DOES NOT INCLUDE bubble_dash permissions!
 func allowed_to_jump() -> bool:
+	if is_dashing() and _frames_since_started_dashing <= DASH_FRAME_DURATION:
+		return false
+
 	return (
 		(is_on_floor() and not is_dashing())
 		or (not is_on_floor() and not coyote_timer.is_stopped())
@@ -329,9 +331,18 @@ func opposite_directions(a, b):
 	return false
 
 
+func refresh_dash():
+	print("dash reset")
+	_has_dash = true  # reset on landing
+	_should_refresh_dash_on_land = false
+
+
 func end_dash():
+	print("end dashing")
+	enable_gravity()
+	# _has_dash = true # reset on landing
 	_is_dashing = false
-	_just_dashed = true
+	# _should_refresh_dash_on_land = true
 	_frames_since_started_dashing = 0
 
 
@@ -344,11 +355,16 @@ func end_bubble_dash():
 	_bubble_origin = Vector2.ZERO
 
 
+# Dashes should end when we hit something, regardless of the type of dash
+func should_end_dash() -> bool:
+	return is_on_floor() or is_on_wall() or is_on_ceiling()
+
+
 # This function calculates a new velocity whenever you need it.
 # It allows you to interrupt jumps.
 func calculate_move_velocity(
 	current_linear_velocity: Vector2,
-	player_input_direction: Vector2,  # INPUT DIRECTION
+	player_input_direction: Vector2,
 	dampen_second_jump_from_interrupted_jump: bool
 ):
 	##########################
@@ -412,8 +428,7 @@ func calculate_move_velocity(
 	if _is_bubble_dashing:
 		_frames_since_started_bubble_dashing += 1
 
-		if is_on_floor() or is_on_wall():
-			print("hit a floor or wall")
+		if should_end_dash():
 			end_bubble_dash()
 
 		if _frames_since_started_bubble_dashing <= BUBBLE_DASH_FRAME_DURATION:
@@ -427,20 +442,26 @@ func calculate_move_velocity(
 
 	if _is_dashing:
 		_frames_since_started_dashing += 1
+		print(_velocity)
 
-		if is_on_floor() or is_on_wall():
+		if should_end_dash():
+			print("hit a floor or wall")
 			end_dash()
 
-		if _frames_since_started_bubble_dashing <= DASH_FRAME_DURATION:
+		if _frames_since_started_dashing <= DASH_FRAME_DURATION:
 			return current_linear_velocity
 
-		# Bubble dash is over
+		# Dash is over
 		end_dash()
 
+	################
+	# REGULAR DASH #
+	################
 	if allowed_to_dash() and Input.is_action_just_pressed("dash"):
+		disable_gravity()
 		_is_dashing = true
 		_has_dash = false
-		_just_dashed = true
+		_should_refresh_dash_on_land = true
 
 		var planned_direction := Vector2(stepify(x_direction, 0.5), stepify(y_direction, 0.5))
 		# Dash straight forward if there's no given direction
@@ -450,10 +471,13 @@ func calculate_move_velocity(
 			else Vector2(x_direction_int, 0)
 		)
 
-		var new_velocity = direction_to_dash.normalized() * BUBBLE_DASH_VELOCITY
+		var new_velocity = direction_to_dash.normalized() * DASH_VELOCITY
 		print(new_velocity)
 		return new_velocity
 
+	###############
+	# BUBBLE DASH #
+	###############
 	if _is_inside_bubble:
 		var just_jumped = Input.is_action_just_pressed("jump")
 		if just_jumped:
@@ -539,7 +563,7 @@ func calculate_move_velocity(
 	else:
 		var reduced_speed_x: float = (
 			current_linear_velocity.x
-			* (SPEED_DECAY_GROUND if is_on_floor() else SPEED_DECAY_AIR)
+			* (SPEED_DECAY_GROUND if is_on_floor() and not is_dashing() else SPEED_DECAY_AIR)
 		)
 		# We can't exceed x max speed while no inputs are pressed
 		if abs(reduced_speed_x) < 3:

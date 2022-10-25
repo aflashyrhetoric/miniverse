@@ -446,7 +446,6 @@ one_shot = true
 position = Vector2( 0, -8 )
 frames = SubResource( 53 )
 animation = "idle"
-frame = 3
 playing = true
 
 [node name="FlowerGun" parent="AnimatedSprite" instance=ExtResource( 4 )]
@@ -458,9 +457,9 @@ enabled = true
 cast_to = Vector2( 0, 6 )
 
 [node name="WallGrabForwardDetector" type="RayCast2D" parent="."]
-position = Vector2( 0, -6 )
+position = Vector2( 0, -2 )
 enabled = true
-cast_to = Vector2( 7, 0 )
+cast_to = Vector2( 6, 0 )
 
 [node name="WallGrabDetector" type="RayCast2D" parent="."]
 position = Vector2( 0, -6 )
