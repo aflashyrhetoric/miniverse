@@ -75,7 +75,7 @@ var _was_on_floor: bool
 var _is_dying = false
 var _is_inside_bubble = false
 
-var _has_dash = false
+var _has_dash = true
 var _is_dashing = false
 var _just_dashed = false
 var _frames_since_started_dashing := 0
@@ -147,6 +147,11 @@ func _physics_process(_delta):
 			_has_extra_jump = false
 		if _is_air_stomping:
 			_is_air_stomping = false
+
+		if _just_dashed:
+			_has_dash = true	
+			_is_dashing = false	
+			_just_dashed = false	
 
 	var direction: Vector2 = get_direction()
 	var dampen_second_jump_from_interrupted_jump: bool
@@ -235,7 +240,7 @@ func allowed_to_jump() -> bool:
 
 
 func allowed_to_dash() -> bool:
-	return _has_dash and (not is_dashing())
+	return _has_dash and (not is_dashing()) and not _is_inside_bubble
 
 
 # Check if a jump is allowed on the current frame.
@@ -264,14 +269,19 @@ func get_direction_x():
 func get_direction_y() -> float:
 	return Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
 
+
 # Returns a direction
 func get_direction() -> Vector2:
 	var dash_is_permitted = allowed_to_dash()
 	var just_entered_dash_input = Input.is_action_just_pressed("dash")
 
 	var jump_is_permitted = allowed_to_jump()
-	var just_entered_jump_input =  Input.is_action_just_pressed("jump")
-	var should_jump_this_frame = false if just_entered_dash_input else Input.is_action_just_pressed("jump")
+	var just_entered_jump_input = Input.is_action_just_pressed("jump")
+	var should_jump_this_frame = (
+		false
+		if just_entered_dash_input
+		else Input.is_action_just_pressed("jump")
+	)
 
 	# DO JUMP RELATED JUICE
 	if jump_is_permitted and should_jump_this_frame:
@@ -323,6 +333,7 @@ func end_dash():
 	_is_dashing = false
 	_just_dashed = true
 	_frames_since_started_dashing = 0
+
 
 func end_bubble_dash():
 	enable_gravity()
@@ -413,7 +424,7 @@ func calculate_move_velocity(
 
 		# Only grant bubble dash jump if they reached the full extent of the dash
 		grant_bubble_dash_jump()
-		
+
 	if _is_dashing:
 		_frames_since_started_dashing += 1
 
@@ -428,6 +439,9 @@ func calculate_move_velocity(
 
 	if allowed_to_dash() and Input.is_action_just_pressed("dash"):
 		_is_dashing = true
+		_has_dash = false
+		_just_dashed = true
+
 		var planned_direction := Vector2(stepify(x_direction, 0.5), stepify(y_direction, 0.5))
 		# Dash straight forward if there's no given direction
 		var direction_to_dash := (
@@ -437,7 +451,7 @@ func calculate_move_velocity(
 		)
 
 		var new_velocity = direction_to_dash.normalized() * BUBBLE_DASH_VELOCITY
-		
+		print(new_velocity)
 		return new_velocity
 
 	if _is_inside_bubble:
