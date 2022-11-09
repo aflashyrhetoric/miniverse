@@ -43,3 +43,7 @@ one_shot = true
 anims/shoot = SubResource( 1 )
 
 [node name="BulletSpawnPoint" type="Position2D" parent="."]
+
+[node name="TimescaleRestoreTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
