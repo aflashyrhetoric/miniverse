@@ -446,6 +446,7 @@ one_shot = true
 position = Vector2( 0, -8 )
 frames = SubResource( 53 )
 animation = "idle"
+frame = 1
 playing = true
 
 [node name="FlowerGun" parent="AnimatedSprite" instance=ExtResource( 4 )]
@@ -561,3 +562,7 @@ stream = ExtResource( 12 )
 
 [node name="SoundSpawn" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 13 )
+
+[node name="FrictionTimer" type="Timer" parent="."]
+wait_time = 1.5
+autostart = true

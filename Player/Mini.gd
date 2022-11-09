@@ -10,8 +10,8 @@ const MAX_SPEED = Vector2(120, 600)
 const JUMP_SPEED = 200.0
 # const FALL_SPEED = 200.0
 
-const SPEED_ACCEL_AIR = 20.0  # added per frame
-const SPEED_ACCEL_GROUND = 5.0  # added per frame
+var SPEED_ACCEL_AIR: float = 20.0  # added per frame
+var SPEED_ACCEL_GROUND: float = 5.0  # added per frame
 const SPEED_DECAY_AIR = 0.8  # deducted per frame
 const SPEED_DECAY_GROUND = 0.66  # deducted per frame
 
@@ -41,6 +41,9 @@ onready var wall_grab_forward_detector = $WallGrabForwardDetector  # Must be a c
 onready var animation_player = $AnimationPlayer
 onready var shoot_timer = $ShootAnimation
 onready var sprite = $AnimatedSprite
+
+# FRICTION TIMER
+onready var friction_timer = $FrictionTimer
 
 onready var level_boundary_trigger = $LevelBoundaryTrigger
 
@@ -113,8 +116,17 @@ func _ready():
 	ellie_float_range.connect("body_entered", self, "_on_EllieFloatRange_body_entered")
 	ellie_float_range.connect("body_exited", self, "_on_EllieFloatRange_body_exited")
 
+	friction_timer.connect("timeout", self, "double_friction")
+
+func double_friction():
+	SPEED_ACCEL_GROUND = SPEED_ACCEL_GROUND / 2
+	SPEED_ACCEL_AIR = SPEED_ACCEL_AIR / 2
+
+	friction_timer.start()
+
 
 func _process(_delta: float) -> void:
+	print(friction_timer.time_left)
 	if not is_on_floor() and _was_on_floor:
 		coyote_timer.start()
 
