@@ -93,7 +93,7 @@ amount = 200
 process_material = SubResource( 5 )
 
 [node name="Bird" parent="." instance=ExtResource( 9 )]
-position = Vector2( 28, 68 )
+position = Vector2( 235, 52 )
 scale = Vector2( -1, 1 )
 
 [node name="Bird2" parent="." instance=ExtResource( 9 )]
