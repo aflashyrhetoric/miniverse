@@ -1,0 +1,115 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/art/parallax/stringstar_parallax/background_1.png" type="Texture" id=2]
+[ext_resource path="res://assets/art/parallax/stringstar_parallax/background_0.png" type="Texture" id=3]
+[ext_resource path="res://Levels/Sandbox.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/art/parallax/stringstar_parallax/background_2.png" type="Texture" id=6]
+[ext_resource path="res://World.gd" type="Script" id=7]
+[ext_resource path="res://assets/audio/ambience/rain.wav" type="AudioStream" id=8]
+[ext_resource path="res://Fauna/Bird.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Levels/Audio.gd" type="Script" id=10]
+[ext_resource path="res://World/Rain/RainParticleMaterial.tres" type="Material" id=11]
+[ext_resource path="res://assets/audio/music/The Verdant Grove LOOP.wav" type="AudioStream" id=17]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0, 0.568238 )
+colors = PoolColorArray( 1, 1, 1, 1, 0.532205, 0.73618, 1, 1 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[sub_resource type="ParticlesMaterial" id=5]
+lifetime_randomness = 1.0
+trail_divisor = 15
+trail_color_modifier = SubResource( 2 )
+emission_shape = 2
+emission_box_extents = Vector3( 320, 90, 1 )
+flag_disable_z = true
+spread = 23.0
+flatness = 1.0
+gravity = Vector3( -595, 680, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+
+[sub_resource type="Animation" id=4]
+resource_name = "muffle_audio"
+
+[node name="World" type="Node2D"]
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 217.0 ]
+}
+
+[node name="First" parent="." instance=ExtResource( 4 )]
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 57, 136 )
+
+[node name="Camera" type="Camera2D" parent="."]
+current = true
+
+[node name="CamTween" type="Tween" parent="."]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+
+[node name="Song" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 17 )
+volume_db = -12.0
+bus = "Music"
+script = ExtResource( 10 )
+
+[node name="Rain" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+volume_db = -8.0
+autoplay = true
+
+[node name="RainParticles" type="Particles2D" parent="."]
+position = Vector2( 521, -86 )
+emitting = false
+amount = 400
+visibility_rect = Rect2( 0, 0, 0, 0 )
+process_material = ExtResource( 11 )
+
+[node name="RainParticles2" type="Particles2D" parent="."]
+position = Vector2( 521, -86 )
+emitting = false
+amount = 200
+process_material = SubResource( 5 )
+
+[node name="Bird" parent="." instance=ExtResource( 9 )]
+position = Vector2( 235, 52 )
+scale = Vector2( -1, 1 )
+
+[node name="Bird2" parent="." instance=ExtResource( 9 )]
+position = Vector2( 247, 52 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/muffle_audio = SubResource( 4 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+layer = -1
+
+[node name="Last + BG" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.2, 1 )
+motion_mirroring = Vector2( 288, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/Last + BG"]
+position = Vector2( 144, 90 )
+texture = ExtResource( 3 )
+
+[node name="Middle" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.4, 1 )
+motion_mirroring = Vector2( 288, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/Middle"]
+position = Vector2( 144, 90 )
+texture = ExtResource( 2 )
+
+[node name="Foremost" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.8, 1 )
+motion_mirroring = Vector2( 288, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/Foremost"]
+position = Vector2( 144, 90 )
+texture = ExtResource( 6 )
