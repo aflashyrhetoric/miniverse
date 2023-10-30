@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/Snow.wav-eca5c6d6f9e7105e66ecf3e3015491f0.sample"
+type="AudioStreamWAV"
+uid="uid://bo4jhjuqjy8c7"
+path="res://.godot/imported/Snow.wav-eca5c6d6f9e7105e66ecf3e3015491f0.sample"
 
 [deps]
 
 source_file="res://assets/audio/sfx/mayragandra.itch.io/Snow.wav"
-dest_files=[ "res://.import/Snow.wav-eca5c6d6f9e7105e66ecf3e3015491f0.sample" ]
+dest_files=["res://.godot/imported/Snow.wav-eca5c6d6f9e7105e66ecf3e3015491f0.sample"]
 
 [params]
 

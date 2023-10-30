@@ -28,44 +28,44 @@ const WALL_GRAB_CLIMB_VELOCITY = Vector2(0, -80)
 const WALL_GRAB_FALL_VELOCITY = Vector2(0, 100)
 
 ## EXPORTED VARIABLES
-export(float) var bubble_dash_particles_speed = BUBBLE_DASH_VELOCITY
+@export var bubble_dash_particles_speed: float = BUBBLE_DASH_VELOCITY
 #####################
 
-onready var hazard_collision_shape = $HazardCollisionShape
-onready var platform_detector = $PlatformDetector
-onready var wall_grab_min_height_detector = $WallGrabDetector  # Must be a certain height above the ground to wall grab
-onready var wall_grab_forward_detector = $WallGrabForwardDetector  # Must be a certain distance from the wall to grab
-onready var animation_player = $AnimationPlayer
-onready var shoot_timer = $ShootAnimation
-onready var sprite = $AnimatedSprite
+@onready var hazard_collision_shape = $HazardCollisionShape
+@onready var platform_detector = $PlatformDetector
+@onready var wall_grab_min_height_detector = $WallGrabDetector  # Must be a certain height above the ground to wall grab
+@onready var wall_grab_forward_detector = $WallGrabForwardDetector  # Must be a certain distance from the wall to grab
+@onready var animation_player = $AnimationPlayer
+@onready var shoot_timer = $ShootAnimation
+@onready var sprite = $AnimatedSprite2D
 
-onready var level_boundary_trigger = $LevelBoundaryTrigger
+@onready var level_boundary_trigger = $LevelBoundaryTrigger
 
-onready var label = $Label
+@onready var label = $Label
 
-onready var gun = sprite.get_node(@"FlowerGun")
+@onready var gun = sprite.get_node("FlowerGun")
 
-onready var ellie_float_range = $EllieFloatRange
-onready var ellie_action_range = $EllieActionRange
+@onready var ellie_float_range = $EllieFloatRange
+@onready var ellie_action_range = $EllieActionRange
 
 # JUICE - AUDIO
-onready var sound_jump = $Jump
+@onready var sound_jump = $Jump
 # onready var sound_land = $Land
-onready var footstep = $Footstep
-onready var footstep_timer = $FootstepTimer
-onready var sound_spawn = $SoundSpawn
+@onready var footstep = $Footstep
+@onready var footstep_timer = $FootstepTimer
+@onready var sound_spawn = $SoundSpawn
 
 # JUICE - DUST
-onready var feet_position = $FeetPosition
-onready var dust = $Dust
+@onready var feet_position = $FeetPosition
+@onready var dust = $Dust
 
 # JUICE - BUBBLES
-onready var bubble_dash_particles = $BubbleDashParticles
+@onready var bubble_dash_particles = $BubbleDashParticles
 
 # JUICE
-onready var juice_animation_player = $JuiceAnimationPlayer
+@onready var juice_animation_player = $JuiceAnimationPlayer
 
-onready var coyote_timer = $CoyoteTimer
+@onready var coyote_timer = $CoyoteTimer
 var _was_on_floor: bool
 
 # Instance Variables
@@ -90,19 +90,19 @@ var _pre_pause_velocity: Vector2 = Vector2.ZERO
 
 
 func _ready():
-	hazard_collision_shape.connect("body_entered", self, "begin_dying")
-	Events.connect("mini_entered_bubble", self, "grant_extra_jump")
-	Events.connect("mini_should_die", self, "begin_dying")
-	Events.connect("mini_died", self, "handle_death")
+	hazard_collision_shape.connect("body_entered", Callable(self, "begin_dying"))
+	Events.connect("mini_entered_bubble", Callable(self, "grant_extra_jump"))
+	Events.connect("mini_should_die", Callable(self, "begin_dying"))
+	Events.connect("mini_died", Callable(self, "handle_death"))
 
 	# Ellie-events
-	Events.connect("ellie_entered_action_range", self, "enable_ellie_action_range")
-	Events.connect("ellie_exited_action_range", self, "disable_ellie_action_range")
+	Events.connect("ellie_entered_action_range", Callable(self, "enable_ellie_action_range"))
+	Events.connect("ellie_exited_action_range", Callable(self, "disable_ellie_action_range"))
 
 	dust.lifetime = WorldVars.DUST_LIFETIME
 
-	ellie_float_range.connect("body_entered", self, "_on_EllieFloatRange_body_entered")
-	ellie_float_range.connect("body_exited", self, "_on_EllieFloatRange_body_exited")
+	ellie_float_range.connect("body_entered", Callable(self, "_on_EllieFloatRange_body_entered"))
+	ellie_float_range.connect("body_exited", Callable(self, "_on_EllieFloatRange_body_exited"))
 
 
 func _process(_delta: float) -> void:
@@ -394,7 +394,7 @@ func calculate_move_velocity(
 			_is_bubble_dashing = true
 			disable_gravity()
 
-			var planned_direction := Vector2(stepify(x_direction, 0.5), stepify(y_direction, 0.5))
+			var planned_direction := Vector2(snapped(x_direction, 0.5), snapped(y_direction, 0.5))
 			# Dash straight forward if there's no given direction
 			var direction_to_dash := (
 				planned_direction
@@ -416,8 +416,8 @@ func calculate_move_velocity(
 				# Configure the "material" resource's gravity to get it to move
 				bubble_dash_particles.process_material.gravity = (
 					Vector3(
-						stepify(direction_from_mini_to_bubble_she_left.x, 1.0),
-						stepify(direction_from_mini_to_bubble_she_left.y, 1.0),
+						snapped(direction_from_mini_to_bubble_she_left.x, 1.0),
+						snapped(direction_from_mini_to_bubble_she_left.y, 1.0),
 						0
 					)
 					* bubble_dash_particles_speed
@@ -557,7 +557,7 @@ func begin_dying(_body):
 	sprite.playing = false
 	animation_player.play("dying")
 	print("before animation")
-	yield(animation_player, "animation_finished")
+	await animation_player.animation_finished
 	print("after animation")
 	send_death_signal(_body)
 

@@ -1,16 +1,16 @@
 [gd_scene load_steps=61 format=2]
 
 [ext_resource path="res://Player/Mini.gd" type="Script" id=1]
-[ext_resource path="res://assets/art/player/character/idle_4.png" type="Texture" id=2]
+[ext_resource path="res://assets/art/player/character/idle_4.png" type="Texture2D" id=2]
 [ext_resource path="res://assets/audio/sfx/jump.wav" type="AudioStream" id=3]
 [ext_resource path="res://Weapons/FlowerGun.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/audio/sfx/mayragandra.itch.io/Grass Running.wav" type="AudioStream" id=5]
 [ext_resource path="res://assets/audio/sfx/land.wav" type="AudioStream" id=6]
-[ext_resource path="res://assets/shaders/light_shader_sprite.png" type="Texture" id=7]
-[ext_resource path="res://assets/art/player/character/jump_down_3.png" type="Texture" id=8]
-[ext_resource path="res://assets/art/player/character/jump_up_3.png" type="Texture" id=9]
-[ext_resource path="res://assets/art/player/character/run_6.png" type="Texture" id=10]
-[ext_resource path="res://assets/art/player/character/death_8.png" type="Texture" id=11]
+[ext_resource path="res://assets/shaders/light_shader_sprite.png" type="Texture2D" id=7]
+[ext_resource path="res://assets/art/player/character/jump_down_3.png" type="Texture2D" id=8]
+[ext_resource path="res://assets/art/player/character/jump_up_3.png" type="Texture2D" id=9]
+[ext_resource path="res://assets/art/player/character/run_6.png" type="Texture2D" id=10]
+[ext_resource path="res://assets/art/player/character/death_8.png" type="Texture2D" id=11]
 [ext_resource path="res://assets/audio/sfx/death.wav" type="AudioStream" id=12]
 [ext_resource path="res://assets/audio/sfx/spawn.wav" type="AudioStream" id=13]
 [ext_resource path="res://Player/EllieActionRange.gd" type="Script" id=14]
@@ -149,38 +149,38 @@ animations = [ {
 resource_name = "dying"
 length = 3.0
 tracks/0/type = "value"
-tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.439857 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0.439857 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ "death" ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("AnimatedSprite:offset")
+tracks/1/path = NodePath("AnimatedSprite2D:offset")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.357423, 0.403038 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 0.357423, 0.403038 ),
+"transitions": PackedFloat32Array( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( -4, -10 ), Vector2( -7, -14 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("AnimatedSprite:playing")
+tracks/2/path = NodePath("AnimatedSprite2D:playing")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.457063 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0.457063 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ true ]
 }
@@ -191,8 +191,8 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0.00203945 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0.00203945 ),
+"transitions": PackedFloat32Array( 1 ),
 "values": [ {
 "args": [ 0.0 ],
 "method": "play"
@@ -205,14 +205,14 @@ length = 0.01
 loop = true
 step = 0.25
 tracks/0/type = "value"
-tracks/0/path = NodePath("AnimatedSprite:frame")
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ 1 ]
 }
@@ -223,14 +223,14 @@ length = 0.5
 loop = true
 step = 0.25
 tracks/0/type = "value"
-tracks/0/path = NodePath("AnimatedSprite:frame")
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ 26 ]
 }
@@ -245,14 +245,14 @@ length = 0.5
 loop = true
 step = 0.25
 tracks/0/type = "value"
-tracks/0/path = NodePath("AnimatedSprite:frame")
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ 25 ]
 }
@@ -262,14 +262,14 @@ length = 0.5
 loop = true
 step = 0.25
 tracks/0/type = "value"
-tracks/0/path = NodePath("AnimatedSprite:frame")
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.25, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 0.25, 0.5 ),
+"transitions": PackedFloat32Array( 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 5 ]
 }
@@ -279,14 +279,14 @@ length = 0.5
 loop = true
 step = 0.25
 tracks/0/type = "value"
-tracks/0/path = NodePath("AnimatedSprite:frame")
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ 26 ]
 }
@@ -297,14 +297,14 @@ length = 1.8
 loop = true
 step = 0.25
 tracks/0/type = "value"
-tracks/0/path = NodePath("AnimatedSprite:frame")
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75 ),
-"transitions": PoolRealArray( 2.46229, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75 ),
+"transitions": PackedFloat32Array( 2.46229, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
 }
@@ -314,14 +314,14 @@ length = 1.25
 loop = true
 step = 0.25
 tracks/0/type = "value"
-tracks/0/path = NodePath("AnimatedSprite:frame")
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1, 1.25 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 0.25, 0.5, 0.75, 1, 1.25 ),
+"transitions": PackedFloat32Array( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 5, 6, 7, 8, 9, 5 ]
 }
@@ -331,14 +331,14 @@ length = 1.25
 loop = true
 step = 0.25
 tracks/0/type = "value"
-tracks/0/path = NodePath("AnimatedSprite:frame")
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1, 1.25 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 0.25, 0.5, 0.75, 1, 1.25 ),
+"transitions": PackedFloat32Array( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 10, 11, 12, 13, 14, 5 ]
 }
@@ -361,7 +361,7 @@ _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 [sub_resource type="CurveTexture" id=55]
 curve = SubResource( 54 )
 
-[sub_resource type="ParticlesMaterial" id=25]
+[sub_resource type="ParticleProcessMaterial" id=25]
 lifetime_randomness = 1.0
 trail_size_modifier = SubResource( 55 )
 emission_shape = 1
@@ -375,13 +375,13 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 
 [sub_resource type="Gradient" id=57]
-offsets = PoolRealArray( 0, 0.769643 )
-colors = PoolColorArray( 0.657107, 0.748802, 0.888428, 1, 0.447059, 0.619608, 0.878431, 0.666667 )
+offsets = PackedFloat32Array( 0, 0.769643 )
+colors = PackedColorArray( 0.657107, 0.748802, 0.888428, 1, 0.447059, 0.619608, 0.878431, 0.666667 )
 
-[sub_resource type="GradientTexture" id=58]
+[sub_resource type="GradientTexture2D" id=58]
 gradient = SubResource( 57 )
 
-[sub_resource type="ParticlesMaterial" id=56]
+[sub_resource type="ParticleProcessMaterial" id=56]
 lifetime_randomness = 1.0
 trail_size_modifier = SubResource( 55 )
 emission_shape = 5
@@ -400,14 +400,14 @@ scale_random = 1.0
 color = Color( 0.870588, 0.921569, 1, 1 )
 color_ramp = SubResource( 58 )
 
-[node name="Hero" type="KinematicBody2D"]
+[node name="Hero" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 0
 script = ExtResource( 1 )
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
 position = Vector2( 4, -14 )
-polygon = PoolVector2Array( -1, 13, 0, 0, -7, 0, -10, 12 )
+polygon = PackedVector2Array( -1, 13, 0, 0, -7, 0, -10, 12 )
 
 [node name="LevelBoundaryTrigger" type="Area2D" parent="."]
 position = Vector2( -4, -3 )
@@ -426,7 +426,7 @@ collision_mask = 256
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HazardCollisionShape"]
 position = Vector2( 4, -14 )
-polygon = PoolVector2Array( -1, 13, 0, 0, -7, 0, -10, 12 )
+polygon = PackedVector2Array( -1, 13, 0, 0, -7, 0, -10, 12 )
 
 [node name="EllieActionRange" type="Area2D" parent="."]
 visible = false
@@ -442,30 +442,30 @@ process_mode = 0
 wait_time = 0.2
 one_shot = true
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2( 0, -8 )
 frames = SubResource( 53 )
 animation = "idle"
 frame = 3
 playing = true
 
-[node name="FlowerGun" parent="AnimatedSprite" instance=ExtResource( 4 )]
+[node name="FlowerGun" parent="AnimatedSprite2D" instance=ExtResource( 4 )]
 position = Vector2( 7, 2 )
 
 [node name="PlatformDetector" type="RayCast2D" parent="."]
 position = Vector2( 0, -6 )
 enabled = true
-cast_to = Vector2( 0, 6 )
+target_position = Vector2( 0, 6 )
 
 [node name="WallGrabForwardDetector" type="RayCast2D" parent="."]
 position = Vector2( 0, -6 )
 enabled = true
-cast_to = Vector2( 7, 0 )
+target_position = Vector2( 7, 0 )
 
 [node name="WallGrabDetector" type="RayCast2D" parent="."]
 position = Vector2( 0, -6 )
 enabled = true
-cast_to = Vector2( 0, 25 )
+target_position = Vector2( 0, 25 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 4.0
@@ -497,8 +497,8 @@ wait_time = 0.2
 one_shot = true
 
 [node name="Label" type="Label" parent="."]
-margin_right = 40.0
-margin_bottom = 14.0
+offset_right = 40.0
+offset_bottom = 14.0
 
 [node name="EllieFloatRange" type="Area2D" parent="."]
 position = Vector2( 0, 8 )
@@ -511,14 +511,14 @@ position = Vector2( 0, -28 )
 rotation = 1.5708
 shape = SubResource( 22 )
 
-[node name="PointBehindMini" type="Position2D" parent="EllieFloatRange"]
+[node name="PointBehindMini" type="Marker2D" parent="EllieFloatRange"]
 position = Vector2( -13, -29 )
 
 [node name="JuiceAnimationPlayer" type="AnimationPlayer" parent="."]
 anims/jump = SubResource( 23 )
 anims/land = SubResource( 24 )
 
-[node name="Dust" type="Particles2D" parent="."]
+[node name="Dust" type="GPUParticles2D" parent="."]
 position = Vector2( 0, -1 )
 amount = 20
 lifetime = 0.3
@@ -529,7 +529,7 @@ visibility_rect = Rect2( 0, 0, 0, 0 )
 local_coords = false
 process_material = SubResource( 25 )
 
-[node name="BubbleDashParticles" type="Particles2D" parent="."]
+[node name="BubbleDashParticles" type="GPUParticles2D" parent="."]
 position = Vector2( 0, -7 )
 emitting = false
 amount = 30
@@ -540,7 +540,7 @@ visibility_rect = Rect2( 0, 0, 0, 0 )
 local_coords = false
 process_material = SubResource( 56 )
 
-[node name="Light2D" type="Light2D" parent="."]
+[node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2( 0, -11 )
 texture = ExtResource( 7 )
 energy = 0.35
@@ -548,7 +548,7 @@ range_layer_min = -1
 shadow_enabled = true
 shadow_gradient_length = 3.0
 
-[node name="FeetPosition" type="Position2D" parent="."]
+[node name="FeetPosition" type="Marker2D" parent="."]
 
 [node name="CoyoteTimer" type="Timer" parent="."]
 process_mode = 0

@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/Sand.wav-be4e0be513d415dfc452bd3e16909b9d.sample"
+type="AudioStreamWAV"
+uid="uid://d04yon6nq5tky"
+path="res://.godot/imported/Sand.wav-be4e0be513d415dfc452bd3e16909b9d.sample"
 
 [deps]
 
 source_file="res://assets/audio/sfx/mayragandra.itch.io/Sand.wav"
-dest_files=[ "res://.import/Sand.wav-be4e0be513d415dfc452bd3e16909b9d.sample" ]
+dest_files=["res://.godot/imported/Sand.wav-be4e0be513d415dfc452bd3e16909b9d.sample"]
 
 [params]
 

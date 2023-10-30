@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/Concrete 1.wav-8908d141f23b33ce5c4a90b49138debd.sample"
+type="AudioStreamWAV"
+uid="uid://df4fjt4hsrtfn"
+path="res://.godot/imported/Concrete 1.wav-8908d141f23b33ce5c4a90b49138debd.sample"
 
 [deps]
 
 source_file="res://assets/audio/sfx/mayragandra.itch.io/Concrete 1.wav"
-dest_files=[ "res://.import/Concrete 1.wav-8908d141f23b33ce5c4a90b49138debd.sample" ]
+dest_files=["res://.godot/imported/Concrete 1.wav-8908d141f23b33ce5c4a90b49138debd.sample"]
 
 [params]
 

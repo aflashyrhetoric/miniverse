@@ -2,4 +2,4 @@
 
 [node name="Projectile" type="Node2D"]
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]

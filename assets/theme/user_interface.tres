@@ -1,8 +1,8 @@
 [gd_resource type="Theme" load_steps=8 format=2]
 
-[ext_resource path="res://assets/theme/fonts/kenney_mini_square.tres" type="DynamicFontData" id=1]
+[ext_resource path="res://assets/theme/fonts/kenney_mini_square.tres" type="FontFile" id=1]
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="FontFile" id=6]
 size = 30
 font_data = ExtResource( 1 )
 

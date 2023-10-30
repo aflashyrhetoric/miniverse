@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/ellie_fire_action_shard.wav-b90e369a59c1ddd61a42aa13c442f853.sample"
+type="AudioStreamWAV"
+uid="uid://ru2o3hy8iriu"
+path="res://.godot/imported/ellie_fire_action_shard.wav-b90e369a59c1ddd61a42aa13c442f853.sample"
 
 [deps]
 
 source_file="res://assets/audio/sfx/ellie_fire_action_shard.wav"
-dest_files=[ "res://.import/ellie_fire_action_shard.wav-b90e369a59c1ddd61a42aa13c442f853.sample" ]
+dest_files=["res://.godot/imported/ellie_fire_action_shard.wav-b90e369a59c1ddd61a42aa13c442f853.sample"]
 
 [params]
 

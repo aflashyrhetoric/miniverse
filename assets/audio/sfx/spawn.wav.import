@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/spawn.wav-e5079cd928b9333aebc617795342c8a4.sample"
+type="AudioStreamWAV"
+uid="uid://jijhbqg6fbr8"
+path="res://.godot/imported/spawn.wav-e5079cd928b9333aebc617795342c8a4.sample"
 
 [deps]
 
 source_file="res://assets/audio/sfx/spawn.wav"
-dest_files=[ "res://.import/spawn.wav-e5079cd928b9333aebc617795342c8a4.sample" ]
+dest_files=["res://.godot/imported/spawn.wav-e5079cd928b9333aebc617795342c8a4.sample"]
 
 [params]
 

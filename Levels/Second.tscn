@@ -1,41 +1,41 @@
 [gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Level.gd" type="Script" id=1]
-[ext_resource path="res://assets/art/hazards/spike.png" type="Texture" id=2]
+[ext_resource path="res://assets/art/hazards/spike.png" type="Texture2D" id=2]
 [ext_resource path="res://Levels/LightsTileset.tres" type="TileSet" id=3]
-[ext_resource path="res://assets/shaders/light_shader_sprite.png" type="Texture" id=4]
+[ext_resource path="res://assets/shaders/light_shader_sprite.png" type="Texture2D" id=4]
 [ext_resource path="res://World/Bubble.tscn" type="PackedScene" id=7]
-[ext_resource path="res://assets/art/tileset/tileset.png" type="Texture" id=19]
+[ext_resource path="res://assets/art/tileset/tileset.png" type="Texture2D" id=19]
 
 [sub_resource type="ConvexPolygonShape2D" id=72]
-points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+points = PackedVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=73]
-points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+points = PackedVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 
 [sub_resource type="OccluderPolygon2D" id=85]
-polygon = PoolVector2Array( 48, 16, 0, 16, 0, 0, 48, 0 )
+polygon = PackedVector2Array( 48, 16, 0, 16, 0, 0, 48, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=86]
-points = PoolVector2Array( 48, 16, 0, 16, 0, 0, 48, 0 )
+points = PackedVector2Array( 48, 16, 0, 16, 0, 0, 48, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=74]
-points = PoolVector2Array( 32, 16, 0, 16, 0, 0, 32, 0 )
+points = PackedVector2Array( 32, 16, 0, 16, 0, 0, 32, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=75]
-points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+points = PackedVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=76]
-points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+points = PackedVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=77]
-points = PoolVector2Array( 48, 16, 0, 16, 0, 0, 48, 0 )
+points = PackedVector2Array( 48, 16, 0, 16, 0, 0, 48, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=78]
-points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+points = PackedVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=79]
-points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+points = PackedVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 
 [sub_resource type="TileSet" id=62]
 0/name = "tileset.png 0"
@@ -440,7 +440,7 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 25/z_index = 0
 
 [sub_resource type="ConvexPolygonShape2D" id=83]
-points = PoolVector2Array( 0, 0, 0, 0, 8, 0, 8, 4, 0, 4, 0, 0, 0, 0 )
+points = PackedVector2Array( 0, 0, 0, 0, 8, 0, 8, 4, 0, 4, 0, 0, 0, 0 )
 
 [sub_resource type="TileSet" id=84]
 0/name = "spike.png 0"
@@ -466,13 +466,13 @@ points = PoolVector2Array( 0, 0, 0, 0, 8, 0, 8, 4, 0, 4, 0, 0, 0, 0 )
 0/z_index = 0
 
 [sub_resource type="RectangleShape2D" id=60]
-extents = Vector2( 159.875, 63 )
+size = Vector2( 159.875, 63 )
 
 [sub_resource type="RectangleShape2D" id=71]
-extents = Vector2( 0, 92 )
+size = Vector2( 0, 92 )
 
 [sub_resource type="RectangleShape2D" id=87]
-extents = Vector2( 1, 29 )
+size = Vector2( 1, 29 )
 
 [node name="Second" type="Node2D"]
 script = ExtResource( 1 )
@@ -480,7 +480,7 @@ __meta__ = {
 "_edit_horizontal_guides_": [ 217.0, 157.0 ]
 }
 
-[node name="CamAnchor" type="Position2D" parent="."]
+[node name="CamAnchor" type="Marker2D" parent="."]
 position = Vector2( 160, 90 )
 
 [node name="Level" type="TileMap" parent="."]
@@ -488,7 +488,7 @@ tile_set = SubResource( 62 )
 cell_size = Vector2( 8, 8 )
 collision_mask = 42
 format = 1
-tile_data = PoolIntArray( -65536, 17, 0, -65535, 17, 0, -65534, 17, 0, -65533, 17, 0, -65532, 17, 0, -65531, 17, 0, -65530, 17, 0, -65529, 17, 0, -65528, 17, 0, -65527, 17, 0, -65526, 17, 0, -65525, 17, 0, -65524, 17, 0, -65523, 17, 0, -65522, 17, 0, -65521, 17, 0, -65520, 17, 0, -65519, 17, 0, -65518, 17, 0, -65517, 17, 0, -65509, 17, 0, -65508, 17, 0, -65507, 17, 0, -65505, 17, 0, -65504, 17, 0, -65503, 17, 0, -65501, 17, 0, -65499, 1073741841, 0, -65498, 17, 0, 0, 17, 0, 2, 17, 0, 10, 17, 0, 11, 17, 0, 14, 17, 0, 15, 17, 0, 19, 17, 0, 38, 1073741841, 0, 65540, 1073741836, 0, 65542, 1610612743, 0, 65544, 17, 0, 65546, 17, 0, 65547, 17, 0, 65549, 17, 0, 65551, 17, 0, 65552, 17, 0, 65553, 17, 0, 65554, 17, 0, 65555, 17, 0, 65557, 4, 0, 65572, 1073741847, 0, 131074, 536870921, 0, 131087, 17, 0, 131088, 17, 0, 131090, 17, 0, 131091, 17, 0, 131110, 17, 0, 196621, 17, 0, 196623, 17, 0, 196624, 17, 0, 196625, 17, 0, 196626, 17, 0, 196627, 17, 0, 196629, 1610612750, 0, 196646, 17, 0, 262159, 17, 0, 262161, 17, 0, 262163, 17, 0, 262171, 1, 0, 262172, 536870913, 0, 262182, 17, 0, 327693, 17, 0, 327695, 17, 0, 327697, 17, 0, 327699, 17, 0, 327701, 4, 0, 327718, 17, 0, 393230, 17, 0, 393232, 17, 0, 393233, 17, 0, 393235, 17, 0, 393254, 17, 0, 458765, 17, 0, 458766, 17, 0, 458767, 17, 0, 458768, 17, 0, 458769, 17, 0, 458771, 17, 0, 458773, 1073741838, 0, 458774, 1073741838, 0, 458776, 17, 0, 458782, 536870916, 0, 458784, 536870915, 0, 458786, 536870913, 0, 458790, 17, 0, 524305, 17, 0, 524322, 536870923, 0, 524326, 17, 0, 589837, 536870927, 0, 589838, 536870927, 0, 589839, 536870927, 0, 589841, 17, 0, 589843, 17, 0, 589845, 17, 0, 589847, 17, 0, 589848, 17, 0, 589862, 17, 0, 655360, 3, 0, 655362, 3, 0, 655364, 4, 0, 655390, 1073741838, 0, 655392, 1073741838, 0, 655398, 17, 0, 720904, 17, 0, 720934, 17, 0, 786440, 17, 0, 786461, 17, 0, 786463, 17, 0, 786465, 17, 0, 786467, 17, 0, 786469, 17, 0, 786470, 17, 0, 851976, 17, 0, 917512, 17, 0, 917533, 536870922, 0, 917534, 15, 0, 917535, 10, 0, 917536, 9, 0, 917537, 15, 0, 917539, 536870922, 0, 917541, 536870921, 0, 917542, 10, 0, 983048, -536870888, 0, 1048584, 17, 0, 1114120, -1073741800, 0, 1179656, 17, 0, 1179658, 20, 0, 1179659, 4, 0, 1310711, 536870929, 0, 1310713, 536870929, 0, 1310715, 536870929, 0, 1245185, 536870929, 0, 1245187, 536870929, 0, 1245192, -1073741800, 0 )
+tile_data = PackedInt32Array( -65536, 17, 0, -65535, 17, 0, -65534, 17, 0, -65533, 17, 0, -65532, 17, 0, -65531, 17, 0, -65530, 17, 0, -65529, 17, 0, -65528, 17, 0, -65527, 17, 0, -65526, 17, 0, -65525, 17, 0, -65524, 17, 0, -65523, 17, 0, -65522, 17, 0, -65521, 17, 0, -65520, 17, 0, -65519, 17, 0, -65518, 17, 0, -65517, 17, 0, -65509, 17, 0, -65508, 17, 0, -65507, 17, 0, -65505, 17, 0, -65504, 17, 0, -65503, 17, 0, -65501, 17, 0, -65499, 1073741841, 0, -65498, 17, 0, 0, 17, 0, 2, 17, 0, 10, 17, 0, 11, 17, 0, 14, 17, 0, 15, 17, 0, 19, 17, 0, 38, 1073741841, 0, 65540, 1073741836, 0, 65542, 1610612743, 0, 65544, 17, 0, 65546, 17, 0, 65547, 17, 0, 65549, 17, 0, 65551, 17, 0, 65552, 17, 0, 65553, 17, 0, 65554, 17, 0, 65555, 17, 0, 65557, 4, 0, 65572, 1073741847, 0, 131074, 536870921, 0, 131087, 17, 0, 131088, 17, 0, 131090, 17, 0, 131091, 17, 0, 131110, 17, 0, 196621, 17, 0, 196623, 17, 0, 196624, 17, 0, 196625, 17, 0, 196626, 17, 0, 196627, 17, 0, 196629, 1610612750, 0, 196646, 17, 0, 262159, 17, 0, 262161, 17, 0, 262163, 17, 0, 262171, 1, 0, 262172, 536870913, 0, 262182, 17, 0, 327693, 17, 0, 327695, 17, 0, 327697, 17, 0, 327699, 17, 0, 327701, 4, 0, 327718, 17, 0, 393230, 17, 0, 393232, 17, 0, 393233, 17, 0, 393235, 17, 0, 393254, 17, 0, 458765, 17, 0, 458766, 17, 0, 458767, 17, 0, 458768, 17, 0, 458769, 17, 0, 458771, 17, 0, 458773, 1073741838, 0, 458774, 1073741838, 0, 458776, 17, 0, 458782, 536870916, 0, 458784, 536870915, 0, 458786, 536870913, 0, 458790, 17, 0, 524305, 17, 0, 524322, 536870923, 0, 524326, 17, 0, 589837, 536870927, 0, 589838, 536870927, 0, 589839, 536870927, 0, 589841, 17, 0, 589843, 17, 0, 589845, 17, 0, 589847, 17, 0, 589848, 17, 0, 589862, 17, 0, 655360, 3, 0, 655362, 3, 0, 655364, 4, 0, 655390, 1073741838, 0, 655392, 1073741838, 0, 655398, 17, 0, 720904, 17, 0, 720934, 17, 0, 786440, 17, 0, 786461, 17, 0, 786463, 17, 0, 786465, 17, 0, 786467, 17, 0, 786469, 17, 0, 786470, 17, 0, 851976, 17, 0, 917512, 17, 0, 917533, 536870922, 0, 917534, 15, 0, 917535, 10, 0, 917536, 9, 0, 917537, 15, 0, 917539, 536870922, 0, 917541, 536870921, 0, 917542, 10, 0, 983048, -536870888, 0, 1048584, 17, 0, 1114120, -1073741800, 0, 1179656, 17, 0, 1179658, 20, 0, 1179659, 4, 0, 1310711, 536870929, 0, 1310713, 536870929, 0, 1310715, 536870929, 0, 1245185, 536870929, 0, 1245187, 536870929, 0, 1245192, -1073741800, 0 )
 
 [node name="Hazards" type="TileMap" parent="."]
 tile_set = SubResource( 84 )
@@ -499,7 +499,7 @@ cell_clip_uv = true
 collision_layer = 256
 collision_mask = 0
 format = 1
-tile_data = PoolIntArray( 852016, 536870912, 0, 852018, 536870912, 0, 1376272, 0, 0, 1376274, 0, 0, 1441826, 1073741824, 0, 1441828, 1073741824, 0, 1441830, 1073741824, 0, 1441832, 1073741824, 0, 1441834, 1073741824, 0, 1441836, 1073741824, 0, 1441838, 1073741824, 0, 1441840, 1073741824, 0, 1441842, 1073741824, 0, 1572921, -2147483648, 0, 1703993, -2147483648, 0 )
+tile_data = PackedInt32Array( 852016, 536870912, 0, 852018, 536870912, 0, 1376272, 0, 0, 1376274, 0, 0, 1441826, 1073741824, 0, 1441828, 1073741824, 0, 1441830, 1073741824, 0, 1441832, 1073741824, 0, 1441834, 1073741824, 0, 1441836, 1073741824, 0, 1441838, 1073741824, 0, 1441840, 1073741824, 0, 1441842, 1073741824, 0, 1572921, -2147483648, 0, 1703993, -2147483648, 0 )
 
 [node name="Lights" type="TileMap" parent="."]
 z_index = 10
@@ -512,27 +512,27 @@ __meta__ = {
 "_editor_description_": "A tilemap that is exclusively for adding tilemaps that are lights. They will all come with a light shader."
 }
 
-[node name="Light2D" type="Light2D" parent="Lights"]
+[node name="PointLight2D" type="PointLight2D" parent="Lights"]
 position = Vector2( 25, 42 )
 texture = ExtResource( 4 )
 energy = 0.6
 range_layer_min = -1
 
-[node name="Light2D3" type="Light2D" parent="Lights"]
+[node name="Light2D3" type="PointLight2D" parent="Lights"]
 position = Vector2( 278, 31 )
 texture = ExtResource( 4 )
 texture_scale = 0.8
 energy = 0.5
 range_layer_min = -1
 
-[node name="Light2D4" type="Light2D" parent="Lights"]
+[node name="Light2D4" type="PointLight2D" parent="Lights"]
 position = Vector2( 194, 98 )
 texture = ExtResource( 4 )
 texture_scale = 0.8
 energy = 0.5
 range_layer_min = -1
 
-[node name="Light2D2" type="Light2D" parent="Lights"]
+[node name="Light2D2" type="PointLight2D" parent="Lights"]
 position = Vector2( 171, 96 )
 texture = ExtResource( 4 )
 energy = 0.5
@@ -578,8 +578,8 @@ shape = SubResource( 87 )
 
 [node name="RespawnPoints" type="Node2D" parent="."]
 
-[node name="RespawnPoint" type="Position2D" parent="RespawnPoints" groups=["respawn_points"]]
+[node name="RespawnPoint" type="Marker2D" parent="RespawnPoints" groups=["respawn_points"]]
 position = Vector2( 42, 70 )
 
-[node name="RespawnPoint2" type="Position2D" parent="RespawnPoints" groups=["respawn_points"]]
+[node name="RespawnPoint2" type="Marker2D" parent="RespawnPoints" groups=["respawn_points"]]
 position = Vector2( 267, 82 )

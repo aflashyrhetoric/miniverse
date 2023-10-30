@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/Fruit collect 1.wav-4d72238de6598412369ebae3524f4277.sample"
+type="AudioStreamWAV"
+uid="uid://cswqpkg82rr4d"
+path="res://.godot/imported/Fruit collect 1.wav-4d72238de6598412369ebae3524f4277.sample"
 
 [deps]
 
 source_file="res://assets/audio/sfx/jdwasabi.itch.io:8-bit-16-bit-sound-effects-pack/Fruit collect 1.wav"
-dest_files=[ "res://.import/Fruit collect 1.wav-4d72238de6598412369ebae3524f4277.sample" ]
+dest_files=["res://.godot/imported/Fruit collect 1.wav-4d72238de6598412369ebae3524f4277.sample"]
 
 [params]
 

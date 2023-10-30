@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/Jump 1.wav-f5ce6e622e262a3628e8eb65bac3496b.sample"
+type="AudioStreamWAV"
+uid="uid://c2wi6ca46si4y"
+path="res://.godot/imported/Jump 1.wav-f5ce6e622e262a3628e8eb65bac3496b.sample"
 
 [deps]
 
 source_file="res://assets/audio/sfx/jdwasabi.itch.io:8-bit-16-bit-sound-effects-pack/Jump 1.wav"
-dest_files=[ "res://.import/Jump 1.wav-f5ce6e622e262a3628e8eb65bac3496b.sample" ]
+dest_files=["res://.godot/imported/Jump 1.wav-f5ce6e622e262a3628e8eb65bac3496b.sample"]
 
 [params]
 

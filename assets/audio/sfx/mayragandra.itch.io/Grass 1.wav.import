@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/Grass 1.wav-be53347085e25236aa23b05bc0984339.sample"
+type="AudioStreamWAV"
+uid="uid://s3dau14ulpx4"
+path="res://.godot/imported/Grass 1.wav-be53347085e25236aa23b05bc0984339.sample"
 
 [deps]
 
 source_file="res://assets/audio/sfx/mayragandra.itch.io/Grass 1.wav"
-dest_files=[ "res://.import/Grass 1.wav-be53347085e25236aa23b05bc0984339.sample" ]
+dest_files=["res://.godot/imported/Grass 1.wav-be53347085e25236aa23b05bc0984339.sample"]
 
 [params]
 

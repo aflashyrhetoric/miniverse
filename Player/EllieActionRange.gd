@@ -5,8 +5,8 @@ extends Area2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	connect("body_entered", self, "enable_ellie_action_range")
-	connect("body_exited", self, "disable_ellie_action_range")
+	connect("body_entered", Callable(self, "enable_ellie_action_range"))
+	connect("body_exited", Callable(self, "disable_ellie_action_range"))
 
 
 func enable_ellie_action_range(_action_point):

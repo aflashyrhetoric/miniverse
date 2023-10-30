@@ -9,11 +9,11 @@ var is_mini = false
 
 const Shard = preload("res://World/Shard.tscn")
 
-onready var sprite = $Sprite
-onready var shard_shooter = $ShardShooter
-onready var shard_spawn_pt = $ShardSpawnPoint
-onready var ellie_fire_action_shard = $EllieFireActionShard
-onready var animation_player = $AnimationPlayer
+@onready var sprite = $Sprite2D
+@onready var shard_shooter = $ShardShooter
+@onready var shard_spawn_pt = $ShardSpawnPoint
+@onready var ellie_fire_action_shard = $EllieFireActionShard
+@onready var animation_player = $AnimationPlayer
 
 var _direction = Vector2.ZERO
 
@@ -22,8 +22,8 @@ var _nearest_activation_point_is_activated = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	Events.connect("ellie_exited_action_range", self, "reset_action_range_vars")
-	Events.connect("mini_died", self, "handle_mini_death")
+	Events.connect("ellie_exited_action_range", Callable(self, "reset_action_range_vars"))
+	Events.connect("mini_died", Callable(self, "handle_mini_death"))
 	animation_player.play("idle")
 
 

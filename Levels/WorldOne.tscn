@@ -1,128 +1,124 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=18 format=3 uid="uid://38e2oh25f3tw"]
 
-[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://assets/art/parallax/stringstar_parallax/background_1.png" type="Texture" id=2]
-[ext_resource path="res://assets/art/parallax/stringstar_parallax/background_0.png" type="Texture" id=3]
-[ext_resource path="res://Levels/First.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Levels/Second.tscn" type="PackedScene" id=5]
-[ext_resource path="res://assets/art/parallax/stringstar_parallax/background_2.png" type="Texture" id=6]
-[ext_resource path="res://World.gd" type="Script" id=7]
-[ext_resource path="res://assets/audio/ambience/rain.wav" type="AudioStream" id=8]
-[ext_resource path="res://Fauna/Bird.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Levels/Audio.gd" type="Script" id=10]
-[ext_resource path="res://World/Rain/RainParticleMaterial.tres" type="Material" id=11]
-[ext_resource path="res://Levels/Upper.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Levels/TallChamber.tscn" type="PackedScene" id=13]
-[ext_resource path="res://assets/audio/music/The Verdant Grove LOOP.wav" type="AudioStream" id=17]
+[ext_resource type="PackedScene" path="res://Player/Player.tscn" id="1"]
+[ext_resource type="Texture2D" uid="uid://wib4mj4d4qk8" path="res://assets/art/parallax/stringstar_parallax/background_1.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://s556jom6fhkg" path="res://assets/art/parallax/stringstar_parallax/background_0.png" id="3"]
+[ext_resource type="PackedScene" path="res://Levels/First.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://Levels/Second.tscn" id="5"]
+[ext_resource type="Texture2D" uid="uid://bqpffwvfxqdlx" path="res://assets/art/parallax/stringstar_parallax/background_2.png" id="6"]
+[ext_resource type="Script" path="res://World.gd" id="7"]
+[ext_resource type="AudioStream" uid="uid://6amtax00yakt" path="res://assets/audio/ambience/rain.wav" id="8"]
+[ext_resource type="PackedScene" path="res://Fauna/Bird.tscn" id="9"]
+[ext_resource type="Script" path="res://Levels/Audio.gd" id="10"]
+[ext_resource type="Material" path="res://World/Rain/RainParticleMaterial.tres" id="11"]
+[ext_resource type="PackedScene" path="res://Levels/Upper.tscn" id="12"]
+[ext_resource type="PackedScene" path="res://Levels/TallChamber.tscn" id="13"]
+[ext_resource type="AudioStream" uid="uid://b2lh8j5u2lvcc" path="res://assets/audio/music/The Verdant Grove LOOP.wav" id="17"]
 
-[sub_resource type="Gradient" id=1]
-offsets = PoolRealArray( 0, 0.568238 )
-colors = PoolColorArray( 1, 1, 1, 1, 0.532205, 0.73618, 1, 1 )
-
-[sub_resource type="GradientTexture" id=2]
-gradient = SubResource( 1 )
-
-[sub_resource type="ParticlesMaterial" id=5]
+[sub_resource type="ParticleProcessMaterial" id="5"]
 lifetime_randomness = 1.0
-trail_divisor = 15
-trail_color_modifier = SubResource( 2 )
 emission_shape = 2
-emission_box_extents = Vector3( 320, 90, 1 )
-flag_disable_z = true
+emission_sphere_radius = 1.0
 spread = 23.0
 flatness = 1.0
-gravity = Vector3( -595, 680, 0 )
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
+gravity = Vector3(-595, 680, 0)
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id="4"]
 resource_name = "muffle_audio"
 
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4colo"]
+_data = {
+"muffle_audio": SubResource("4")
+}
+
 [node name="World" type="Node2D"]
-script = ExtResource( 7 )
-__meta__ = {
-"_edit_horizontal_guides_": [ 217.0 ]
-}
+script = ExtResource("7")
 
-[node name="First" parent="." groups=["rooms"] instance=ExtResource( 4 )]
+[node name="First" parent="." groups=["rooms"] instance=ExtResource("4")]
 
-[node name="Second" parent="." groups=["rooms"] instance=ExtResource( 5 )]
-position = Vector2( 320, 0 )
-__meta__ = {
-"_edit_horizontal_guides_": [ 217.0 ]
-}
+[node name="Second" parent="." groups=["rooms"] instance=ExtResource("5")]
+position = Vector2(320, 0)
 
-[node name="Upper" parent="." groups=["rooms"] instance=ExtResource( 12 )]
-position = Vector2( 320, -176 )
+[node name="Upper" parent="." groups=["rooms"] instance=ExtResource("12")]
+position = Vector2(320, -176)
 
-[node name="TallChamber" parent="." groups=["rooms"] instance=ExtResource( 13 )]
-position = Vector2( 640, -176 )
+[node name="TallChamber" parent="." groups=["rooms"] instance=ExtResource("13")]
+position = Vector2(640, -176)
 
-[node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 57, 136 )
+[node name="Player" parent="." instance=ExtResource("1")]
+position = Vector2(57, 136)
 
-[node name="Camera" type="Camera2D" parent="."]
-current = true
+[node name="Camera3D" type="Camera2D" parent="."]
 
 [node name="CamTween" type="Tween" parent="."]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+editor_description = ""
+script = null
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 
 [node name="Song" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 17 )
+stream = ExtResource("17")
 volume_db = -12.0
-bus = "Music"
-script = ExtResource( 10 )
+bus = &"Music"
+script = ExtResource("10")
 
 [node name="Rain" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 8 )
+stream = ExtResource("8")
 volume_db = -8.0
 autoplay = true
 
-[node name="RainParticles" type="Particles2D" parent="."]
-position = Vector2( 521, -86 )
+[node name="RainParticles" type="GPUParticles2D" parent="."]
+position = Vector2(521, -86)
 amount = 400
-visibility_rect = Rect2( 0, 0, 0, 0 )
-process_material = ExtResource( 11 )
+process_material = ExtResource("11")
+visibility_rect = Rect2(0, 0, 0, 0)
 
-[node name="RainParticles2" type="Particles2D" parent="."]
-position = Vector2( 521, -86 )
+[node name="RainParticles2" type="GPUParticles2D" parent="."]
+position = Vector2(521, -86)
 amount = 200
-process_material = SubResource( 5 )
+process_material = SubResource("5")
 
-[node name="Bird" parent="." instance=ExtResource( 9 )]
-position = Vector2( 28, 68 )
-scale = Vector2( -1, 1 )
+[node name="Bird" parent="." instance=ExtResource("9")]
+position = Vector2(28, 68)
+scale = Vector2(-1, 1)
 
-[node name="Bird2" parent="." instance=ExtResource( 9 )]
-position = Vector2( 247, 52 )
+[node name="Bird2" parent="." instance=ExtResource("9")]
+position = Vector2(247, 52)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/muffle_audio = SubResource( 4 )
+libraries = {
+"": SubResource("AnimationLibrary_4colo")
+}
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 layer = -1
 
 [node name="Last + BG" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.2, 1 )
-motion_mirroring = Vector2( 288, 0 )
+motion_scale = Vector2(0.2, 1)
+motion_mirroring = Vector2(288, 0)
 
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/Last + BG"]
-position = Vector2( 144, 90 )
-texture = ExtResource( 3 )
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Last + BG"]
+position = Vector2(144, 90)
+texture = ExtResource("3")
 
 [node name="Middle" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.4, 1 )
-motion_mirroring = Vector2( 288, 0 )
+motion_scale = Vector2(0.4, 1)
+motion_mirroring = Vector2(288, 0)
 
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/Middle"]
-position = Vector2( 144, 90 )
-texture = ExtResource( 2 )
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Middle"]
+position = Vector2(144, 90)
+texture = ExtResource("2")
 
 [node name="Foremost" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.8, 1 )
-motion_mirroring = Vector2( 288, 0 )
+motion_scale = Vector2(0.8, 1)
+motion_mirroring = Vector2(288, 0)
 
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/Foremost"]
-position = Vector2( 144, 90 )
-texture = ExtResource( 6 )
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Foremost"]
+position = Vector2(144, 90)
+texture = ExtResource("6")

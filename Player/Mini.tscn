@@ -1,11 +1,11 @@
 [gd_scene load_steps=24 format=2]
 
-[ext_resource path="res://Player/mini_walking_spritesheet1.png" type="Texture" id=2]
+[ext_resource path="res://Player/mini_walking_spritesheet1.png" type="Texture2D" id=2]
 [ext_resource path="res://assets/audio/sfx/jump.wav" type="AudioStream" id=3]
 [ext_resource path="res://Weapons/FlowerGun.tscn" type="PackedScene" id=4]
-[ext_resource path="res://assets/art/juice/JumpDust.png" type="Texture" id=5]
-[ext_resource path="res://assets/art/juice/LandDust.png" type="Texture" id=6]
-[ext_resource path="res://assets/shaders/light_shader_sprite.png" type="Texture" id=7]
+[ext_resource path="res://assets/art/juice/JumpDust.png" type="Texture2D" id=5]
+[ext_resource path="res://assets/art/juice/LandDust.png" type="Texture2D" id=6]
+[ext_resource path="res://assets/shaders/light_shader_sprite.png" type="Texture2D" id=7]
 
 [sub_resource type="CapsuleShape2D" id=21]
 radius = 6.0
@@ -17,14 +17,14 @@ length = 0.01
 loop = true
 step = 0.25
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 0,
 "values": [ 1 ]
 }
@@ -35,14 +35,14 @@ length = 0.5
 loop = true
 step = 0.25
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ 26 ]
 }
@@ -52,14 +52,14 @@ length = 2.0
 loop = true
 step = 0.25
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( -0.0065557, 1.25 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array( -0.0065557, 1.25 ),
+"transitions": PackedFloat32Array( 1, 1 ),
 "update": 0,
 "values": [ 0, 1 ]
 }
@@ -69,14 +69,14 @@ length = 0.5
 loop = true
 step = 0.25
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ 25 ]
 }
@@ -86,14 +86,14 @@ length = 0.5
 loop = true
 step = 0.25
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.25, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 0.25, 0.5 ),
+"transitions": PackedFloat32Array( 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 5 ]
 }
@@ -103,14 +103,14 @@ length = 0.5
 loop = true
 step = 0.25
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ 26 ]
 }
@@ -121,14 +121,14 @@ length = 1.8
 loop = true
 step = 0.25
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75 ),
-"transitions": PoolRealArray( 2.46229, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75 ),
+"transitions": PackedFloat32Array( 2.46229, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
 }
@@ -138,14 +138,14 @@ length = 1.25
 loop = true
 step = 0.25
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1, 1.25 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 0.25, 0.5, 0.75, 1, 1.25 ),
+"transitions": PackedFloat32Array( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 5, 6, 7, 8, 9, 5 ]
 }
@@ -155,14 +155,14 @@ length = 1.25
 loop = true
 step = 0.25
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1, 1.25 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 0.25, 0.5, 0.75, 1, 1.25 ),
+"transitions": PackedFloat32Array( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 10, 11, 12, 13, 14, 5 ]
 }
@@ -180,8 +180,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.05, 0.1, 0.15 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 0.05, 0.1, 0.15 ),
+"transitions": PackedFloat32Array( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3 ]
 }
@@ -192,8 +192,8 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.174161 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array( 0, 0.174161 ),
+"transitions": PackedFloat32Array( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
 }
@@ -209,8 +209,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.05, 0.1, 0.15 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 0.05, 0.1, 0.15 ),
+"transitions": PackedFloat32Array( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3 ]
 }
@@ -221,20 +221,20 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.17438 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array( 0, 0.17438 ),
+"transitions": PackedFloat32Array( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
 }
 
 [sub_resource type="Gradient" id=26]
-offsets = PoolRealArray( 0.00127065, 1 )
-colors = PoolColorArray( 0.261087, 0.175754, 0.754053, 1, 1, 1, 1, 1 )
+offsets = PackedFloat32Array( 0.00127065, 1 )
+colors = PackedColorArray( 0.261087, 0.175754, 0.754053, 1, 1, 1, 1, 1 )
 
-[sub_resource type="GradientTexture" id=27]
+[sub_resource type="GradientTexture2D" id=27]
 gradient = SubResource( 26 )
 
-[sub_resource type="ParticlesMaterial" id=25]
+[sub_resource type="ParticleProcessMaterial" id=25]
 emission_shape = 1
 emission_sphere_radius = 0.01
 flag_disable_z = true
@@ -247,11 +247,11 @@ color_ramp = SubResource( 27 )
 [sub_resource type="CircleShape2D" id=28]
 radius = 1.0
 
-[node name="Mini" type="KinematicBody2D"]
+[node name="Mini" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 256
 
-[node name="CollisionShape" type="CollisionShape2D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -12 )
 shape = SubResource( 21 )
 
@@ -269,28 +269,28 @@ process_mode = 0
 wait_time = 0.2
 one_shot = true
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2( 0, -12 )
 texture = ExtResource( 2 )
 hframes = 8
 
-[node name="FlowerGun" parent="Sprite" instance=ExtResource( 4 )]
+[node name="FlowerGun" parent="Sprite2D" instance=ExtResource( 4 )]
 position = Vector2( 7, 2 )
 
 [node name="PlatformDetector" type="RayCast2D" parent="."]
 position = Vector2( 0, -6 )
 enabled = true
-cast_to = Vector2( 0, 6 )
+target_position = Vector2( 0, 6 )
 
 [node name="WallGrabForwardDetector" type="RayCast2D" parent="."]
 position = Vector2( 0, -6 )
 enabled = true
-cast_to = Vector2( 7, 0 )
+target_position = Vector2( 7, 0 )
 
 [node name="WallGrabDetector" type="RayCast2D" parent="."]
 position = Vector2( 0, -6 )
 enabled = true
-cast_to = Vector2( 0, 25 )
+target_position = Vector2( 0, 25 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 4.0
@@ -309,8 +309,8 @@ stream = ExtResource( 3 )
 volume_db = -15.0
 
 [node name="Label" type="Label" parent="."]
-margin_right = 40.0
-margin_bottom = 14.0
+offset_right = 40.0
+offset_bottom = 14.0
 
 [node name="EllieFloatRange" type="Area2D" parent="."]
 collision_layer = 0
@@ -322,10 +322,10 @@ position = Vector2( 0, -28 )
 rotation = 1.5708
 shape = SubResource( 22 )
 
-[node name="PointBehindMini" type="Position2D" parent="EllieFloatRange"]
+[node name="PointBehindMini" type="Marker2D" parent="EllieFloatRange"]
 position = Vector2( -13, -29 )
 
-[node name="JumpDust" type="Sprite" parent="."]
+[node name="JumpDust" type="Sprite2D" parent="."]
 visible = false
 position = Vector2( 0, -4 )
 scale = Vector2( 2, 1 )
@@ -333,7 +333,7 @@ texture = ExtResource( 5 )
 hframes = 4
 frame = 3
 
-[node name="LandDust" type="Sprite" parent="."]
+[node name="LandDust" type="Sprite2D" parent="."]
 visible = false
 position = Vector2( 0, -7 )
 scale = Vector2( 2, 1 )
@@ -344,13 +344,13 @@ hframes = 4
 anims/jump = SubResource( 23 )
 anims/land = SubResource( 24 )
 
-[node name="Particles2D" type="Particles2D" parent="."]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 position = Vector2( -2, -9 )
 visibility_rect = Rect2( 0, 0, 0, 0 )
 local_coords = false
 process_material = SubResource( 25 )
 
-[node name="Light2D" type="Light2D" parent="."]
+[node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2( 0, -10 )
 texture = ExtResource( 7 )
 texture_scale = 2.0

@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/Forest 1.wav-e2ad0a9d9c74af52140d3826aed24ec8.sample"
+type="AudioStreamWAV"
+uid="uid://bb33xp6ccm1hh"
+path="res://.godot/imported/Forest 1.wav-e2ad0a9d9c74af52140d3826aed24ec8.sample"
 
 [deps]
 
 source_file="res://assets/audio/sfx/mayragandra.itch.io/Forest 1.wav"
-dest_files=[ "res://.import/Forest 1.wav-e2ad0a9d9c74af52140d3826aed24ec8.sample" ]
+dest_files=["res://.godot/imported/Forest 1.wav-e2ad0a9d9c74af52140d3826aed24ec8.sample"]
 
 [params]
 

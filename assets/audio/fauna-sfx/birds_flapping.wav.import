@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/birds_flapping.wav-d872c25cb5dbba1c50958fe8858cca42.sample"
+type="AudioStreamWAV"
+uid="uid://b2hpbca4r35sw"
+path="res://.godot/imported/birds_flapping.wav-d872c25cb5dbba1c50958fe8858cca42.sample"
 
 [deps]
 
 source_file="res://assets/audio/fauna-sfx/birds_flapping.wav"
-dest_files=[ "res://.import/birds_flapping.wav-d872c25cb5dbba1c50958fe8858cca42.sample" ]
+dest_files=["res://.godot/imported/birds_flapping.wav-d872c25cb5dbba1c50958fe8858cca42.sample"]
 
 [params]
 

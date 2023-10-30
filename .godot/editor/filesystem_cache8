@@ -1,0 +1,301 @@
+ea4bc82a6ad023ab7ee23ee620429895
+::res://::1698625663
+ApproachableObject.gd::GDScript::-1::1698625629::0::1::::<>Node2D<>::
+default_bus_layout.tres::AudioBusLayout::-1::1698625629::0::1::::<><>::
+default_env.tres::Environment::-1::1698625629::0::1::::<><>::
+Events.gd::GDScript::-1::1698625629::0::1::::<>Node<>::
+icon.png::CompressedTexture2D::9132695343580748601::1662994699::1698625665::1::::<><>::
+Level.gd::GDScript::-1::1698625629::0::1::::<>Node2D<>::
+Util.gd::GDScript::-1::1698625629::0::1::::<>Node<>::
+World.gd::GDScript::-1::1698625629::0::1::::<>Node2D<>::
+WorldVars.gd::GDScript::-1::1698625629::0::1::::<>Node<>::
+::res://addons/::1664564982
+::res://addons/godot-git-plugin/::1664565031
+plugin.cfg::TextFile::-1::1664564982::0::1::::<><>::
+THIRDPARTY.md::TextFile::-1::1664564982::0::1::::<><>::
+::res://addons/godot-git-plugin/osx/::1664564982
+::res://addons/godot-git-plugin/osx/release/::1664564982
+::res://addons/godot-git-plugin/win64/::1664564982
+::res://addons/godot-git-plugin/win64/release/::1664564982
+::res://addons/godot-git-plugin/x11/::1664564982
+::res://addons/godot-git-plugin/x11/release/::1664564982
+::res://assets/::1663808253
+::res://assets/art/::1664596421
+mini_walking_spritesheet.png::CompressedTexture2D::6180581347189355766::1643511983::1698625665::1::::<><>::
+::res://assets/art/background/::1662410060
+cloud_1.png::CompressedTexture2D::1819487744410335672::1661725723::1698625665::1::::<><>::
+cloud_2.png::CompressedTexture2D::4104196484430759195::1661725723::1698625665::1::::<><>::
+cloud_3.png::CompressedTexture2D::5867806598838480703::1661725723::1698625665::1::::<><>::
+distant_platforms_1.png::CompressedTexture2D::6855348574678135051::1661725723::1698625665::1::::<><>::
+distant_platforms_2.png::CompressedTexture2D::1146089219154549447::1661725723::1698625665::1::::<><>::
+sky.png::CompressedTexture2D::2408293527513064947::1661725723::1698625665::1::::<><>::
+::res://assets/art/collectibles/::1664596429
+gem_blue.png::CompressedTexture2D::6260998031546552333::1568002614::1698625665::1::::<><>::
+::res://assets/art/enemy/::1662691157
+damage_flowers.png::CompressedTexture2D::7683610918017215776::1662612797::1698625665::1::::<><>::
+enemy.png::CompressedTexture2D::2796498773001761193::1593529958::1698625665::1::::<><>::
+enemy_fly.png::CompressedTexture2D::7482806656639526450::1593536526::1698625665::1::::<><>::
+enemy_wisp.png::CompressedTexture2D::3925327480626784006::1593540690::1698625665::1::::<><>::
+enemy_worm.png::CompressedTexture2D::3965108452434305479::1593536286::1698625665::1::::<><>::
+::res://assets/art/fauna/::1662781430
+bird_flying.png::CompressedTexture2D::2000622957882004577::1662781430::1698625665::1::::<><>::
+bird_idle.png::CompressedTexture2D::3625951786938651596::1662781430::1698625665::1::::<><>::
+::res://assets/art/hazards/::1663645661
+spike.png::CompressedTexture2D::3526854345906537074::1663645500::1698625665::1::::<><>::
+::res://assets/art/juice/::1663314426
+EnemyDeathEffect.png::CompressedTexture2D::2184324528766813766::1662994699::1698625665::1::::<><>::
+GrassEffect.png::CompressedTexture2D::5767444042213275240::1662994699::1698625665::1::::<><>::
+HitEffect.png::CompressedTexture2D::7114254369952073768::1662994699::1698625665::1::::<><>::
+JumpDust.png::CompressedTexture2D::376373350518221873::1589782540::1698625665::1::::<><>::
+LandDust.png::CompressedTexture2D::3293732490210851178::1589782536::1698625665::1::::<><>::
+::res://assets/art/misc/::1665085804
+antidote_potion.png::CompressedTexture2D::6570619974582322295::1662994699::1698625665::1::::<><>::
+apple_item.png::CompressedTexture2D::8073319906739142682::1662994699::1698625665::1::::<><>::
+arrow_plate_left.png::CompressedTexture2D::2688247048906215928::1662994699::1698625665::1::::<><>::
+arrow_plate_right.png::CompressedTexture2D::8439631712453038400::1662994699::1698625665::1::::<><>::
+bigflowers_props.png::CompressedTexture2D::5022959288434029293::1662994699::1698625665::1::::<><>::
+bomb_on_ground_anim_strip_8.png::CompressedTexture2D::767869220872957090::1662994699::1698625665::1::::<><>::
+bomb_thrown_anim_strip_3.png::CompressedTexture2D::8026966746004971911::1662994699::1698625665::1::::<><>::
+buttom.png::CompressedTexture2D::1415683731721573915::1662994699::1698625665::1::::<><>::
+buttom_pressed.png::CompressedTexture2D::1171858126934577907::1662994699::1698625665::1::::<><>::
+coin_anim_strip_6.png::CompressedTexture2D::6944258750942719408::1662994699::1698625665::1::::<><>::
+coin_pickup_anim_strip_6.png::CompressedTexture2D::3362205347695677106::1662994699::1698625665::1::::<><>::
+crosshair.png::CompressedTexture2D::7099872090638275547::1665085804::1698625665::1::::<><>::
+door.png::CompressedTexture2D::8938681489799115410::1662994699::1698625665::1::::<><>::
+drygrass_props.png::CompressedTexture2D::6541383839268660784::1662994699::1698625665::1::::<><>::
+explosion_anim_strip_10.png::CompressedTexture2D::4014581673433128176::1662994699::1698625665::1::::<><>::
+flowers_props.png::CompressedTexture2D::5608690846186606829::1662994699::1698625665::1::::<><>::
+grass_props.png::CompressedTexture2D::8369789489128858624::1662994699::1698625665::1::::<><>::
+health_potion.png::CompressedTexture2D::6104534040471093158::1662994699::1698625665::1::::<><>::
+lever_turned_left.png::CompressedTexture2D::4364124899815195189::1662994699::1698625665::1::::<><>::
+lever_turned_right.png::CompressedTexture2D::8239762379249724151::1662994699::1698625665::1::::<><>::
+loot_box_anim_opening_strip_6.png::CompressedTexture2D::7441832110690758005::1662994699::1698625665::1::::<><>::
+loot_box_anim_strip_12.png::CompressedTexture2D::8894105273962038091::1662994699::1698625665::1::::<><>::
+loot_box_open.png::CompressedTexture2D::100590937041744371::1662994699::1698625665::1::::<><>::
+meat_item.png::CompressedTexture2D::956935156028633117::1662994699::1698625665::1::::<><>::
+orb.png::CompressedTexture2D::7806371446873442301::1662994699::1698625665::1::::<><>::
+orb_anim_strip_6.png::CompressedTexture2D::8281089190848244218::1662994699::1698625665::1::::<><>::
+orb_boundary.png::CompressedTexture2D::7684312526289554419::1662994699::1698625665::1::::<><>::
+orb_collected_anim_strip_5.png::CompressedTexture2D::2961051879579648744::1662994699::1698625665::1::::<><>::
+root_props.png::CompressedTexture2D::3699581153027134136::1662994699::1698625665::1::::<><>::
+save_point_anim_strip_9.png::CompressedTexture2D::1669081098240763264::1662994699::1698625665::1::::<><>::
+save_point_saving_anim_strip_3.png::CompressedTexture2D::3090325468424053108::1662994699::1698625665::1::::<><>::
+spikes.png::CompressedTexture2D::4305586110688809758::1662994699::1698625665::1::::<><>::
+spikes_trap.png::CompressedTexture2D::2681124688989746495::1662994699::1698625665::1::::<><>::
+spikes_trap_hit_wall_dust_effect_strip_3.png::CompressedTexture2D::5538658716767764669::1662994699::1698625665::1::::<><>::
+stone.png::CompressedTexture2D::7245717424221903657::1662994699::1698625665::1::::<><>::
+strange_door_closed_anim_strip_10.png::CompressedTexture2D::4485697676395141189::1662994699::1698625665::1::::<><>::
+strange_door_opening_anim_strip_14.png::CompressedTexture2D::2491050194136466412::1662994699::1698625665::1::::<><>::
+tiki_torch_props_strip_12.png::CompressedTexture2D::7506731002520772288::1662994699::1698625665::1::::<><>::
+trap_spikes_anim_strip_7.png::CompressedTexture2D::6737016373828813047::1662994699::1698625665::1::::<><>::
+trap_suspended_anim_strip_18.png::CompressedTexture2D::6850298981535785250::1662994699::1698625665::1::::<><>::
+vase.png::CompressedTexture2D::8067065343060059574::1662994699::1698625665::1::::<><>::
+vase_breaking_anim_strip_5.png::CompressedTexture2D::2152520725812905569::1662994699::1698625665::1::::<><>::
+wooden_plate.png::CompressedTexture2D::4029185562496443909::1662994699::1698625665::1::::<><>::
+wood_slab_left.png::CompressedTexture2D::9037841045506173038::1662994699::1698625665::1::::<><>::
+wood_slab_middle.png::CompressedTexture2D::1643806427347978720::1662994699::1698625665::1::::<><>::
+wood_slab_right.png::CompressedTexture2D::34585177922698150::1662994699::1698625665::1::::<><>::
+::res://assets/art/parallax/::1663519469
+::res://assets/art/parallax/Background layers/::1662781430
+Layer_0000_9.png::CompressedTexture2D::545351598727521992::1662781430::1698625665::1::::<><>::
+Layer_0001_8.png::CompressedTexture2D::5757037916652540008::1662781430::1698625665::1::::<><>::
+Layer_0002_7.png::CompressedTexture2D::7481290934379848885::1662781430::1698625665::1::::<><>::
+Layer_0003_6.png::CompressedTexture2D::5866107897492728380::1662781430::1698625665::1::::<><>::
+Layer_0004_Lights.png::CompressedTexture2D::2829221560868693112::1662781430::1698625665::1::::<><>::
+Layer_0005_5.png::CompressedTexture2D::3589134958882498491::1662781430::1698625665::1::::<><>::
+Layer_0006_4.png::CompressedTexture2D::493402323744002941::1662781430::1698625665::1::::<><>::
+Layer_0007_Lights.png::CompressedTexture2D::3363271188107458034::1662781430::1698625665::1::::<><>::
+Layer_0008_3.png::CompressedTexture2D::8084386334339800625::1662781430::1698625665::1::::<><>::
+Layer_0009_2.png::CompressedTexture2D::5727975934734712292::1662781430::1698625665::1::::<><>::
+license.txt::TextFile::-1::1662781430::0::1::::<><>::
+readme.txt::TextFile::-1::1662781430::0::1::::<><>::
+::res://assets/art/parallax/stringstar_parallax/::1663519489
+background_0.png::CompressedTexture2D::1327207882424691470::1586671718::1698625665::1::::<><>::
+background_1.png::CompressedTexture2D::1560782732591435565::1586671738::1698625665::1::::<><>::
+background_2.png::CompressedTexture2D::3540721550359014121::1586671764::1698625665::1::::<><>::
+::res://assets/art/platforms/::1662410059
+moving_platform.png::CompressedTexture2D::7611932220331912933::1661725723::1698625665::1::::<><>::
+one_way_platform.png::CompressedTexture2D::5151921374430997551::1661725723::1698625665::1::::<><>::
+::res://assets/art/player/::1665423449
+ellie_idle_4.png::CompressedTexture2D::7562842790120716963::1665423347::1698625665::1::::<><>::
+robot_demo.png::CompressedTexture2D::231436425597492765::1661725723::1698625665::1::::<><>::
+::res://assets/art/player/bullet/::1662410059
+bullet.png::CompressedTexture2D::1446162228245929768::1661725723::1698625665::1::::<><>::
+::res://assets/art/player/character/::1663833935
+death_8.png::CompressedTexture2D::7965755665812774862::1589735446::1698625665::1::::<><>::
+idle_4.png::CompressedTexture2D::5143444462032468154::1589660708::1698625665::1::::<><>::
+jump_down_3.png::CompressedTexture2D::3003643635973895229::1589736854::1698625665::1::::<><>::
+jump_up_3.png::CompressedTexture2D::5348475958949660264::1590536972::1698625665::1::::<><>::
+run_6.png::CompressedTexture2D::4248028953450821170::1590455010::1698625665::1::::<><>::
+::res://assets/art/projectiles/::1662683790
+bullet.png::CompressedTexture2D::3906505614316255026::1567919202::1698625665::1::::<><>::
+::res://assets/art/tileset/::1663514868
+tileset.png::CompressedTexture2D::5891006070662462006::1586671666::1698625665::1::::<><>::
+tileset.tres::TileSet::-1::1698625630::0::1::::<><>::res://assets/art/tileset/tiles_demo.png
+tiles_demo.png::CompressedTexture2D::3672424680038410127::1661725723::1698625665::1::::<><>::
+::res://assets/art/ui/::1662410059
+touch_button_fire.png::CompressedTexture2D::7058726942623915187::1661725723::1698625665::1::::<><>::
+touch_button_jump.png::CompressedTexture2D::2328767838473777404::1661725723::1698625665::1::::<><>::
+touch_button_left.png::CompressedTexture2D::5519575270571580876::1661725723::1698625665::1::::<><>::
+touch_button_right.png::CompressedTexture2D::4426735099140812751::1661725723::1698625665::1::::<><>::
+::res://assets/audio/::1665007620
+::res://assets/audio/ambience/::1664404382
+rain.wav::AudioStreamWAV::2176616723477133719::1628109466::1698625666::1::::<><>::
+::res://assets/audio/fauna-sfx/::1664460837
+birds_flapping.wav::AudioStreamWAV::4296882753271976834::1664460823::1698625666::1::::<><>::
+::res://assets/audio/music/::1662976044
+music.ogg::AudioStreamOggVorbis::5045552802171636835::1661725723::1698625665::1::::<><>::
+The Verdant Grove LOOP.wav::AudioStreamWAV::4304712087362389794::1646517924::1698625666::1::::<><>::
+::res://assets/audio/sfx/::1665085804
+bubble_blurp.wav::AudioStreamWAV::8298936418275730279::1665085804::1698625666::1::::<><>::
+bubble_entry.wav::AudioStreamWAV::1187793815712583325::1664464741::1698625666::1::::<><>::
+bubble_exit.wav::AudioStreamWAV::3134104083348436927::1664464800::1698625666::1::::<><>::
+bubble_trigger_hit.wav::AudioStreamWAV::436720057040903039::1665085804::1698625666::1::::<><>::
+coin_pickup.wav::AudioStreamWAV::1161314659614664393::1661725723::1698625666::1::::<><>::
+death.wav::AudioStreamWAV::1802956646998593042::1665085804::1698625666::1::::<><>::
+ellie_entered_action_range.wav::AudioStreamWAV::1786310380781739811::1665085804::1698625666::1::::<><>::
+ellie_exited_action_range.wav::AudioStreamWAV::3899666041160395300::1665085804::1698625666::1::::<><>::
+ellie_fire_action_shard.wav::AudioStreamWAV::1236163739449427704::1665085804::1698625666::1::::<><>::
+explode.wav::AudioStreamWAV::3292817428486864825::1661725723::1698625666::1::::<><>::
+hit.wav::AudioStreamWAV::4613308759514242843::1662994699::1698625666::1::::<><>::
+jump.wav::AudioStreamWAV::8066426776425462386::1585166128::1698625666::1::::<><>::
+land.wav::AudioStreamWAV::7862375449907562075::1585166128::1698625666::1::::<><>::
+orb_activated.wav::AudioStreamWAV::5607433551082780604::1665085804::1698625666::1::::<><>::
+orb_hit.mp3::AudioStreamMP3::7718767531375874411::1662994699::1698625665::1::::<><>::
+shoot.wav::AudioStreamWAV::3331658395824473253::1537989200::1698625666::1::::<><>::
+spawn.wav::AudioStreamWAV::648773645821460159::1665085804::1698625666::1::::<><>::
+::res://assets/audio/sfx/jdwasabi.itch.io:8-bit-16-bit-sound-effects-pack/::1664017894
+Balloon Pop 1.wav::AudioStreamWAV::4941137238358494250::1664017894::1698625666::1::::<><>::
+Balloon ride 1.wav::AudioStreamWAV::8122077533105255043::1664017894::1698625666::1::::<><>::
+Balloon start riding 1.wav::AudioStreamWAV::4752986441495900529::1664017894::1698625666::1::::<><>::
+Balloon start riding 2.wav::AudioStreamWAV::3777336117455654779::1664017894::1698625666::1::::<><>::
+Big Egg collect 1.wav::AudioStreamWAV::2505783623489128917::1664017894::1698625666::1::::<><>::
+Block Break 1.wav::AudioStreamWAV::5463253807644952278::1664017894::1698625666::1::::<><>::
+Blow 1.wav::AudioStreamWAV::8300733610267648874::1664017894::1698625666::1::::<><>::
+Blow 1V2.mp3::AudioStreamMP3::4357786214586503775::1664017894::1698625665::1::::<><>::
+Blow 1V2.wav::AudioStreamWAV::3868537343350952975::1664017894::1698625666::1::::<><>::
+Blow 2.wav::AudioStreamWAV::5697473199229631641::1664017894::1698625666::1::::<><>::
+Boss hit 1.wav::AudioStreamWAV::3999105852748964123::1664017894::1698625666::1::::<><>::
+Bubble 1.wav::AudioStreamWAV::7828919096938761734::1664017894::1698625666::1::::<><>::
+Bubble heavy 1.wav::AudioStreamWAV::7708039475319481906::1664017894::1698625666::1::::<><>::
+Bubble heavy 2.wav::AudioStreamWAV::398968684746249208::1664017894::1698625666::1::::<><>::
+Cancel 1.wav::AudioStreamWAV::16106838958654515::1664017894::1698625666::1::::<><>::
+Confirm 1.wav::AudioStreamWAV::5560651408248934648::1664017894::1698625666::1::::<><>::
+Fruit collect 1.wav::AudioStreamWAV::6082655658291403769::1664017894::1698625666::1::::<><>::
+Hit damage 1.wav::AudioStreamWAV::3306765362800582512::1664017894::1698625666::1::::<><>::
+Jump 1.wav::AudioStreamWAV::6713897658162046770::1664017894::1698625666::1::::<><>::
+Select 1.wav::AudioStreamWAV::8101263574850376619::1664017894::1698625666::1::::<><>::
+Suck 1.wav::AudioStreamWAV::9169207487846233669::1664017894::1698625666::1::::<><>::
+Suck 1V2.wav::AudioStreamWAV::7469688899377605379::1664017894::1698625666::1::::<><>::
+Suck 2.wav::AudioStreamWAV::982478695465620620::1664017894::1698625666::1::::<><>::
+Text 1.wav::AudioStreamWAV::8232195291473906804::1664017894::1698625666::1::::<><>::
+::res://assets/audio/sfx/mayragandra.itch.io/::1664017894
+Concrete 1.wav::AudioStreamWAV::7570393924331948107::1664017894::1698625666::1::::<><>::
+Concrete 2.wav::AudioStreamWAV::8538313218525322819::1664017894::1698625666::1::::<><>::
+Forest 1.wav::AudioStreamWAV::2516154089335315293::1664017894::1698625666::1::::<><>::
+Forest 2.wav::AudioStreamWAV::2034209775757472811::1664017894::1698625666::1::::<><>::
+Grass 1.wav::AudioStreamWAV::1321385005553278239::1664017894::1698625666::1::::<><>::
+Grass Running.wav::AudioStreamWAV::1891909411040352773::1664017894::1698625666::1::::<><>::
+Gravel 1.wav::AudioStreamWAV::5247977672822176269::1664017894::1698625666::1::::<><>::
+Gravel - Run.wav::AudioStreamWAV::839770735348232623::1664017894::1698625666::1::::<><>::
+Sand.wav::AudioStreamWAV::8975333037144642056::1664017894::1698625666::1::::<><>::
+Snow.wav::AudioStreamWAV::3429490907331735352::1664017894::1698625666::1::::<><>::
+::res://assets/audio/sfx/mayragandra.itch.io:homesoundeffects/::1664017894
+Footsteps.wav::AudioStreamWAV::4428524616244805398::1664017894::1698625666::1::::<><>::
+::res://assets/shaders/::1663808253
+light_shader_sprite.png::CompressedTexture2D::293667986263231656::1663808253::1698625665::1::::<><>::
+::res://assets/theme/::1662978698
+user_interface.tres::Theme::-1::1698625630::0::1::::<><>::res://assets/theme/fonts/kenney_mini_square.tres
+::res://assets/theme/fonts/::1661725723
+kenney_mini_square.tres::FontFile::-1::1698625630::0::1::::<><>::
+kenney_mini_square.ttf::FontFile::2992304130920911461::1661725723::1698625665::1::::<><>::
+::res://Fauna/::1664601060
+Bird.gd::GDScript::-1::1698625630::0::1::::Bird<>Fauna<>::
+Bird.tscn::PackedScene::-1::1698625630::0::1::::<><>::res://assets/art/fauna/bird_idle.png<>res://Fauna/Bird.gd<>res://assets/art/fauna/bird_flying.png<>res://assets/audio/fauna-sfx/birds_flapping.wav
+::res://Levels/::1698625613
+Audio.gd::GDScript::-1::1698625630::0::1::::<>AudioStreamPlayer<>::
+DebugWorld.tscn::PackedScene::-1::1698625630::0::1::::<><>::res://Player/Player.tscn<>res://assets/art/parallax/stringstar_parallax/background_1.png<>res://assets/art/parallax/stringstar_parallax/background_0.png<>res://Levels/LevelTileset.tres<>res://Levels/Second.tscn<>res://assets/art/parallax/stringstar_parallax/background_2.png<>res://World.gd<>res://assets/shaders/light_shader_sprite.png<>res://Levels/LightsTileset.tres<>res://World/ApproachableObject.tscn<>res://World/Bubble.tscn<>res://Level.gd<>res://assets/audio/music/The Verdant Grove LOOP.wav
+First.tscn::PackedScene::-1::1698625630::0::1::::<><>::res://assets/art/hazards/spike.png<>res://Levels/LevelTileset.tres<>res://Levels/LightsTileset.tres<>res://World/ApproachableObject.tscn<>res://assets/shaders/light_shader_sprite.png<>res://World/BubbleTrigger.tscn<>res://World/Bubble.tscn<>res://Level.gd
+LevelTileset.tres::TileSet::-1::1698625630::0::1::::<><>::res://assets/art/tileset/tileset.png
+LightsTileset.tres::TileSet::-1::1698625630::0::1::::<><>::res://assets/art/tileset/tileset.png
+Room.tscn::PackedScene::-1::1698625630::0::1::::<><>::res://World/Bubble.tscn<>res://assets/art/hazards/spike.png<>res://assets/art/tileset/tileset.png<>res://Level.gd<>res://World/ApproachableObject.tscn
+Second.tscn::PackedScene::-1::1698625630::0::1::::<><>::res://Level.gd<>res://assets/art/hazards/spike.png<>res://Levels/LightsTileset.tres<>res://assets/shaders/light_shader_sprite.png<>res://World/Bubble.tscn<>res://assets/art/tileset/tileset.png
+TallChamber.tscn::PackedScene::-1::1698625630::0::1::::<><>::res://World/Bubble.tscn<>res://assets/art/hazards/spike.png<>res://assets/art/tileset/tileset.png<>res://Level.gd<>res://World/ApproachableObject.tscn
+Upper.tscn::PackedScene::-1::1698625630::0::1::::<><>::res://Level.gd<>res://assets/art/hazards/spike.png<>res://World/BubbleTrigger.tscn<>res://World/Bubble.tscn<>res://assets/art/tileset/tileset.png
+WorldOne.tscn::PackedScene::-1::1698625630::0::1::::<><>::res://Player/Player.tscn<>res://assets/art/parallax/stringstar_parallax/background_1.png<>res://assets/art/parallax/stringstar_parallax/background_0.png<>res://Levels/First.tscn<>res://Levels/Second.tscn<>res://assets/art/parallax/stringstar_parallax/background_2.png<>res://World.gd<>res://assets/audio/ambience/rain.wav<>res://Fauna/Bird.tscn<>res://Levels/Audio.gd<>res://World/Rain/RainParticleMaterial.tres<>res://Levels/Upper.tscn<>res://Levels/TallChamber.tscn<>res://assets/audio/music/The Verdant Grove LOOP.wav
+::res://licenses for assets/::1663808253
+CREDITS.txt::TextFile::-1::1663808253::0::1::::<><>::
+LICENSE.txt::TextFile::-1::1593872326::0::1::::<><>::
+::res://Objects/::1665042130
+Bullet.gd::GDScript::-1::1698625630::0::1::::Bullet<>RigidBody2D<>::
+Bullet.tscn::PackedScene::-1::1698625630::0::1::::<><>::res://assets/art/player/bullet/bullet.png<>res://Objects/Bullet.gd
+flower_gun_spritesheet.png::CompressedTexture2D::5702001578453505936::1662679779::1698625665::1::::<><>::
+::res://Player/::1698625613
+Actor.gd::GDScript::-1::1698625629::0::1::::Actor<>CharacterBody2D<>::
+ActorFlying.gd::GDScript::-1::1698625630::0::1::::ActorFlying<>CharacterBody2D<>::
+bird_idle.png::CompressedTexture2D::2322811654196081874::1662781430::1698625665::1::::<><>::
+Ellie.gd::GDScript::-1::1698625630::0::1::::Ellie<>Actor<>::
+Ellie.tscn::PackedScene::-1::1698625630::0::1::::<><>::res://assets/art/player/ellie_idle_4.png<>res://Player/Ellie.gd<>res://assets/audio/sfx/bubble_blurp.wav<>res://assets/audio/sfx/ellie_fire_action_shard.wav
+EllieActionRange.gd::GDScript::-1::1698625629::0::1::::<>Area2D<>::
+ellie_sprite.png::CompressedTexture2D::5733513044725373812::1662781430::1698625665::1::::<><>::
+Enemy.gd::GDScript::-1::1698625629::0::1::::Enemy<>Actor<>::
+EnemyFly.tscn::PackedScene::-1::1698625629::0::1::::<><>::res://assets/art/player/bullet/bullet.png<>res://assets/audio/sfx/explode.wav<>res://assets/audio/sfx/hit.wav<>res://assets/art/enemy/enemy_fly.png<>res://Player/EnemyFlying.gd
+EnemyFlying.gd::GDScript::-1::1698625629::0::1::::EnemyFlying<>ActorFlying<>::
+EnemyRobo.tscn::PackedScene::-1::1698625629::0::1::::<><>::res://assets/art/player/bullet/bullet.png<>res://assets/audio/sfx/explode.wav<>res://assets/audio/sfx/hit.wav<>res://assets/art/enemy/enemy.png<>res://Player/Enemy.gd
+EnemyWisp.tscn::PackedScene::-1::1698625629::0::1::::<><>::res://assets/art/player/bullet/bullet.png<>res://assets/audio/sfx/explode.wav<>res://assets/audio/sfx/hit.wav<>res://assets/art/enemy/enemy_wisp.png<>res://Player/Enemy.gd
+EnemyWorm.gd::GDScript::-1::1698625630::0::1::::<>Enemy<>::
+EnemyWorm.tscn::PackedScene::-1::1698625630::0::1::::<><>::res://assets/art/player/bullet/bullet.png<>res://assets/audio/sfx/explode.wav<>res://assets/audio/sfx/hit.wav<>res://assets/art/enemy/enemy_worm.png<>res://Player/Enemy.gd
+Fauna.gd::GDScript::-1::1698625630::0::1::::Fauna<>Node2D<>::
+Gun.gd::GDScript::-1::1698625630::0::1::::Gun<>Marker2D<>::
+Hero.tscn::PackedScene::-1::1698625630::0::1::::<><>::res://Player/Mini.gd<>res://assets/art/player/character/idle_4.png<>res://assets/audio/sfx/jump.wav<>res://Weapons/FlowerGun.tscn<>res://assets/audio/sfx/mayragandra.itch.io/Grass Running.wav<>res://assets/audio/sfx/land.wav<>res://assets/shaders/light_shader_sprite.png<>res://assets/art/player/character/jump_down_3.png<>res://assets/art/player/character/jump_up_3.png<>res://assets/art/player/character/run_6.png<>res://assets/art/player/character/death_8.png<>res://assets/audio/sfx/death.wav<>res://assets/audio/sfx/spawn.wav<>res://Player/EllieActionRange.gd
+hood_player_sprites.png::CompressedTexture2D::8184812485208554597::1602997886::1698625665::1::::<><>::
+Mini.gd::GDScript::-1::1698625629::0::1::::Mini<>Actor<>::
+Mini.tscn::PackedScene::-1::1698625630::0::1::::<><>::res://Player/mini_walking_spritesheet1.png<>res://assets/audio/sfx/jump.wav<>res://Weapons/FlowerGun.tscn<>res://assets/art/juice/JumpDust.png<>res://assets/art/juice/LandDust.png<>res://assets/shaders/light_shader_sprite.png
+mini_walking_spritesheet1.png::CompressedTexture2D::8761120564754645376::1661693447::1698625665::1::::<><>::
+mini_walking_spritesheet.png::CompressedTexture2D::967150875875142358::1662442108::1698625665::1::::<><>::
+Player.gd::GDScript::-1::1698625629::0::1::::Player<>Node2D<>::
+Player.tscn::PackedScene::-1::1698625629::0::1::::<><>::res://Player/Hero.tscn<>res://Player/Player.gd<>res://Player/Ellie.tscn
+s4m_ur4i_huge-assetpack-characters.png::CompressedTexture2D::6970390471454216248::1661691769::1698625665::1::::<><>::
+::res://Shadows/::1663808253
+LargeShadow.png::CompressedTexture2D::4675511064697292137::1661689281::1698625665::1::::<><>::
+MediumShadow.png::CompressedTexture2D::918982503930676630::1661689281::1698625665::1::::<><>::
+SmallShadow.png::CompressedTexture2D::6951641383515669253::1661689281::1698625665::1::::<><>::
+::res://UI/::1661689282
+HeartUIEmpty.png::CompressedTexture2D::1684286917222532037::1661689281::1698625665::1::::<><>::
+HeartUIFull.png::CompressedTexture2D::7700881705302082765::1661689281::1698625665::1::::<><>::
+::res://Weapons/::1698625613
+FlowerGun.gd::GDScript::-1::1698625630::0::1::::FlowerGun<>Gun<>::
+FlowerGun.tscn::PackedScene::-1::1698625630::0::1::::<><>::res://Weapons/FlowerGun.gd<>res://assets/audio/sfx/shoot.wav<>res://Objects/flower_gun_spritesheet.png
+HitEffect.gd::GDScript::-1::1698625630::0::1::::<>Node2D<>::
+HitEffect.tscn::PackedScene::-1::1698625630::0::1::::<><>::res://assets/art/juice/HitEffect.png<>res://Weapons/HitEffect.gd
+water_dart.png::CompressedTexture2D::7712902285563701611::1665085804::1698625665::1::::<><>::
+::res://World/::1698625613
+ApproachableObject.tscn::PackedScene::-1::1698625630::0::1::::<><>::res://ApproachableObject.gd<>res://assets/art/misc/arrow_plate_right.png
+Bubble.gd::GDScript::-1::1698625630::0::1::::<>Node2D<>::
+Bubble.tscn::PackedScene::-1::1698625630::0::1::::<><>::res://World/Bubble.gd<>res://assets/art/misc/orb_boundary.png<>res://assets/art/misc/orb_anim_strip_6.png<>res://assets/audio/sfx/orb_activated.wav<>res://assets/audio/sfx/bubble_entry.wav<>res://assets/audio/sfx/bubble_exit.wav
+BubbleTrigger.gd::GDScript::-1::1698625630::0::1::::<>Node2D<>::
+BubbleTrigger.tscn::PackedScene::-1::1698625630::0::1::::<><>::res://assets/art/misc/save_point_anim_strip_9.png<>res://assets/art/misc/crosshair.png<>res://World/BubbleTrigger.gd<>res://assets/audio/sfx/ellie_entered_action_range.wav<>res://assets/audio/sfx/ellie_exited_action_range.wav<>res://assets/audio/sfx/bubble_trigger_hit.wav
+Bush.png::CompressedTexture2D::7880615708651397627::1661689281::1698625665::1::::<><>::
+City.png::CompressedTexture2D::2720170793452326229::1661690688::1698625665::1::::<><>::
+CliffTileset.png::CompressedTexture2D::5761558540364849325::1661689281::1698625665::1::::<><>::
+Decorations.tres::TileSet::-1::1698625630::0::1::::<><>::res://assets/art/misc/flowers_props.png<>res://assets/art/misc/arrow_plate_right.png<>res://assets/art/misc/bigflowers_props.png<>res://assets/art/misc/door.png<>res://assets/art/misc/wooden_plate.png<>res://assets/art/misc/grass_props.png
+DirtTileset.png::CompressedTexture2D::8514673005202539279::1661689281::1698625665::1::::<><>::
+Factory.gd::GDScript::-1::1698625630::0::1::::<>Node2D<>::
+Grass.png::CompressedTexture2D::5547854639235951724::1661689281::1698625665::1::::<><>::
+GrassBackground.png::CompressedTexture2D::5278208365485109521::1661689281::1698625665::1::::<><>::
+HookPoint.gd::GDScript::-1::1698625630::0::1::::<>Node2D<>::
+HookPoint.tscn::PackedScene::-1::1698625630::0::1::::<><>::res://World/HookPoint.gd<>res://assets/art/misc/orb_boundary.png<>res://assets/art/misc/orb_anim_strip_6.png<>res://assets/audio/sfx/orb_hit.mp3
+Main.tres::TileSet::-1::1698625630::0::1::::<><>::res://World/rpg_asset_spritesheet.png<>res://World/spritesheet_ground.png
+main_spritesheet.png::CompressedTexture2D::79591889285701208::1542842604::1698625665::1::::<><>::
+ParallaxBackground.tscn::PackedScene::-1::1698625630::0::1::::<><>::res://World/parallax_behind.png<>res://World/parallax_front.png
+parallax_behind.png::CompressedTexture2D::6862426526465455074::1590451708::1698625665::1::::<><>::
+parallax_front.png::CompressedTexture2D::1583118406505831802::1589933320::1698625665::1::::<><>::
+Projectile.tscn::PackedScene::-1::1698625630::0::1::::<><>::
+rpg_asset_spritesheet1.png::CompressedTexture2D::3941385977919995383::1626844120::1698625665::1::::<><>::
+rpg_asset_spritesheet.png::CompressedTexture2D::8289589469610013959::1626843968::1698625665::1::::<><>::
+Shard.gd::GDScript::-1::1698625630::0::1::::Shard<>Node2D<>::
+Shard.tscn::PackedScene::-1::1698625630::0::1::::<><>::res://Weapons/water_dart.png<>res://World/Shard.gd
+spritesheet_ground.png::CompressedTexture2D::2147570760734582061::1568002182::1698625666::1::::<><>::
+Tree.png::CompressedTexture2D::6898202582977721455::1661689281::1698625665::1::::<><>::
+::res://World/Rain/::1669868167
+RainParticleMaterial.tres::ParticleProcessMaterial::-1::1698625630::0::1::::<><>::

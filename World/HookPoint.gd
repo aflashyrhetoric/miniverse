@@ -5,10 +5,10 @@ signal mini_exited_hookzone
 
 const ORB_FLIGHT_SPEED = 500
 
-onready var orb = $Orb
-onready var _original_orb_position: Vector2 = orb.global_position
-onready var hook_zone = $HookZone
-onready var orb_hit = $OrbHit
+@onready var orb = $Orb
+@onready var _original_orb_position: Vector2 = orb.global_position
+@onready var hook_zone = $HookZone
+@onready var orb_hit = $OrbHit
 
 var _label
 var _should_reset_position = false
@@ -22,11 +22,11 @@ var _mini_ref = null
 
 func _ready() -> void:
 	# Set up signals for the hook zone so we can detect mini entering
-	hook_zone.connect("body_entered", self, "_mini_entered")
-	hook_zone.connect("body_exited", self, "_mini_exited")
+	hook_zone.connect("body_entered", Callable(self, "_mini_entered"))
+	hook_zone.connect("body_exited", Callable(self, "_mini_exited"))
 
 	# Set up signals for the orb so we can detect the orb flying to mini
-	orb.connect("body_entered", self, "_orb_hit_mini")
+	orb.connect("body_entered", Callable(self, "_orb_hit_mini"))
 
 	# Get child nodes that we need
 	_orb_boundary = get_node("OrbBoundary")

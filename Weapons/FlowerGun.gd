@@ -3,16 +3,16 @@ extends Gun
 
 const Bullet = preload("res://Objects/Bullet.tscn")
 
-onready var timer = $Cooldown
-onready var sound_shoot = $Shoot
-onready var bullet_spawn_point = $BulletSpawnPoint
-onready var animation_player = $AnimationPlayer
+@onready var timer = $Cooldown
+@onready var sound_shoot = $Shoot
+@onready var bullet_spawn_point = $BulletSpawnPoint
+@onready var animation_player = $AnimationPlayer
 
 
 # ! THIS METHOD IS ONLY CALLED BY PLAYER.GD.
 func add_new_bullet():
-	var bullet = Bullet.instance()
-	bullet.set_as_toplevel(true)
+	var bullet = Bullet.instantiate()
+	bullet.set_as_top_level(true)
 	bullet.global_position = bullet_spawn_point.global_position
 	bullet._damage = bullet_damage
 	add_child(bullet)

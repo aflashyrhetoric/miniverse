@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/Gravel 1.wav-9be63c9d78f0621adfc3d892677b2d8a.sample"
+type="AudioStreamWAV"
+uid="uid://cg1fop6ecddaj"
+path="res://.godot/imported/Gravel 1.wav-9be63c9d78f0621adfc3d892677b2d8a.sample"
 
 [deps]
 
 source_file="res://assets/audio/sfx/mayragandra.itch.io/Gravel 1.wav"
-dest_files=[ "res://.import/Gravel 1.wav-9be63c9d78f0621adfc3d892677b2d8a.sample" ]
+dest_files=["res://.godot/imported/Gravel 1.wav-9be63c9d78f0621adfc3d892677b2d8a.sample"]
 
 [params]
 

@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/bubble_trigger_hit.wav-dc2ef2db171fe541ff03cb4ee0bfb9d6.sample"
+type="AudioStreamWAV"
+uid="uid://ghsylflwsfn8"
+path="res://.godot/imported/bubble_trigger_hit.wav-dc2ef2db171fe541ff03cb4ee0bfb9d6.sample"
 
 [deps]
 
 source_file="res://assets/audio/sfx/bubble_trigger_hit.wav"
-dest_files=[ "res://.import/bubble_trigger_hit.wav-dc2ef2db171fe541ff03cb4ee0bfb9d6.sample" ]
+dest_files=["res://.godot/imported/bubble_trigger_hit.wav-dc2ef2db171fe541ff03cb4ee0bfb9d6.sample"]
 
 [params]
 

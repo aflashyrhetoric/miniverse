@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/Confirm 1.wav-83974788e862b16aa5fe909ead592ccb.sample"
+type="AudioStreamWAV"
+uid="uid://clhvd7n8flcdc"
+path="res://.godot/imported/Confirm 1.wav-83974788e862b16aa5fe909ead592ccb.sample"
 
 [deps]
 
 source_file="res://assets/audio/sfx/jdwasabi.itch.io:8-bit-16-bit-sound-effects-pack/Confirm 1.wav"
-dest_files=[ "res://.import/Confirm 1.wav-83974788e862b16aa5fe909ead592ccb.sample" ]
+dest_files=["res://.godot/imported/Confirm 1.wav-83974788e862b16aa5fe909ead592ccb.sample"]
 
 [params]
 

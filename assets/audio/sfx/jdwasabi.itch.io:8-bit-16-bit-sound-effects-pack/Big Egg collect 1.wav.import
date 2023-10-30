@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/Big Egg collect 1.wav-6240ae503b944a531344fc16d8a3585c.sample"
+type="AudioStreamWAV"
+uid="uid://bbx25jbuv11an"
+path="res://.godot/imported/Big Egg collect 1.wav-6240ae503b944a531344fc16d8a3585c.sample"
 
 [deps]
 
 source_file="res://assets/audio/sfx/jdwasabi.itch.io:8-bit-16-bit-sound-effects-pack/Big Egg collect 1.wav"
-dest_files=[ "res://.import/Big Egg collect 1.wav-6240ae503b944a531344fc16d8a3585c.sample" ]
+dest_files=["res://.godot/imported/Big Egg collect 1.wav-6240ae503b944a531344fc16d8a3585c.sample"]
 
 [params]
 

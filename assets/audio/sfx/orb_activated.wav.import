@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/orb_activated.wav-8f96b64cac691befd835c59a660eee33.sample"
+type="AudioStreamWAV"
+uid="uid://cl5ju1xylriiu"
+path="res://.godot/imported/orb_activated.wav-8f96b64cac691befd835c59a660eee33.sample"
 
 [deps]
 
 source_file="res://assets/audio/sfx/orb_activated.wav"
-dest_files=[ "res://.import/orb_activated.wav-8f96b64cac691befd835c59a660eee33.sample" ]
+dest_files=["res://.godot/imported/orb_activated.wav-8f96b64cac691befd835c59a660eee33.sample"]
 
 [params]
 

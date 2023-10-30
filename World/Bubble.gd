@@ -5,20 +5,20 @@ signal mini_exited_bubble
 
 const ORB_FLIGHT_SPEED = 500
 
-onready var orb = $OrbSprite
-onready var orb_boundary_sprite = $OrbBoundary
-onready var _original_orb_position: Vector2 = orb.global_position
-onready var bubble_shape = $BubbleShape
+@onready var orb = $OrbSprite
+@onready var orb_boundary_sprite = $OrbBoundary
+@onready var _original_orb_position: Vector2 = orb.global_position
+@onready var bubble_shape = $BubbleShape
 
-onready var bubble_entry_sound = $BubbleEntry
-onready var bubble_exit_sound = $BubbleExit
-onready var bubble_activated_sound = $BubbleActivated
+@onready var bubble_entry_sound = $BubbleEntry
+@onready var bubble_exit_sound = $BubbleExit
+@onready var bubble_activated_sound = $BubbleActivated
 
-onready var label = $Label
+@onready var label = $Label
 
-onready var mini_placement = $MiniPlacement
+@onready var mini_placement = $MiniPlacement
 
-export(bool) var _require_activation = false
+@export var _require_activation: bool = false
 var _should_disable = false
 var _active = null
 
@@ -29,11 +29,11 @@ var _should_reset_orb_position = false
 func _ready() -> void:
 	add_to_group("bubbles")
 	# Set up signals for the hook zone so we can detect mini entering
-	bubble_shape.connect("body_entered", self, "_mini_entered")
-	bubble_shape.connect("body_exited", self, "_mini_exited")
+	bubble_shape.connect("body_entered", Callable(self, "_mini_entered"))
+	bubble_shape.connect("body_exited", Callable(self, "_mini_exited"))
 
-	Events.connect("mini_died", self, "handle_mini_death")
-	Events.connect("mini_landed", self, "handle_mini_landed")
+	Events.connect("mini_died", Callable(self, "handle_mini_death"))
+	Events.connect("mini_landed", Callable(self, "handle_mini_landed"))
 
 	# Get child nodes that we need
 

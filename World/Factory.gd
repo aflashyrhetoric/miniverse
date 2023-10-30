@@ -11,12 +11,12 @@ func _ready() -> void:
 
 
 func shard(spawn_pt, look_at_pt, movement_direction) -> Shard:
-	var shard = Shard.instance()
+	var shard = Shard.instantiate()
 	shard.global_position = spawn_pt
 
 	if look_at_pt != null:
 		shard.look_at(look_at_pt)
 
 	shard._velocity = shard.SHARD_SPEED * movement_direction
-	shard.set_as_toplevel(true)
+	shard.set_as_top_level(true)
 	return shard

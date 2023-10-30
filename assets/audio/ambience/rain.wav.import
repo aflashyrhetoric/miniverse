@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/rain.wav-ff275f43bcde52d81834c6d804464773.sample"
+type="AudioStreamWAV"
+uid="uid://6amtax00yakt"
+path="res://.godot/imported/rain.wav-ff275f43bcde52d81834c6d804464773.sample"
 
 [deps]
 
 source_file="res://assets/audio/ambience/rain.wav"
-dest_files=[ "res://.import/rain.wav-ff275f43bcde52d81834c6d804464773.sample" ]
+dest_files=["res://.godot/imported/rain.wav-ff275f43bcde52d81834c6d804464773.sample"]
 
 [params]
 

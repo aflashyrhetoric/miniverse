@@ -2,7 +2,7 @@ class_name Shard
 extends Node2D
 
 
-onready var timer = $Timer
+@onready var timer = $Timer
 
 var _velocity = Vector2.ZERO
 
@@ -20,5 +20,5 @@ func _physics_process(_delta: float) -> void:
 
 func begin_to_disappear():
 	timer.start()
-	yield(timer, "timeout")
+	await timer.timeout
 	queue_free()

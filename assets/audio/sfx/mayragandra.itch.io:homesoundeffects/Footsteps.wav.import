@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/Footsteps.wav-06d2104fff7b712ee9b79344c09af10c.sample"
+type="AudioStreamWAV"
+uid="uid://b4dhfhl1wrg51"
+path="res://.godot/imported/Footsteps.wav-06d2104fff7b712ee9b79344c09af10c.sample"
 
 [deps]
 
 source_file="res://assets/audio/sfx/mayragandra.itch.io:homesoundeffects/Footsteps.wav"
-dest_files=[ "res://.import/Footsteps.wav-06d2104fff7b712ee9b79344c09af10c.sample" ]
+dest_files=["res://.godot/imported/Footsteps.wav-06d2104fff7b712ee9b79344c09af10c.sample"]
 
 [params]
 

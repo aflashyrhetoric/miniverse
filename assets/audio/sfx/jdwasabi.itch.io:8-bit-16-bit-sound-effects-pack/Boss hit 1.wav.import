@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/Boss hit 1.wav-dbe6a05805902e42da603654754682d9.sample"
+type="AudioStreamWAV"
+uid="uid://bw8gxovdk8erb"
+path="res://.godot/imported/Boss hit 1.wav-dbe6a05805902e42da603654754682d9.sample"
 
 [deps]
 
 source_file="res://assets/audio/sfx/jdwasabi.itch.io:8-bit-16-bit-sound-effects-pack/Boss hit 1.wav"
-dest_files=[ "res://.import/Boss hit 1.wav-dbe6a05805902e42da603654754682d9.sample" ]
+dest_files=["res://.godot/imported/Boss hit 1.wav-dbe6a05805902e42da603654754682d9.sample"]
 
 [params]
 

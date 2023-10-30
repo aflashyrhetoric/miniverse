@@ -8,7 +8,7 @@ extends Node2D
 # export var speed = Vector2(150.0, 350.0)
 # export var max_speed = Vector2(220, 600)
 
-onready var gravity = ProjectSettings.get("physics/2d/default_gravity")
+@onready var gravity = ProjectSettings.get("physics/2d/default_gravity")
 
 const FLOOR_NORMAL = Vector2.UP
 

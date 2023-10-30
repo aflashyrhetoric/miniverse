@@ -6,8 +6,8 @@ const ELLIE_FLIGHT_SPEED = Vector2(50, 30)
 const ELLIE_RETURN_SPEED = Vector2(10, 10)
 
 # The BBs! :D
-onready var mini = $Hero # TO DO FIX
-onready var ellie = $Ellie
+@onready var mini = $Hero # TO DO FIX
+@onready var ellie = $Ellie
 
 # Instance variables
 var _ellie_is_inside_float_area = true
@@ -15,8 +15,8 @@ var _ellie_is_inside_float_area = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	Events.connect("ellie_entered_area", self, "_on_Mini_ellie_entered_area")
-	Events.connect("ellie_exited_area", self, "_on_Mini_ellie_exited_area")
+	Events.connect("ellie_entered_area", Callable(self, "_on_Mini_ellie_entered_area"))
+	Events.connect("ellie_exited_area", Callable(self, "_on_Mini_ellie_exited_area"))
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -34,7 +34,7 @@ func handle_ellie_position():
 	ellie._direction = direction
 
 
-func point_for_ellie_to_approach() -> Position2D:
+func point_for_ellie_to_approach() -> Marker2D:
 	# TODO: Make it so that it takes in other factors into consideration
 	return mini.get_node("EllieFloatRange/PointBehindMini")
 

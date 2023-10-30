@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/Balloon start riding 1.wav-ecece5a04beb35caea3c879835e52d43.sample"
+type="AudioStreamWAV"
+uid="uid://b8ym80cibbnqf"
+path="res://.godot/imported/Balloon start riding 1.wav-ecece5a04beb35caea3c879835e52d43.sample"
 
 [deps]
 
 source_file="res://assets/audio/sfx/jdwasabi.itch.io:8-bit-16-bit-sound-effects-pack/Balloon start riding 1.wav"
-dest_files=[ "res://.import/Balloon start riding 1.wav-ecece5a04beb35caea3c879835e52d43.sample" ]
+dest_files=["res://.godot/imported/Balloon start riding 1.wav-ecece5a04beb35caea3c879835e52d43.sample"]
 
 [params]
 

@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/Block Break 1.wav-7363c2292ef5f03f6248933c4e195323.sample"
+type="AudioStreamWAV"
+uid="uid://cj3o8y1m06tww"
+path="res://.godot/imported/Block Break 1.wav-7363c2292ef5f03f6248933c4e195323.sample"
 
 [deps]
 
 source_file="res://assets/audio/sfx/jdwasabi.itch.io:8-bit-16-bit-sound-effects-pack/Block Break 1.wav"
-dest_files=[ "res://.import/Block Break 1.wav-7363c2292ef5f03f6248933c4e195323.sample" ]
+dest_files=["res://.godot/imported/Block Break 1.wav-7363c2292ef5f03f6248933c4e195323.sample"]
 
 [params]
 

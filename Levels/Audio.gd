@@ -11,8 +11,8 @@ const LOW_PASS_FILTER_IDX = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	Events.connect("mini_entered_bubble", self, "muffle_audio")
-	Events.connect("mini_exited_bubble", self, "unmuffle_audio")
+	Events.connect("mini_entered_bubble", Callable(self, "muffle_audio"))
+	Events.connect("mini_exited_bubble", Callable(self, "unmuffle_audio"))
 	AudioServer.set_bus_layout(load(BUS_LAYOUT))
 
 	# var low_pass = get_low_pass()

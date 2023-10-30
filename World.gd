@@ -1,14 +1,14 @@
 extends Node2D
 
-onready var display_width = ProjectSettings.get("display/window/size/width")
-onready var display_height = ProjectSettings.get("display/window/size/height")
+@onready var display_width = ProjectSettings.get("display/window/size/viewport_width")
+@onready var display_height = ProjectSettings.get("display/window/size/viewport_height")
 
-onready var first = $First
-onready var cam = $Camera
-onready var player = $Player
+@onready var first = $First
+@onready var cam = $Camera3D
+@onready var player = $Player
 
-onready var song = $Song
-onready var ambience = $Rain
+@onready var song = $Song
+@onready var ambience = $Rain
 
 # TODO: Optimize later if necessary, make dynamic if necessary
 const WINDOW_WIDTH = 320.0
@@ -29,12 +29,12 @@ func _ready():
 	cam.global_position = first.cam_anchor.position
 
 	# Handle events
-	Events.connect("mini_died", self, "handle_death")
+	Events.connect("mini_died", Callable(self, "handle_death"))
 
 	# For every room, initialize scene-change orchestration process
 	var rooms = get_tree().get_nodes_in_group("rooms")
 	for room in rooms:
-		room.connect("change_room", self, "_move_camera")
+		room.connect("change_room", Callable(self, "_move_camera"))
 
 
 func _process(_delta: float) -> void:
@@ -60,7 +60,7 @@ func handle_death(_body):
 	pass
 
 
-func get_nearest_respawn_point(_pos: Vector2) -> Position2D:
+func get_nearest_respawn_point(_pos: Vector2) -> Marker2D:
 	var current_room_respawn_points = WorldVars.levels_to_respawn_points[WorldVars.current_room_name]
 	var closest = null
 	var closest_distance = 99999.0
@@ -98,9 +98,9 @@ func _move_camera(name_of_room: String):
 	tween.interpolate_property(
 		cam, "position", cam.global_position, new_pos, 0.65, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT
 	)
-	if tween.is_connected("tween_completed", self, "update_room_name"):
-		tween.disconnect("tween_completed", self, "update_room_name")
-	tween.connect("tween_completed", self, "update_room_name", [new_room])
+	if tween.is_connected("tween_completed", Callable(self, "update_room_name")):
+		tween.disconnect("tween_completed", Callable(self, "update_room_name"))
+	tween.connect("tween_completed", Callable(self, "update_room_name").bind(new_room))
 	tween.start()
 
 

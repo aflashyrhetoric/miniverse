@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/The Verdant Grove LOOP.wav-d4ec9ab36c2ead186595facc2827badb.sample"
+type="AudioStreamWAV"
+uid="uid://b2lh8j5u2lvcc"
+path="res://.godot/imported/The Verdant Grove LOOP.wav-d4ec9ab36c2ead186595facc2827badb.sample"
 
 [deps]
 
 source_file="res://assets/audio/music/The Verdant Grove LOOP.wav"
-dest_files=[ "res://.import/The Verdant Grove LOOP.wav-d4ec9ab36c2ead186595facc2827badb.sample" ]
+dest_files=["res://.godot/imported/The Verdant Grove LOOP.wav-d4ec9ab36c2ead186595facc2827badb.sample"]
 
 [params]
 

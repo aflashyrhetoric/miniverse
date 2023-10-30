@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/ellie_exited_action_range.wav-0a868e77d221580f83e11fef3f66fada.sample"
+type="AudioStreamWAV"
+uid="uid://bvta6va0des4s"
+path="res://.godot/imported/ellie_exited_action_range.wav-0a868e77d221580f83e11fef3f66fada.sample"
 
 [deps]
 
 source_file="res://assets/audio/sfx/ellie_exited_action_range.wav"
-dest_files=[ "res://.import/ellie_exited_action_range.wav-0a868e77d221580f83e11fef3f66fada.sample" ]
+dest_files=["res://.godot/imported/ellie_exited_action_range.wav-0a868e77d221580f83e11fef3f66fada.sample"]
 
 [params]
 

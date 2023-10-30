@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/Balloon Pop 1.wav-1b33733a8a620a0bcf718da29d836206.sample"
+type="AudioStreamWAV"
+uid="uid://ccnr2qru2xo7k"
+path="res://.godot/imported/Balloon Pop 1.wav-1b33733a8a620a0bcf718da29d836206.sample"
 
 [deps]
 
 source_file="res://assets/audio/sfx/jdwasabi.itch.io:8-bit-16-bit-sound-effects-pack/Balloon Pop 1.wav"
-dest_files=[ "res://.import/Balloon Pop 1.wav-1b33733a8a620a0bcf718da29d836206.sample" ]
+dest_files=["res://.godot/imported/Balloon Pop 1.wav-1b33733a8a620a0bcf718da29d836206.sample"]
 
 [params]
 

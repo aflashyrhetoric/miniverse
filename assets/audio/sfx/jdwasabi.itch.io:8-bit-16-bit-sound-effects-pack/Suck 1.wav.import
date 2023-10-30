@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/Suck 1.wav-17c904b086682a27c339cf62376d9394.sample"
+type="AudioStreamWAV"
+uid="uid://d3vvri5ehgu0d"
+path="res://.godot/imported/Suck 1.wav-17c904b086682a27c339cf62376d9394.sample"
 
 [deps]
 
 source_file="res://assets/audio/sfx/jdwasabi.itch.io:8-bit-16-bit-sound-effects-pack/Suck 1.wav"
-dest_files=[ "res://.import/Suck 1.wav-17c904b086682a27c339cf62376d9394.sample" ]
+dest_files=["res://.godot/imported/Suck 1.wav-17c904b086682a27c339cf62376d9394.sample"]
 
 [params]
 

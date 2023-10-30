@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/Hit damage 1.wav-d0157eac603559516060bcdbff21748a.sample"
+type="AudioStreamWAV"
+uid="uid://bnd27boegv3o3"
+path="res://.godot/imported/Hit damage 1.wav-d0157eac603559516060bcdbff21748a.sample"
 
 [deps]
 
 source_file="res://assets/audio/sfx/jdwasabi.itch.io:8-bit-16-bit-sound-effects-pack/Hit damage 1.wav"
-dest_files=[ "res://.import/Hit damage 1.wav-d0157eac603559516060bcdbff21748a.sample" ]
+dest_files=["res://.godot/imported/Hit damage 1.wav-d0157eac603559516060bcdbff21748a.sample"]
 
 [params]
 

@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/Blow 1V2.wav-f8917ad49c384aebb83603556ff593c0.sample"
+type="AudioStreamWAV"
+uid="uid://bvd7ilbmwycmp"
+path="res://.godot/imported/Blow 1V2.wav-f8917ad49c384aebb83603556ff593c0.sample"
 
 [deps]
 
 source_file="res://assets/audio/sfx/jdwasabi.itch.io:8-bit-16-bit-sound-effects-pack/Blow 1V2.wav"
-dest_files=[ "res://.import/Blow 1V2.wav-f8917ad49c384aebb83603556ff593c0.sample" ]
+dest_files=["res://.godot/imported/Blow 1V2.wav-f8917ad49c384aebb83603556ff593c0.sample"]
 
 [params]
 

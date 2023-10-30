@@ -1,15 +1,15 @@
 class_name Bird
 extends Fauna
 
-export(Vector2) var fly_speed = Vector2.ZERO
+@export var fly_speed: Vector2 = Vector2.ZERO
 
-onready var animation_player = $AnimationPlayer
-onready var scare_radius = $ScareRadius
-onready var disappear_timer = $DisappearTimer
-onready var sprite = $Sprite
-onready var flying_sprite = $FlyingSprite
+@onready var animation_player = $AnimationPlayer
+@onready var scare_radius = $ScareRadius
+@onready var disappear_timer = $DisappearTimer
+@onready var sprite = $Sprite2D
+@onready var flying_sprite = $FlyingSprite
 
-onready var sound_flapping = $Flap
+@onready var sound_flapping = $Flap
 
 
 func _ready() -> void:
