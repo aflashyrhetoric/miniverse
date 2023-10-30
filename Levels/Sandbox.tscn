@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://assets/art/hazards/spike.png" type="Texture" id=1]
 [ext_resource path="res://Levels/LevelTileset.tres" type="TileSet" id=2]
@@ -7,7 +7,12 @@
 [ext_resource path="res://assets/shaders/light_shader_sprite.png" type="Texture" id=5]
 [ext_resource path="res://World/BubbleTrigger.tscn" type="PackedScene" id=6]
 [ext_resource path="res://World/Bubble.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Player/EnemyRobo.tscn" type="PackedScene" id=8]
+[ext_resource path="res://World/bg.png" type="Texture" id=9]
 [ext_resource path="res://Level.gd" type="Script" id=22]
+
+[sub_resource type="OccluderPolygon2D" id=84]
+polygon = PoolVector2Array( 73, 46, 105, 46, 105, 86, 89, 86, 89, 62, 73, 62 )
 
 [sub_resource type="ConvexPolygonShape2D" id=83]
 points = PoolVector2Array( 0, 0, 0, 0, 8, 0, 8, 4, 0, 4, 0, 0, 0, 0 )
@@ -47,18 +52,56 @@ __meta__ = {
 "_edit_horizontal_guides_": [ 217.0 ]
 }
 
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 160, 88 )
+texture = ExtResource( 9 )
+
+[node name="DeadlyLights" type="Node2D" parent="."]
+
+[node name="DeadlyLight" type="Light2D" parent="DeadlyLights"]
+position = Vector2( 308, 18 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 5 )
+texture_scale = 1.8
+color = Color( 1, 0.145098, 0.145098, 1 )
+energy = 2.55
+shadow_enabled = true
+
+[node name="RayToWalls" type="RayCast2D" parent="DeadlyLights/DeadlyLight"]
+enabled = true
+cast_to = Vector2( -59, 33.5 )
+collision_mask = 13
+
+[node name="DeadlyLight2" type="Light2D" parent="DeadlyLights"]
+position = Vector2( 88, 32 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 5 )
+texture_scale = 1.8
+color = Color( 1, 0.145098, 0.145098, 1 )
+energy = 2.55
+shadow_enabled = true
+
+[node name="RayToWalls" type="RayCast2D" parent="DeadlyLights/DeadlyLight2"]
+enabled = true
+cast_to = Vector2( -59, 33.5 )
+collision_mask = 13
+
 [node name="CamAnchor" type="Position2D" parent="."]
 position = Vector2( 160, 90 )
+
+[node name="EnemyRobo" parent="CamAnchor" instance=ExtResource( 8 )]
+position = Vector2( -50, 30 )
+scale = Vector2( 0.25, 0.25 )
+speed = 120
 
 [node name="Level" type="TileMap" parent="."]
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 8, 8 )
 collision_mask = 42
 format = 1
-tile_data = PoolIntArray( -65536, 17, 0, -65534, 536870929, 0, -65532, 17, 0, -65530, 17, 0, -65528, 17, 0, -65526, 536870929, 0, -65524, 17, 0, -65523, 17, 0, -65516, 17, 0, -65515, 17, 0, -65513, 17, 0, -65511, 17, 0, -65509, 17, 0, -65507, 17, 0, -65505, 17, 0, -65503, 17, 0, -65501, 17, 0, -65499, 17, 0, -65498, 17, 0, 65536, -536870890, 0, 65540, 536870926, 0, 65542, 536870926, 0, 65544, 536870926, 0, 65548, 536870926, 0, 65549, 536870926, 0, 65557, 1610612742, 0, 65572, 536870926, 0, 65576, 17, 0, 196648, 17, 0, 327720, 17, 0, 458792, 17, 0, 655358, 17, 0, 589855, 1610612753, 0, 589857, 1610612753, 0, 589864, 17, 0, 655393, 1610612753, 0, 786430, 17, 0, 720936, 17, 0, 786465, 1610612753, 0, 917502, 17, 0, 852006, 1610612750, 0, 852008, 17, 0, 1048574, 17, 0, 983076, 23, 0, 983078, 536870929, 0, 983080, 17, 0, 1048588, 1, 0, 1048590, 4, 0, 1179646, 17, 0, 1114139, 11, 0, 1114146, 23, 0, 1114148, 536870929, 0, 1114150, 536870929, 0, 1114152, 17, 0, 1179665, 536870916, 0, 1179667, 536870913, 0, 1310718, 17, 0, 1245184, 536870934, 0, 1245216, 23, 0, 1245218, 536870930, 0, 1245224, 17, 0, 1441790, 17, 0, 1376256, 19, 0, 1376260, 19, 0, 1376264, 19, 0, 1376268, 536870931, 0, 1376272, 536870931, 0, 1376276, 536870931, 0, 1376280, 536870931, 0, 1376284, 19, 0, 1376286, 19, 0, 1376290, 536870929, 0, 1376292, 536870929, 0, 1376294, 536870929, 0, 1376296, 17, 0 )
+tile_data = PoolIntArray( -65536, 17, 0, -65534, 536870929, 0, -65532, 17, 0, -65530, 17, 0, -65528, 17, 0, -65526, 536870929, 0, -65524, 17, 0, -65523, 17, 0, -65516, 17, 0, -65515, 17, 0, -65513, 17, 0, -65511, 17, 0, -65509, 17, 0, -65507, 17, 0, -65505, 17, 0, -65503, 17, 0, -65501, 17, 0, -65499, 17, 0, -65498, 17, 0, 65536, -536870890, 0, 65540, 536870926, 0, 65542, 536870926, 0, 65544, 536870926, 0, 65548, 536870926, 0, 65549, 536870926, 0, 65557, 1610612742, 0, 65572, 536870926, 0, 65576, 17, 0, 196602, 2, 0, 196648, 17, 0, 327720, 17, 0, 393246, 17, 0, 458792, 17, 0, 524318, 17, 0, 655358, 17, 0, 589832, 17, 0, 589834, 17, 0, 589864, 17, 0, 655390, 1610612753, 0, 655392, 1610612753, 0, 786430, 17, 0, 720928, 1610612753, 0, 720936, 17, 0, 786450, 17, 0, 917502, 17, 0, 852000, 1610612753, 0, 852006, 1610612750, 0, 852008, 17, 0, 1048574, 17, 0, 983076, 23, 0, 983078, 536870929, 0, 983080, 17, 0, 1048588, 1, 0, 1048590, 4, 0, 1179646, 17, 0, 1114139, 11, 0, 1114146, 23, 0, 1114148, 536870929, 0, 1114150, 536870929, 0, 1114152, 17, 0, 1179665, 536870916, 0, 1179667, 536870913, 0, 1310718, 17, 0, 1245184, 536870934, 0, 1245216, 23, 0, 1245218, 536870930, 0, 1245224, 17, 0, 1441790, 17, 0, 1376256, 19, 0, 1376260, 19, 0, 1376264, 19, 0, 1376268, 536870931, 0, 1376272, 536870931, 0, 1376276, 536870931, 0, 1376280, 536870931, 0, 1376284, 19, 0, 1376286, 19, 0, 1376290, 536870929, 0, 1376292, 536870929, 0, 1376294, 536870929, 0, 1376296, 17, 0 )
 
 [node name="Lights" type="TileMap" parent="."]
-z_index = 10
 tile_set = ExtResource( 3 )
 cell_size = Vector2( 8, 8 )
 collision_layer = 0
@@ -75,18 +118,15 @@ texture = ExtResource( 5 )
 energy = 0.6
 range_layer_min = -1
 
-[node name="Light2D4" type="Light2D" parent="Lights"]
-position = Vector2( 308, 18 )
-texture = ExtResource( 5 )
-texture_scale = 0.8
-energy = 0.5
-range_layer_min = -1
-
 [node name="Light2D2" type="Light2D" parent="Lights"]
 position = Vector2( 85, 31 )
 texture = ExtResource( 5 )
 energy = 0.5
 range_layer_min = -1
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Lights"]
+position = Vector2( 167, 34 )
+occluder = SubResource( 84 )
 
 [node name="Hazards" type="TileMap" parent="."]
 tile_set = SubResource( 82 )
@@ -112,7 +152,7 @@ shape = SubResource( 60 )
 position = Vector2( -24, -106 )
 
 [node name="Bubble" parent="Bubbles" instance=ExtResource( 7 )]
-position = Vector2( 248, 226 )
+position = Vector2( 154, 153 )
 
 [node name="Boundaries" type="Node2D" parent="."]
 
@@ -128,7 +168,8 @@ shape = SubResource( 71 )
 [node name="RespawnPoints" type="Node2D" parent="."]
 
 [node name="RespawnPoint" type="Position2D" parent="RespawnPoints" groups=["respawn_points"]]
-position = Vector2( 119, 124 )
+position = Vector2( 80, 152 )
 
 [node name="BubbleTrigger" parent="." instance=ExtResource( 6 )]
-position = Vector2( 229, 24 )
+visible = false
+position = Vector2( 96, 24 )

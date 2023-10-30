@@ -166,7 +166,7 @@ colors = PoolColorArray( 1, 1, 1, 1, 0, 0, 0, 1 )
 collision_layer = 8
 collision_mask = 24
 script = ExtResource( 5 )
-speed = Vector2( 75, 250 )
+speed = 20
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 1 )
@@ -250,5 +250,9 @@ stream = ExtResource( 3 )
 
 [node name="Explode" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 2 )
+
+[node name="GravityEnableTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]

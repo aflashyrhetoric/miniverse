@@ -8,6 +8,8 @@ onready var out_of_bounds = $OutOfBounds
 onready var cam_anchor = $CamAnchor
 onready var bubbles_group = $Bubbles
 
+onready var deadly_lights_group = $DeadlyLights
+
 onready var boundaries = $Boundaries
 
 # JUICE
@@ -15,11 +17,14 @@ var jump_dust_texture = preload("res://assets/art/juice/JumpDust.png")
 var land_dust_texture = preload("res://assets/art/juice/JumpDust.png")
 
 var bubbles
+var deadly_lights
 
 
 func _ready():
 	# Initialize bubbles
 	bubbles = bubbles_group.get_children() if bubbles_group != null else null
+
+	deadly_lights = deadly_lights_group.get_children() if deadly_lights_group != null else null
 
 	# Initialize out of bounds
 	if out_of_bounds != null:
@@ -32,6 +37,19 @@ func _ready():
 	for boundary in boundaries.get_children():
 		# The only thing that can enter this boundary is mini's room-change-trigger
 		boundary.connect("area_entered", self, "change_room_to", [boundary.get_child(0).name])
+
+
+func _physics_process(_delta: float) -> void:
+	if deadly_lights != null:
+		for light in deadly_lights:
+			var ray_to_walls = light.get_node("RayToWalls")
+			var cast_to_pos = (WorldVars.ray_detector_area_position - ray_to_walls.global_position) / 4
+			ray_to_walls.cast_to = cast_to_pos
+			ray_to_walls.force_raycast_update()
+
+			if not ray_to_walls.is_colliding():
+				pass
+				Events.emit_signal("mini_should_die", null)
 
 
 func change_room_to(_body, name_of_room):

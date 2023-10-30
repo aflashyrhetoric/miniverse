@@ -23,6 +23,8 @@ onready var animation_player = $AnimationPlayer
 onready var hitbox = $Hitbox
 onready var health_label = $HealthLabel
 
+onready var gravity_enable_timer = $GravityEnableTimer
+
 const HitSprite = preload("res://Weapons/HitEffect.tscn")
 
 # If the sprite spawns facing right, it's as if it hit the left wall
@@ -31,6 +33,10 @@ onready var last_wall_hit: int = Wall.LEFT if sprite.scale.x > 0 else Wall.Right
 
 func _ready():
 	_velocity.x = speed
+	gravity_enable_timer.connect("timeout", self, "enable_grav")
+
+func enable_grav():
+	enable_gravity()
 
 
 func _physics_process(_delta):
@@ -89,6 +95,14 @@ func get_new_animation():
 
 # When shot. Only bullets can hit, so no need to check the type of the entered body
 func _on_Hitbox_body_entered(projectile: Node) -> void:
+	# process momentum transfer from projectile
+	_velocity += projectile.linear_velocity
+
+	disable_gravity()
+
+	gravity_enable_timer.start()
+
+
 	_health -= projectile._damage
 	health_label.text = str(_health)
 

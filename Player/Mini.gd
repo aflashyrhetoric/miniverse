@@ -128,6 +128,7 @@ func _process(_delta: float) -> void:
 
 
 func _physics_process(_delta):
+	WorldVars.ray_detector_area_position = $RayDetectorArea.global_position
 	var psn = owner.get_node("Ellie").global_position
 
 	# label.text = str(psn, "\n", WorldVars.nearest_interaction_point)
@@ -642,6 +643,7 @@ func _on_EllieFloatRange_body_exited(_body: Node) -> void:
 
 
 func begin_dying(_body):
+	print("Begin death")
 	# Indicate death, and send along the position of death (so we can calculate nearest respawn)
 	_is_dying = true
 	sprite.playing = false
@@ -649,7 +651,15 @@ func begin_dying(_body):
 	print("before animation")
 	yield(animation_player, "animation_finished")
 	print("after animation")
-	send_death_signal(_body)
+
+	var _body_to_send_to_signal
+
+	if _body == null:
+		_body_to_send_to_signal = self
+	else:
+		_body_to_send_to_signal = _body
+
+	send_death_signal(_body_to_send_to_signal)
 
 
 func send_death_signal(_body):

@@ -7,4 +7,6 @@ var levels_to_respawn_points = {}
 
 var nearest_interaction_point = null
 
+var ray_detector_area_position: Vector2 = Vector2.ZERO
+
 var DUST_LIFETIME: float = 0.3
